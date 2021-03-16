@@ -3,26 +3,15 @@ const config = require("../config/keys");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 
+const chatbot = require("../Chatbot/chatbot");
 // The text query request.
 module.exports = (app) => {
   app.post("/api/text_query", async (req, res) => {
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        text: {
-          // The query to send to the dialogflow agent
-          text: req.body.text,
-          // The language used by the client (en-US)
-          languageCode: config.dialogFlowSessionLanguageCode,
-        },
-      },
-    };
-    let responses = await sessionCLient.detectIntent(request);
-
+    let responses = await chatbot.textQuery(req.body.text, req.body.parameters);
     res.send(responses[0].queryResult);
   });
   // the event query request
   app.post("/api/event_querry", (req, res) => {
-    res.send({ do: "event query" });
+    res.send(chatbot.textQuery(req));
   });
 };
