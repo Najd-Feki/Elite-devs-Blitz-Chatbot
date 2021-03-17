@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-var Reclamataion = new Schema({
-  userId: Number,
+var Reclamation = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   type: String,
   date: {
     type: Date,

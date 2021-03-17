@@ -10,5 +10,11 @@ var User = new Schema({
   adress: String,
   role: String,
   age: Number,
+  events: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
+    },
+  ],
 });
 module.exports = mongoose.model("User", User);

@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const course = require("./course");
 const Schema = mongoose.Schema;
 var Profile = new Schema({
-  userId: Number,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   education: [
     {
       type: String,
@@ -30,7 +33,8 @@ var Profile = new Schema({
   ],
   courses: [
     {
-      type: course,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
     },
   ],
 });
