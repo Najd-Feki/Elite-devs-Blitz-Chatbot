@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const course = require("./course");
 const Schema = mongoose.Schema;
 var Profile = new Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  education: [
-    {
-      type: String,
-    },
-  ],
+  age: Number,
+  phone: Number,
+  email: String,
+  education: String,
+  address: String,
   skills: [
     {
       type: String,
