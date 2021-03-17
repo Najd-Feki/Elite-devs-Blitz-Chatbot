@@ -1,15 +1,17 @@
 "use strict";
 const dialogflow = require("dialogflow");
+const mongoose = require("mongoose");
 const config = require("../config/keys");
+const profile = require("../models/profile");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
+const Profile = mongoose.model("Profile");
 // user attributes list///
 var profilePreparation = {
   fullName: String,
   age: Number,
   phone: Number,
   email: String,
-  education: String,
   address: String,
   degree: String,
   degreeDomain: String,
@@ -18,13 +20,14 @@ var profilePreparation = {
   duration: Number,
   typeOfExperience: String,
   projectDescription: String,
-  hardSkills: [{ type: String }],
-  softSkills: [{ type: String }],
+  hardSkills: [""],
+  softSkills: [""],
   field: String,
-  hobbies: [{ type: String }],
-  languages: [{ type: String }],
+  hobbies: [""],
+  languages: [""],
+  courses: [""],
 };
-////////
+
 module.exports = {
   textQuery: async (text, parameters = {}) => {
     let self = module.exports;
@@ -52,12 +55,7 @@ module.exports = {
     let self = module.exports;
     let queryResult = responses[0].queryResult;
     let fields = queryResult.parameters.fields;
-    console.log(JSON.stringify(fields));
-    console.log("number of keys is : ", Object.keys(fields).length);
     let keys = Object.keys(fields);
-    keys.forEach((element) => {
-      console.log(element);
-    });
     if (keys.includes("age")) profilePreparation.age = fields.age.structValue.fields.amount.numberValue;
     if (keys.includes("person")) profilePreparation.name = fields.person.structValue.fields.name.stringValue;
     if (keys.includes("email")) profilePreparation.email = fields.email.stringValue;
@@ -88,14 +86,40 @@ module.exports = {
         profilePreparation.languages.push(element.stringValue);
       });
     if (keys.includes("course")) {
-      profilePreparation.course = fields.course.stringValue;
+      profilePreparation.courses.push(fields.course.stringValue);
       console.log(JSON.stringify(profilePreparation, null, 4));
+      self.saveUser();
     }
-
-    let res = self.saveUser();
     return responses;
   },
-  saveUser: function () {
-    //console.log("name is : " + name + "age is " + age);
+  saveUser: async function () {
+    const profile = new Profile({
+      age: profilePreparation.age,
+      phone: profilePreparation.phone,
+      email: profilePreparation.email,
+      address: profilePreparation.address,
+      education: profilePreparation.degree + " in " + profilePreparation.degreeDomain,
+      academicProject: profilePreparation.projectDescription,
+      softSkills: profilePreparation.softSkills,
+      hardSkills: profilePreparation.hardSkills,
+      hobbies: profilePreparation.hobbies,
+      languages: profilePreparation.languages,
+      experiences:
+        "I " +
+        profilePreparation.typeOfExperience +
+        " as a " +
+        profilePreparation.job +
+        " for " +
+        profilePreparation.duration +
+        " at " +
+        profilePreparation.workPlace,
+      courses: profilePreparation.courses,
+    });
+    try {
+      let pro = await profile.save();
+      console.log(pro);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };

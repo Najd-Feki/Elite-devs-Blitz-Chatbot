@@ -10,32 +10,17 @@ var Profile = new Schema({
   phone: Number,
   email: String,
   education: String,
+  academicProject: String,
   address: String,
-  skills: [
-    {
-      type: String,
-    },
-  ],
-  hobbies: [
-    {
-      type: String,
-    },
-  ],
-  informations: [
-    {
-      type: String,
-    },
-  ],
-  experiences: [
-    {
-      type: String,
-    },
-  ],
+  softSkills: [String],
+  hardSkills: [String],
+  hobbies: [String],
+  languages: [String],
+  experiences: [String],
   courses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
-    },
+    String,
+    //{type: mongoose.Schema.Types.ObjectId, ref: "Course",},
   ],
+  creationDate: { type: Date, value: Date.now },
 });
 module.exports = mongoose.model("Profile", Profile);
