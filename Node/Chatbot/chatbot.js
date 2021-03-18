@@ -58,7 +58,7 @@ module.exports = {
     let queryResult = responses[0].queryResult;
     let fields = queryResult.parameters.fields;
     let keys = Object.keys(fields);
-    if (keys.includes("age")) profilePreparation.age = fields.age.structValue.fields.amount.numberValue;
+    if (keys.includes("age")) profilePreparation.age = console.log(fields.age);
     if (keys.includes("person")) profilePreparation.name = fields.person.structValue.fields.name.stringValue;
     if (keys.includes("email")) profilePreparation.email = fields.email.stringValue;
     if (keys.includes("phone")) profilePreparation.phone = fields.phone.stringValue;
@@ -118,6 +118,8 @@ module.exports = {
         " at " +
         profilePreparation.workPlace,
       courses: profilePreparation.courses.slice(1, profilePreparation.courses.length),
+      github: profilePreparation.urlGithub,
+      linkedIn: profilePreparation.urlLinkedIn,
     });
     try {
       let pro = await profile.save();

@@ -12,6 +12,8 @@ var Profile = new Schema({
   education: String,
   academicProject: String,
   address: String,
+  linkedIn: String,
+  github: String,
   softSkills: [String],
   hardSkills: [String],
   hobbies: [String],
