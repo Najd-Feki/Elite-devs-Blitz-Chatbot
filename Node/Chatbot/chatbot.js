@@ -20,6 +20,8 @@ var profilePreparation = {
   duration: Number,
   typeOfExperience: String,
   projectDescription: String,
+  urlGithub: String,
+  urlLinkedIn: String,
   hardSkills: [""],
   softSkills: [""],
   field: String,
@@ -69,6 +71,8 @@ module.exports = {
     if (keys.includes("typeOfExperience")) profilePreparation.typeOfExperience = fields.typeOfExperience.stringValue;
     if (keys.includes("description")) profilePreparation.projectDescription = fields.description.stringValue;
     if (keys.includes("field")) profilePreparation.field = fields.field.stringValue;
+    if (keys.includes("urlGithub")) profilePreparation.urlGithub = fields.urlGithub.stringValue;
+    if (keys.includes("urlLinkedIn")) profilePreparation.urlLinkedIn = fields.urlLinkedIn.stringValue;
     if (keys.includes("hardSkills1"))
       fields.hardSkills1.listValue.values.forEach((element) => {
         profilePreparation.hardSkills.push(element.stringValue);
@@ -100,10 +104,10 @@ module.exports = {
       address: profilePreparation.address,
       education: profilePreparation.degree + " in " + profilePreparation.degreeDomain,
       academicProject: profilePreparation.projectDescription,
-      softSkills: profilePreparation.softSkills,
-      hardSkills: profilePreparation.hardSkills,
-      hobbies: profilePreparation.hobbies,
-      languages: profilePreparation.languages,
+      softSkills: profilePreparation.softSkills.slice(1, profilePreparation.softSkills.length),
+      hardSkills: profilePreparation.hardSkills.slice(1, profilePreparation.hardSkills.length),
+      hobbies: profilePreparation.hobbies.slice(1, profilePreparation.hobbies.length),
+      languages: profilePreparation.languages.slice(1, profilePreparation.languages.length),
       experiences:
         "I " +
         profilePreparation.typeOfExperience +
@@ -113,7 +117,7 @@ module.exports = {
         profilePreparation.duration +
         " at " +
         profilePreparation.workPlace,
-      courses: profilePreparation.courses,
+      courses: profilePreparation.courses.slice(1, profilePreparation.courses.length),
     });
     try {
       let pro = await profile.save();
