@@ -21,3 +21,22 @@ db.once("open", () => console.log("Connected to database !"));
 //importing routes
 dialogflowRoutes = require("./routes/dialogflowRoutes")(app);
 userRoutes = require("./routes/userRoute")(app);
+
+
+// Express Session
+app.use(
+    session({
+        secret: "very secret this is",
+        resave: false,
+        saveUninitialized: true,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
+    })
+  );
+  
+  // Passport middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
+  
+  // Routes
+  app.use("/api/auth", auth);
+  app.get("/", (req, res) => res.send("Good monring sunshine!"));
