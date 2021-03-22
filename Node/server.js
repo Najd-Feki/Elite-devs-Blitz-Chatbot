@@ -6,7 +6,10 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./Auth/auth");
 const auth = require("./routes/authRoutes");
-
+const eventRoute = require("./routes/eventRoute");
+const profileRoute = require("./routes/profileRoute");
+const reclamationRoute = require("./routes/reclamationRoute");
+const userRoute = require("./routes/userRoute");
 //starting express
 const app = express();
 
@@ -42,3 +45,7 @@ app.use(passport.session());
 
 // Routes
 app.use("/api/auth", auth);
+app.use("/event", eventRoute);
+app.use("/user", userRoute);
+app.use("/profile", profileRoute);
+app.use("/reclamation", reclamationRoute);
