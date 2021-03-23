@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "style.css";
-import SaaSProductLandingPage from "pages/SaaSProductLandingPage.js";
+import Home from "pages/Home.js";
 import "tailwindcss/dist/base.css";
 //import "styles/globalStyles.css";
 import React from "react";
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default SaaSProductLandingPage;
+export default Home;
