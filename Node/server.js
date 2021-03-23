@@ -16,7 +16,7 @@ const db = mongoose.connection;
 
 //Server configuration
 app.use(express.json());
-app.listen(3000, () => console.log("Server Started !"));
+app.listen(5000, () => console.log("Server Started !"));
 
 //DB Status on init
 db.on("error", (error) => console.error(error));
@@ -24,7 +24,7 @@ db.once("open", () => console.log("Connected to database !"));
 
 //importing routes
 dialogflowRoutes = require("./routes/dialogflowRoutes")(app);
-userRoutes = require("./routes/userRoute")(app);
+userRoutes = require("./routes/userRoutes")(app);
 
 // Express Session
 app.use(
@@ -41,4 +41,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use("/api/auth", auth);
+app.get("/", (req, res) => {
+  console.log("helloooo");
+  res.send("Welcome to elite devs !");
+});
+auth = require("./routes/authRoutes")(app);
+linkedIn = require("./routes/linkedInRoutes")(app);
