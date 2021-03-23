@@ -22,7 +22,7 @@ router.post('/register_login', (req, res, next) => {
 // GET /auth/google
 app.get(
   '/google',
-  passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' })
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 // GET /auth/google/callback
@@ -32,6 +32,27 @@ app.get(
   function (req, res) {
     res.redirect('/');
   }
+);
+// GET /auth/Facebook
+app.get('/facebook', passport.authenticate('facebook'), {
+  scope: ['profile', 'email'],
+});
+app.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  })
+);
+
+// GET /auth/Twitter
+app.get('/twitter', passport.authenticate('twitter'));
+app.get(
+  '/twitter/callback',
+  passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  })
 );
 
 module.exports = router;

@@ -3,6 +3,8 @@ const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -69,6 +71,47 @@ passport.use(
     function (token, tokenSecret, profile, done) {
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         return done(err, user);
+      });
+    }
+  )
+);
+
+// Use the Facebook Strategy within Passport.
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID:
+        '321353180877-9e53hr8ci22mlaa5sksoa5il149vdijj.apps.googleusercontent.com',
+      clientSecret: 'GzkbaOnGRmOoGroIIe5iXKIv',
+      callbackURL: 'http://localhost:3000/facebook/callback',
+    },
+    function (accessToken, refreshToken, profile, done) {
+      User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        done(null, user);
+      });
+    }
+  )
+);
+
+// Use the Twitter Strategy within Passport.
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey:
+        '321353180877-9e53hr8ci22mlaa5sksoa5il149vdijj.apps.googleusercontent.com',
+      consumerSecret: 'GzkbaOnGRmOoGroIIe5iXKIv',
+      callbackURL: 'http://localhost:3000/twitter/callback',
+    },
+    function (token, tokenSecret, profile, done) {
+      User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        done(null, user);
       });
     }
   )
