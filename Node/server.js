@@ -38,11 +38,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //importing routes
-dialogflowRoutes = require('./routes/dialogflowRoutes')(app);
-eventRoute = require('./routes/eventRoute')(app);//done
-profileRoute = require('./routes/profileRoute')(app);//done
-userRoutes = require('./routes/userRoute')(app);//done
-reclamationRoute = require('./routes/reclamationRoute')(app);
+dialogflowRoutes = require("./routes/dialogflowRoutes")(app);
+eventRoute = require("./routes/eventRoute")(app); //done
+profileRoute = require("./routes/profileRoute")(app); //done
+userRoutes = require("./routes/userRoute")(app); //done
+reclamationRoute = require("./routes/reclamationRoute")(app);
 //******************************************************************rigelha *************************************/
-//auth = require('./routes/authRoutes')(app);
-
+auth = require("./routes/authRoutes")(app);
+//***************************************************************wrasek mrigla **********************************/
