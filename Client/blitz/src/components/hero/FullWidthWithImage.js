@@ -48,7 +48,7 @@ export default ({
       <NavLink href="#">Blog</NavLink>
       <NavLink href="#">Pricing</NavLink>
       <NavLink href="#">Login</NavLink>
-    </NavLinks>
+    </NavLinks>,
   ],
   heading = (
     <>
@@ -62,7 +62,7 @@ export default ({
   primaryActionUrl = "#",
   primaryActionText = "Sign Up",
   secondaryActionUrl = "#",
-  secondaryActionText = "Search Hotels"
+  secondaryActionText = "Search Hotels",
 }) => {
   return (
     <Container>

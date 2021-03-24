@@ -4,7 +4,7 @@ import tw from "twin.macro";
 //eslint-disable-next-line
 import { css } from "styled-components/macro";
 
-import Header from "../headers/light.js";
+import Header from "../headers/light";
 
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import DesignIllustration from "../../images/design-illustration-2.svg";
@@ -56,8 +56,7 @@ export default ({ roundedHeaderButton }) => {
               Beautiful React Templates <span tw="text-primary-500">for you.</span>
             </Heading>
             <Paragraph>
-              Our templates are easy to setup, understand and customize. Fully modular components with a variety of
-              pages and components.
+              Our templates are easy to setup, understand and customize. Fully modular components with a variety of pages and components.
             </Paragraph>
             <Actions>
               <input type="text" placeholder="Your E-mail Address" />
