@@ -1,32 +1,59 @@
 module.exports = (app) => {
     var express = require("express");
     var router = express.Router();
-  
+    const mongoose = require('mongoose');
+    const Reclamation = require ('../models/reclamation');
   // GET all reclamation
-    app.get("/", function (req, res, next) {
-      res.send("...");
+    app.get("/reclamation",async function (req, res, next) {
+      await  Reclamation.find(function(err,data) {
+        if(err)
+        {console.log(err);}
+        res.json(data)
+      });
     });
   
   // GET reclamation by id
-    app.get("/:id", function (req, res, next) {
+    app.get("/reclamation/:id",async function (req, res, next) {
       var id = req.params.id;
-      res.send("...");
+      await Reclamation.findById(id,function(err,data) {
+        if (err)
+        { console.log(err);}
+        res.json(data);
+      })
     });
   
   // add reclamtion 
-      app.post('/add', function (req, res) {
-        res.send("...");
+      app.post('/reclamation/add',async function (req, res) {
+        var reclamation = new Reclamation();
+        reclamation.userId = req.body.userId;
+        reclamation.date = req.body.date;
+
+        try
+        {var reclamationlog = await reclamation.save();
+        console.log(reclamationlog);
+        res.send("reclamation added")}
+        catch(err)
+        {console.log(err);}
       });
   
   // delete reclamation
-  app.delete('/delete/:id', function (req, res) {
+  app.delete('/reclamation/delete/:id',async function (req, res) {
     var id = req.params.id;
-    res.send("...");
+    await Reclamation.findByIdAndRemove(id,function(err,doc) {
+      if (err)
+      { console.log(err);}
+      res.send("reclamation removed");
+    })
   });    
   
   // modify reclamation 
-  app.put('/modify/:id', function (req, res) {
+  app.put('/reclamation/modify/:id',async function (req, res) {
     var id = req.params.id;
-    res.send("...");
+    await Reclamation.findByIdAndUpdate(id,{$set:req.body},function(err,doc) {
+      if (err)
+      { console.log(err);}
+      res.send("reclamation updated");
+      console.log(doc);
+    })
   });
   };

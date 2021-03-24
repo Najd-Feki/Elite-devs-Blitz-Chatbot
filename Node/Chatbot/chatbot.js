@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const config = require("../config/keys");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
-const Profile = mongoose.model("Profile");
+const Profile = require("../models/profile");
 // user attributes list///
 var profilePreparation = {
   fullName: String,
