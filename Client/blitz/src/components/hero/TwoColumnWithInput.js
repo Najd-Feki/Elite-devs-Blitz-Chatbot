@@ -4,6 +4,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 //eslint-disable-next-line
 import { css } from "styled-components/macro";
+import Fade from "react-reveal/Fade";
 
 import Header from "../headers/light";
 
@@ -42,38 +43,39 @@ const CustomersLogoStrip = styled.div`
     ${tw`mt-4 w-full lg:pr-16 xl:pr-32 opacity-50`}
   }
 `;
-
 export default ({ roundedHeaderButton }) => {
   return (
     <>
       <Header roundedHeaderButton={roundedHeaderButton} />
-      <Container>
-        <TwoColumn>
-          <LeftColumn>
-            <Heading>
-              Blitz learning assistant <span tw="text-primary-500">for you.</span>
-            </Heading>
-            <Paragraph>
-              Blitz is a chatbot made with artificial intelligence and natural language processing to help you build a profile and find the best
-              available courses for your studies.
-            </Paragraph>
-            <Actions>
-              {/* <input type="text" placeholder="Your E-mail Address" /> */}
-              <button>Get Started</button>
-            </Actions>
-            <CustomersLogoStrip>
-              <p>Our TRUSTED Customers</p>
-              <img src={CustomersLogoStripImage} alt="Our Customers" />
-            </CustomersLogoStrip>
-          </LeftColumn>
-          <RightColumn>
-            <IllustrationContainer>
-              <img tw="min-w-0 w-full max-w-lg xl:max-w-3xl" src={DesignIllustration} alt="Design Illustration" />
-            </IllustrationContainer>
-          </RightColumn>
-        </TwoColumn>
-        <DecoratorBlob1 />
-      </Container>
+      <Fade left>
+        <Container>
+          <TwoColumn>
+            <LeftColumn>
+              <Heading>
+                Blitz learning assistant <span tw="text-primary-500">for you.</span>
+              </Heading>
+              <Paragraph>
+                Blitz is a chatbot made with artificial intelligence and natural language processing to help you build a profile and find the best
+                available courses for your studies.
+              </Paragraph>
+              <Actions>
+                {/* <input type="text" placeholder="Your E-mail Address" /> */}
+                <button>Get Started</button>
+              </Actions>
+              <CustomersLogoStrip>
+                <p>Our TRUSTED Customers</p>
+                <img src={CustomersLogoStripImage} alt="Our Customers" />
+              </CustomersLogoStrip>
+            </LeftColumn>
+            <RightColumn>
+              <IllustrationContainer>
+                <img tw="min-w-0 w-full max-w-lg xl:max-w-3xl" src={DesignIllustration} alt="Design Illustration" />
+              </IllustrationContainer>
+            </RightColumn>
+          </TwoColumn>
+          <DecoratorBlob1 />
+        </Container>
+      </Fade>
     </>
   );
 };

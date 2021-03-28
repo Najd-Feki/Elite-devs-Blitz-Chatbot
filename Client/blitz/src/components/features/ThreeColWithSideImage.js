@@ -63,7 +63,7 @@ export default ({
   cards = null,
   heading = "Amazing Features",
   subheading = "Features",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  description = "BLITZ chatbot will be your gate for a better personal development, faster learning and greater time managment",
 }) => {
   /*
    * This componets has an array of object denoting the cards defined below. Each object in the cards array can have the key (Change it according to your need, you can also add more objects to have more cards in this feature component) or you can directly pass this using the cards prop:
@@ -77,13 +77,25 @@ export default ({
     {
       imageSrc: ShieldIconImage,
       title: "Secure",
-      description: "We strictly only deal with vendors that provide top notch security.",
+      description: "We strictly only use your data for your own benefit such as resume creation or searching for courses.",
     },
-    { imageSrc: SupportIconImage, title: "24/7 Support" },
-    { imageSrc: CustomizeIconImage, title: "Customizable" },
-    { imageSrc: ReliableIconImage, title: "Reliable" },
-    { imageSrc: FastIconImage, title: "Fast" },
-    { imageSrc: SimpleIconImage, title: "Easy" },
+    { imageSrc: SupportIconImage, title: "24/7 Support", description: "You can ask blitz or the developers for help whenever you want." },
+    {
+      imageSrc: CustomizeIconImage,
+      title: "Customizable",
+      description: "With Blitz's help you can customize your data,your profile or your preferences.",
+    },
+    {
+      imageSrc: ReliableIconImage,
+      title: "Reliable",
+      description: "Our database is heavily backed up to guarantee the safety of your data and the ease of your access to our services",
+    },
+    {
+      imageSrc: FastIconImage,
+      title: "Fast",
+      description: "We focused on the optimization and using the best cloud providers so you can have the fastest response time ",
+    },
+    { imageSrc: SimpleIconImage, title: "Easy", description: "We can guarantee the best user experience with the simplicty of our design." },
   ];
 
   if (!cards) cards = defaultCards;

@@ -1,19 +1,19 @@
 import React from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import Fade from "react-reveal";
-import Hero from "components/hero/TwoColumnWithInput.js";
+import { Fade, Zoom } from "react-reveal";
+import Hero from "components/hero/TwoColumnWithInput";
 import Features from "components/features/ThreeColWithSideImage.js";
 import MainFeature from "components/features/TwoColWithButton.js";
 import MainFeature2 from "components/features/TwoColWithTwoHorizontalFeaturesAndButton.js";
-import FeatureWithSteps from "components/features/TwoColWithSteps.js";
+import FeatureWithSteps from "components/features/TwoColWithButton";
 import Pricing from "components/pricing/ThreePlans.js";
 import Testimonial from "components/testimonials/TwoColumnWithImageAndRating.js";
 import FAQ from "components/faqs/SingleCol.js";
 import GetStarted from "components/cta/GetStarted";
 import Footer from "components/footers/FiveColumnWithBackground.js";
-import heroScreenshotImageSrc from "images/hero-screenshot-1.png";
-import macHeroScreenshotImageSrc from "images/hero-screenshot-2.png";
+import conceptionImg from "images/concept.jpg";
+import responsiveImg from "images/smartphone.jpg";
 import prototypeIllustrationImageSrc from "images/prototype-illustration.svg";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
@@ -24,33 +24,51 @@ export default () => {
   const HighlightedText = tw.span`text-primary-500`;
 
   return (
-    <Fade left>
+    <>
       <Hero roundedHeaderButton={true} />
+
       <Features
         subheading={<Subheading>Features</Subheading>}
         heading={
           <>
-            We have Amazing <HighlightedText>Service.</HighlightedText>
+            <HighlightedText>Blitz </HighlightedText> provides an amazing Service.
+          </>
+        }
+        description={
+          <>
+            <HighlightedText>BLITZ</HighlightedText> chatbot will be your gate for a better personal development, faster learning and greater time
+            managment
           </>
         }
       />
+
       <MainFeature
         subheading={<Subheading>Quality Work</Subheading>}
-        imageSrc={heroScreenshotImageSrc}
+        imageSrc={conceptionImg}
         imageBorder={true}
         imageDecoratorBlob={true}
-      />
-      <FeatureWithSteps
-        subheading={<Subheading>STEPS</Subheading>}
-        heading={
+        imageRounded={true}
+        description={
           <>
-            Easy to <HighlightedText>Get Started.</HighlightedText>
+            We are a team of young developers who gathered for one purpose which is the creation of <HighlightedText> BLITZ </HighlightedText>, the
+            learning assistant who can change your future.
           </>
         }
+      />
+
+      <FeatureWithSteps
+        subheading={<Subheading>Responsiveness</Subheading>}
+        heading={
+          <>
+            Take <HighlightedText>BLITZ</HighlightedText> wherever you go.
+          </>
+        }
+        description="Thanks to his responssive design,our website can fit on whatever device you are using, So you will never have to stop learning."
+        imageRounded={true}
         textOnLeft={false}
-        imageSrc={macHeroScreenshotImageSrc}
+        imageSrc={responsiveImg}
         imageDecoratorBlob={true}
-        decoratorBlobCss={tw`xl:w-40 xl:h-40 opacity-15 -translate-x-1/2 left-1/2`}
+        //decoratorBlobCss={tw`xl:w-40 xl:h-40 opacity-15 -translate-x-1/2 left-1/2`}
       />
       <MainFeature2
         subheading={<Subheading>VALUES</Subheading>}
@@ -180,6 +198,6 @@ export default () => {
       />
       <GetStarted />
       <Footer />
-    </Fade>
+    </>
   );
 };
