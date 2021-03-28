@@ -5,7 +5,7 @@ import { Fade, Zoom } from "react-reveal";
 import Hero from "components/hero/TwoColumnWithInput";
 import Features from "components/features/ThreeColWithSideImage.js";
 import MainFeature from "components/features/TwoColWithButton.js";
-import MainFeature2 from "components/features/TwoColWithTwoHorizontalFeaturesAndButton.js";
+//import MainFeature2 from "components/features/VerticalWithAlternateImageAndText";
 import FeatureWithSteps from "components/features/TwoColWithButton";
 import Pricing from "components/pricing/ThreePlans.js";
 import Testimonial from "components/testimonials/TwoColumnWithImageAndRating.js";
@@ -14,7 +14,7 @@ import GetStarted from "components/cta/GetStarted";
 import Footer from "components/footers/FiveColumnWithBackground.js";
 import conceptionImg from "images/concept.jpg";
 import responsiveImg from "images/smartphone.jpg";
-import prototypeIllustrationImageSrc from "images/prototype-illustration.svg";
+import securityImg from "images/security.jpg";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 
@@ -26,21 +26,22 @@ export default () => {
   return (
     <>
       <Hero roundedHeaderButton={true} />
-
-      <Features
-        subheading={<Subheading>Features</Subheading>}
-        heading={
-          <>
-            <HighlightedText>Blitz </HighlightedText> provides an amazing Service.
-          </>
-        }
-        description={
-          <>
-            <HighlightedText>BLITZ</HighlightedText> chatbot will be your gate for a better personal development, faster learning and greater time
-            managment
-          </>
-        }
-      />
+      <Fade left>
+        <Features
+          subheading={<Subheading>Features</Subheading>}
+          heading={
+            <>
+              <HighlightedText>Blitz </HighlightedText> provides an amazing Service.
+            </>
+          }
+          description={
+            <>
+              <HighlightedText>BLITZ</HighlightedText> chatbot will be your gate for a better personal development, faster learning and greater time
+              managment
+            </>
+          }
+        />
+      </Fade>
 
       <MainFeature
         subheading={<Subheading>Quality Work</Subheading>}
@@ -56,7 +57,7 @@ export default () => {
         }
       />
 
-      <FeatureWithSteps
+      <MainFeature
         subheading={<Subheading>Responsiveness</Subheading>}
         heading={
           <>
@@ -65,35 +66,29 @@ export default () => {
         }
         description="Thanks to his responssive design,our website can fit on whatever device you are using, So you will never have to stop learning."
         imageRounded={true}
+        imageBorder={true}
         textOnLeft={false}
         imageSrc={responsiveImg}
         imageDecoratorBlob={true}
         //decoratorBlobCss={tw`xl:w-40 xl:h-40 opacity-15 -translate-x-1/2 left-1/2`}
       />
-      <MainFeature2
-        subheading={<Subheading>VALUES</Subheading>}
+
+      <MainFeature
+        subheading={<Subheading>Security</Subheading>}
         heading={
           <>
             We Always Abide by Our <HighlightedText>Principles.</HighlightedText>
           </>
         }
-        imageSrc={prototypeIllustrationImageSrc}
+        imageSrc={securityImg}
         showDecoratorBlob={false}
-        features={[
-          {
-            Icon: MoneyIcon,
-            title: "Affordable",
-            description: "We promise to offer you the best rate we can - at par with the industry standard.",
-            iconContainerCss: tw`bg-green-300 text-green-800`,
-          },
-          {
-            Icon: BriefcaseIcon,
-            title: "Professionalism",
-            description: "We assure you that our templates are designed and created by professional designers.",
-            iconContainerCss: tw`bg-red-300 text-red-800`,
-          },
-        ]}
+        imageRounded={true}
+        imageBorder={true}
+        imageDecoratorBlob={true}
+        description="Security is a major concern that we allways try to improve and focus on in our policy, thats why we allow our users to access their accounts with secure passwords.
+        We can also assure you that we strictly only use your data for your own benefit such as resume creation or searching for courses."
       />
+
       <Pricing
         subheading={<Subheading>Pricing</Subheading>}
         heading={

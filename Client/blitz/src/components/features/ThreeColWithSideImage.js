@@ -36,9 +36,9 @@ const Column = styled.div`
 const Card = styled.div`
   ${tw`flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left h-full mx-4 px-2 py-8`}
   .imageContainer {
-    ${tw`border text-center rounded-full p-5 flex-shrink-0`}
+    ${tw`animate-pulse border text-center rounded-full p-5 flex-shrink-0`}
     img {
-      ${tw`w-6 h-6`}
+      ${tw`transition  duration-500  transform hover:-translate-y-1 hover:scale-110 w-6 h-6`}
     }
   }
 
@@ -65,14 +65,6 @@ export default ({
   subheading = "Features",
   description = "BLITZ chatbot will be your gate for a better personal development, faster learning and greater time managment",
 }) => {
-  /*
-   * This componets has an array of object denoting the cards defined below. Each object in the cards array can have the key (Change it according to your need, you can also add more objects to have more cards in this feature component) or you can directly pass this using the cards prop:
-   *  1) imageSrc - the image shown at the top of the card
-   *  2) title - the title of the card
-   *  3) description - the description of the card
-   *  If a key for a particular card is not provided, a default value is used
-   */
-
   const defaultCards = [
     {
       imageSrc: ShieldIconImage,

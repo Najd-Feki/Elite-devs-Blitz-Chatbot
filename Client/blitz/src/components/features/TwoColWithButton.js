@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import tw from "twin.macro";
+import Fade from "react-reveal/Fade";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
@@ -17,7 +18,11 @@ const TextColumn = styled(Column)((props) => [
   props.textOnLeft ? tw`md:mr-12 lg:mr-16 md:order-first` : tw`md:ml-12 lg:ml-16 md:order-last`,
 ]);
 
-const Image = styled.img((props) => [props.imageRounded && tw`rounded`, props.imageBorder && tw`border`, props.imageShadow && tw`shadow`]);
+const Image = styled.img((props) => [
+  props.imageRounded && tw`rounded-3xl`,
+  props.imageBorder && tw`border-black`,
+  props.imageShadow && tw`shadow-2xl`,
+]);
 
 const DecoratorBlob = styled(SvgDotPattern)((props) => [
   tw`w-20 h-20 absolute right-0 bottom-0 transform translate-x-1/2 translate-y-1/2 fill-current text-primary-500 -z-10`,
@@ -54,24 +59,26 @@ export default ({
   imageDecoratorBlobCss = null,
   textOnLeft = true,
 }) => {
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
-
   return (
     <Container>
       <TwoColumn>
         <ImageColumn>
-          <Image css={imageCss} src={imageSrc} imageBorder={imageBorder} imageShadow={imageShadow} imageRounded={imageRounded} />
-          {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
+          <Fade right={textOnLeft} left={!textOnLeft} opposite>
+            <Image css={imageCss} src={imageSrc} imageBorder={imageBorder} imageShadow={imageShadow} imageRounded={imageRounded} />
+            {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
+          </Fade>
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
-          <TextContent>
-            <Subheading>{subheading}</Subheading>
-            <Heading>{heading}</Heading>
-            <Description>{description}</Description>
-            {/* <PrimaryButton buttonRounded={buttonRounded} as="a" href={primaryButtonUrl}>
+          <Fade left={textOnLeft} right={!textOnLeft} opposite>
+            <TextContent>
+              <Subheading>{subheading}</Subheading>
+              <Heading>{heading}</Heading>
+              <Description>{description}</Description>
+              {/* <PrimaryButton buttonRounded={buttonRounded} as="a" href={primaryButtonUrl}>
               {primaryButtonText}
             </PrimaryButton> */}
-          </TextContent>
+            </TextContent>
+          </Fade>
         </TextColumn>
       </TwoColumn>
     </Container>

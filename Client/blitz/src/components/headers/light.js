@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Pulse from "react-reveal/Pulse";
+import Fade from "react-reveal/Fade";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
@@ -90,22 +91,24 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   links = links || defaultLinks;
 
   return (
-    <Header className={className || "header-light"}>
-      <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
-        {logoLink}
-        {links}
-      </DesktopNavLinks>
-
-      <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
-        {logoLink}
-        <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+    <Fade bottom duration={3000}>
+      <Header className={className || "header-light"}>
+        <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
+          {logoLink}
           {links}
-        </MobileNavLinks>
-        <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>
-          {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
-        </NavToggle>
-      </MobileNavLinksContainer>
-    </Header>
+        </DesktopNavLinks>
+
+        <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
+          {logoLink}
+          <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+            {links}
+          </MobileNavLinks>
+          <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>
+            {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
+          </NavToggle>
+        </MobileNavLinksContainer>
+      </Header>
+    </Fade>
   );
 };
 

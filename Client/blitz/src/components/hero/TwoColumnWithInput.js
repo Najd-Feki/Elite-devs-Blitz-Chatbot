@@ -47,10 +47,11 @@ export default ({ roundedHeaderButton }) => {
   return (
     <>
       <Header roundedHeaderButton={roundedHeaderButton} />
-      <Fade left>
-        <Container>
-          <TwoColumn>
-            <LeftColumn>
+
+      <Container>
+        <TwoColumn>
+          <LeftColumn>
+            <Fade left>
               <Heading>
                 Blitz learning assistant <span tw="text-primary-500">for you.</span>
               </Heading>
@@ -66,16 +67,19 @@ export default ({ roundedHeaderButton }) => {
                 <p>Our TRUSTED Customers</p>
                 <img src={CustomersLogoStripImage} alt="Our Customers" />
               </CustomersLogoStrip>
-            </LeftColumn>
-            <RightColumn>
+            </Fade>
+          </LeftColumn>
+
+          <RightColumn>
+            <Fade right>
               <IllustrationContainer>
                 <img tw="min-w-0 w-full max-w-lg xl:max-w-3xl" src={DesignIllustration} alt="Design Illustration" />
               </IllustrationContainer>
-            </RightColumn>
-          </TwoColumn>
-          <DecoratorBlob1 />
-        </Container>
-      </Fade>
+            </Fade>
+          </RightColumn>
+        </TwoColumn>
+        <DecoratorBlob1 />
+      </Container>
     </>
   );
 };
