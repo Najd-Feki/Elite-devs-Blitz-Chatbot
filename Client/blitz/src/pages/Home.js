@@ -1,12 +1,9 @@
 import React from "react";
 import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { Fade, Zoom } from "react-reveal";
+import Fade from "react-reveal/Fade";
 import Hero from "components/hero/TwoColumnWithInput";
 import Features from "components/features/ThreeColWithSideImage.js";
 import MainFeature from "components/features/TwoColWithButton.js";
-//import MainFeature2 from "components/features/VerticalWithAlternateImageAndText";
-//import Pricing from "components/cards/PortfolioTwoCardsWithImage";
 import Testimonial from "components/testimonials/TwoColumnWithImageAndRating.js";
 import FAQ from "components/faqs/SingleCol.js";
 import GetStarted from "components/cta/GetStarted";
