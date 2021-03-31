@@ -62,9 +62,9 @@ export const DesktopNavLinks = tw.nav`
 export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">About</NavLink>
+      <NavLink href="/about">About</NavLink>
       <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/#">Pricing</NavLink>
+      <NavLink href="/contact">Contact Us</NavLink>
       <NavLink href="/profile">Profile</NavLink>
       <NavLink href="/login" tw="lg:ml-12!">
         Login
