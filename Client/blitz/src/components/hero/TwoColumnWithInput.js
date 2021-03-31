@@ -6,6 +6,7 @@ import tw from "twin.macro";
 import { css } from "styled-components/macro";
 import Fade from "react-reveal/Fade";
 
+//import Header from "../headers/light";
 import Header from "../headers/light";
 
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";

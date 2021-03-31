@@ -36,9 +36,8 @@ module.exports = {
       session: sessionPath,
       queryInput: {
         text: {
-          // The query to send to the dialogflow agent
           text: text,
-          // The language used by the client (en-US)
+
           languageCode: config.dialogFlowSessionLanguageCode,
         },
       },

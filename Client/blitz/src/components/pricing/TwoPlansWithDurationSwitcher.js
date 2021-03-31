@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+/* eslint-disable import/no-anonymous-default-export */
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -17,14 +18,14 @@ const Description = tw(SectionDescription)`w-full text-center`;
 const PlanDurationSwitcher = tw.div`block w-full max-w-xs sm:inline-block sm:w-auto border-2 rounded-full px-1 py-1 mt-8`;
 const SwitchButton = styled.button`
   ${tw`w-1/2 sm:w-32 px-4 sm:px-8 py-3 rounded-full focus:outline-none text-sm font-bold text-gray-700 transition duration-300`}
-  ${props => props.active && tw`bg-primary-500 text-gray-100`}
+  ${(props) => props.active && tw`bg-primary-500 text-gray-100`}
 `;
 
 const PlansContainer = tw.div`flex justify-center flex-col md:flex-row items-center md:items-start relative`;
 const Plan = styled.div`
   ${tw`w-full max-w-72 mt-16 md:mr-12 md:last:mr-0 text-center px-8 rounded-lg relative text-gray-900 bg-white flex flex-col shadow-raised`}
 
-  ${props =>
+  ${(props) =>
     props.featured &&
     css`
       ${tw`border-2 border-gray-200 shadow-none`}
@@ -82,23 +83,23 @@ export default ({
     {
       text: "Year",
       switcherText: "Yearly",
-    }
-  ]
+    },
+  ],
 }) => {
   const defaultPlans = [
     {
       name: "Free Plan",
       durationPrices: ["$0", "$0"],
       mainFeature: "For Personal Blogs",
-      features: ["30 Templates", "7 Landing Pages", "12 Internal Pages", "Basic Assistance"]
+      features: ["30 Templates", "7 Landing Pages", "12 Internal Pages", "Basic Assistance"],
     },
     {
       name: "Pro Plan",
       durationPrices: ["$49", "$499"],
       mainFeature: "Suited for Production Websites",
       features: ["60 Templates", "8 Landing Pages", "22 Internal Pages", "Priority Assistance", "Lifetime Updates"],
-      featured: true
-    }
+      featured: true,
+    },
   ];
 
   if (!plans) plans = defaultPlans;
@@ -112,11 +113,13 @@ export default ({
           {subheading && <Subheading>{subheading}</Subheading>}
           <Heading>{heading}</Heading>
           {description && <Description>{description}</Description>}
-        <PlanDurationSwitcher>
-          {planDurations.map((planDuration, index) => (
-            <SwitchButton active={activeDurationIndex === index} key={index} onClick={() => setActiveDurationIndex(index)}>{planDuration.switcherText}</SwitchButton>
-          ))}
-        </PlanDurationSwitcher>
+          <PlanDurationSwitcher>
+            {planDurations.map((planDuration, index) => (
+              <SwitchButton active={activeDurationIndex === index} key={index} onClick={() => setActiveDurationIndex(index)}>
+                {planDuration.switcherText}
+              </SwitchButton>
+            ))}
+          </PlanDurationSwitcher>
         </HeaderContainer>
         <PlansContainer>
           {plans.map((plan, index) => (

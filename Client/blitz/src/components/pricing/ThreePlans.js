@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -20,7 +21,7 @@ const Plan = styled.div`
     ${tw`rounded-t-lg absolute top-0 inset-x-0 h-2`}
   }
 
-  ${props =>
+  ${(props) =>
     props.featured &&
     css`
       background: rgb(100,21,255);
@@ -81,13 +82,12 @@ const DecoratorBlob = styled(SvgDecoratorBlob)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-64 w-64 opacity-25 transform -translate-x-1/2 translate-y-1/2`}
 `;
 
-
 export default ({
   subheading = "Pricing",
   heading = "Flexible Plans.",
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   plans = null,
-  primaryButtonText = "Buy Now"
+  primaryButtonText = "Buy Now",
 }) => {
   const defaultPlans = [
     {
@@ -128,7 +128,7 @@ export default ({
     css`
       background: rgb(245, 101, 101);
       background: linear-gradient(115deg, rgba(245, 101, 101, 1) 0%, rgba(254, 178, 178, 1) 100%);
-    `
+    `,
   ];
 
   return (
@@ -161,7 +161,7 @@ export default ({
               </PlanAction>
             </Plan>
           ))}
-          <DecoratorBlob/>
+          <DecoratorBlob />
         </PlansContainer>
       </ContentWithPaddingXl>
     </Container>

@@ -6,8 +6,7 @@ import Hero from "components/hero/TwoColumnWithInput";
 import Features from "components/features/ThreeColWithSideImage.js";
 import MainFeature from "components/features/TwoColWithButton.js";
 //import MainFeature2 from "components/features/VerticalWithAlternateImageAndText";
-import FeatureWithSteps from "components/features/TwoColWithButton";
-import Pricing from "components/pricing/ThreePlans.js";
+//import Pricing from "components/cards/PortfolioTwoCardsWithImage";
 import Testimonial from "components/testimonials/TwoColumnWithImageAndRating.js";
 import FAQ from "components/faqs/SingleCol.js";
 import GetStarted from "components/cta/GetStarted";
@@ -15,6 +14,7 @@ import Footer from "components/footers/FiveColumnWithBackground.js";
 import conceptionImg from "images/concept.jpg";
 import responsiveImg from "images/smartphone.jpg";
 import securityImg from "images/security.jpg";
+import cloudImg from "images/cloud.jpg";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 
@@ -88,8 +88,22 @@ export default () => {
         description="Security is a major concern that we allways try to improve and focus on in our policy, thats why we allow our users to access their accounts with secure passwords.
         We can also assure you that we strictly only use your data for your own benefit such as resume creation or searching for courses."
       />
-
-      <Pricing
+      <MainFeature
+        subheading={<Subheading>Speed</Subheading>}
+        heading={
+          <>
+            Get your answers at the<HighlightedText> speed of light </HighlightedText>
+          </>
+        }
+        textOnLeft={false}
+        imageSrc={cloudImg}
+        showDecoratorBlob={false}
+        imageRounded={true}
+        imageBorder={true}
+        imageDecoratorBlob={true}
+        description="Maintaining high speed responses and high availability are our main concerns, and that's why Blitz is based on cloud services such as google and Mongo's Atlas."
+      />
+      {/* <Pricing
         subheading={<Subheading>Pricing</Subheading>}
         heading={
           <>
@@ -104,14 +118,14 @@ export default () => {
             mainFeature: "For Individuals",
             features: ["30 Templates", "7 Landing Pages", "12 Internal Pages", "Basic Assistance"],
           },
-          {
-            name: "Business",
-            price: "$37.99",
-            duration: "Monthly",
-            mainFeature: "For Small Businesses",
-            features: ["60 Templates", "15 Landing Pages", "22 Internal Pages", "Priority Assistance"],
-            featured: true,
-          },
+          // {
+          //   name: "Business",
+          //   price: "$37.99",
+          //   duration: "Monthly",
+          //   mainFeature: "For Small Businesses",
+          //   features: ["60 Templates", "15 Landing Pages", "22 Internal Pages", "Priority Assistance"],
+          //   featured: true,
+          // },
           {
             name: "Enterprise",
             price: "$57.99",
@@ -120,12 +134,18 @@ export default () => {
             features: ["90 Templates", "27 Landing Pages", "37 Internal Pages", "Personal Assistance"],
           },
         ]}
-      />
+      /> */}
       <Testimonial
         subheading={<Subheading>Testimonials</Subheading>}
+        description={
+          <>
+            <HighlightedText>Blitz</HighlightedText> has helped many users attain their objectives and succeed, and he is always ready to give more !"
+          </>
+        }
+        textOnLeft={true}
         heading={
           <>
-            Our Clients <HighlightedText>Love Us.</HighlightedText>
+            Our users <HighlightedText>Love Us.</HighlightedText>
           </>
         }
         testimonials={[
@@ -135,24 +155,28 @@ export default () => {
               "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
             heading: "Amazing User Experience",
             quote:
-              "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-            customerName: "Charlotte Hale",
-            customerTitle: "Director, Delos Inc.",
+              "Blitz helped me find the perfect job that matches my skills, and I'm still using it daily to learn more and develop my knowledge.",
+            customerName: "Amal gharsallah",
+            customerTitle: "Executive Assistant , BIAT ",
           },
           {
             stars: 5,
             profileImageSrc:
               "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=512&h=512&q=80",
-            heading: "Love the Developer Experience and Design Principles !",
-            quote:
-              "Sinor Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-            customerName: "Adam Cuppy",
-            customerTitle: "Founder, EventsNYC",
+            heading: "Perfect discussion flow !",
+            quote: "Love the discussion and the way that blitz answers and reacts to my texts, the developers did a pretty great job!",
+            customerName: "Ahmed Jouini",
+            customerTitle: "Mechanical Engineer, SNCFT",
           },
         ]}
       />
       <FAQ
         subheading={<Subheading>FAQS</Subheading>}
+        description={
+          <>
+            And we have got answers to all of them. You can look for your answers here or you can just ask <HighlightedText>Blitz</HighlightedText>{" "}
+          </>
+        }
         heading={
           <>
             You have <HighlightedText>Questions ?</HighlightedText>
@@ -160,34 +184,20 @@ export default () => {
         }
         faqs={[
           {
-            question: "Are all the templates easily customizable ?",
-            answer:
-              "Yes, they all are. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            question: "Is Blitz always available ?",
+            answer: "Yes, Blitz is 24/7 available to help you and answer your questions",
           },
           {
-            question: "How long do you usually support an standalone template for ?",
-            answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            question: "How much should I pay for Blitz ?",
+            answer: "Actually blitz is totally free! but you can of course help the developers by buying us a cup of coffee",
           },
           {
-            question: "What kind of payment methods do you accept ?",
-            answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            question: "Can Blitz help me find a decent job ?",
+            answer: "Yes! the main purpose of blitz is helping you achieve your dream job by providing the necessary courses that you need.",
           },
           {
-            question: "Is there a subscribption service to get the latest templates ?",
-            answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          },
-          {
-            question: "Are the templates compatible with the React ?",
-            answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          },
-          {
-            question: "Do you really support Internet Explorer 11 ?",
-            answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            question: "Do you really support all types of devices?",
+            answer: "Yes we do, thanks to our responsive design, you can use blitz on any device that supports a web browser",
           },
         ]}
       />

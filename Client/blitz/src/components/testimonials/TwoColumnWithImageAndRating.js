@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import "slick-carousel/slick/slick.css";
 import React, { useState } from "react";
 import Slider from "react-slick";
@@ -10,25 +11,19 @@ import loveIllustrationImageSrc from "images/love-illustration.svg";
 import { ReactComponent as StarIconBase } from "images/star-icon.svg";
 import { ReactComponent as ArrowLeftIcon } from "images/arrow-left-3-icon.svg";
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg";
-
+import Fade from "react-reveal/Fade";
 const Row = tw.div`flex flex-col md:flex-row justify-between items-center`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const ImageColumn = tw(Column)`md:w-5/12 xl:w-6/12 flex-shrink-0 relative`;
-const TextColumn = styled(Column)(props => [
+const TextColumn = styled(Column)((props) => [
   tw`md:w-7/12 xl:w-6/12 mt-16 md:mt-0`,
-  props.textOnLeft ? tw`md:pr-12 lg:pr-16 md:order-first` : tw`md:pl-12 lg:pl-16 md:order-last`
+  props.textOnLeft ? tw`md:pr-12 lg:pr-16 md:order-first` : tw`md:pl-12 lg:pl-16 md:order-last`,
 ]);
 
-const Image = styled.img(props => [
-  props.imageRounded && tw`rounded`,
-  props.imageBorder && tw`border`,
-  props.imageShadow && tw`shadow`
-]);
+const Image = styled.img((props) => [props.imageRounded && tw`rounded`, props.imageBorder && tw`border`, props.imageShadow && tw`shadow`]);
 
 const Subheading = tw(SubheadingBase)`text-center md:text-left`;
-const Heading = tw(
-  SectionHeading
-)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
+const Heading = tw(SectionHeading)`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-6 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
 const TestimonialSlider = styled(Slider)`
@@ -75,7 +70,7 @@ export default ({
   imageShadow = false,
   subheading = "Testimonials",
   heading = "Our Clients Love Us.",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.",
+  description = "",
   textOnLeft = false,
   testimonials = [
     {
@@ -86,7 +81,7 @@ export default ({
       quote:
         "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
       customerName: "Charlotte Hale",
-      customerTitle: "CEO, Delos Inc."
+      customerTitle: "CEO, Delos Inc.",
     },
     {
       stars: 5,
@@ -96,9 +91,9 @@ export default ({
       quote:
         "Sinor Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
       customerName: "Adam Cuppy",
-      customerTitle: "Founder, EventsNYC"
-    }
-  ]
+      customerTitle: "Founder, EventsNYC",
+    },
+  ],
 }) => {
   const [sliderRef, setSliderRef] = useState(null);
 
@@ -107,43 +102,47 @@ export default ({
       <ContentWithPaddingXl>
         <Row>
           <ImageColumn>
-            <Image src={imageSrc} imageBorder={imageBorder} imageShadow={imageShadow} imageRounded={imageRounded} />
+            <Fade right>
+              <Image src={imageSrc} imageBorder={imageBorder} imageShadow={imageShadow} imageRounded={imageRounded} />
+            </Fade>
           </ImageColumn>
           <TextColumn textOnLeft={textOnLeft}>
-            <Subheading>{subheading}</Subheading>
-            <Heading>{heading}</Heading>
-            <Description>{description}</Description>
-            <TestimonialSlider arrows={false} ref={setSliderRef}>
-              {testimonials.map((testimonial, index) => (
-                <Testimonial key={index}>
-                  <StarsContainer>
-                    {Array.from({ length: testimonial.stars }).map((_,indexIcon) => (
-                      <StarIcon key={indexIcon} />
-                    ))}
-                  </StarsContainer>
-                  <TestimonialHeading>{testimonial.heading}</TestimonialHeading>
-                  <Quote>{testimonial.quote}</Quote>
-                  <CustomerInfoAndControlsContainer>
-                    <CustomerInfo>
-                      <CustomerProfilePicture src={testimonial.profileImageSrc} alt={testimonial.customerName} />
-                      <CustomerTextInfo>
-                        <CustomerName>{testimonial.customerName}</CustomerName>
-                        <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
-                      </CustomerTextInfo>
-                    </CustomerInfo>
-                    <Controls>
-                      <ControlButton onClick={sliderRef?.slickPrev}>
-                        <ArrowLeftIcon />
-                      </ControlButton>
-                      <div className="divider" />
-                      <ControlButton onClick={sliderRef?.slickNext}>
-                        <ArrowRightIcon />
-                      </ControlButton>
-                    </Controls>
-                  </CustomerInfoAndControlsContainer>
-                </Testimonial>
-              ))}
-            </TestimonialSlider>
+            <Fade left>
+              <Subheading>{subheading}</Subheading>
+              <Heading>{heading}</Heading>
+              <Description>{description}</Description>
+              <TestimonialSlider arrows={false} ref={setSliderRef}>
+                {testimonials.map((testimonial, index) => (
+                  <Testimonial key={index}>
+                    <StarsContainer>
+                      {Array.from({ length: testimonial.stars }).map((_, indexIcon) => (
+                        <StarIcon key={indexIcon} />
+                      ))}
+                    </StarsContainer>
+                    <TestimonialHeading>{testimonial.heading}</TestimonialHeading>
+                    <Quote>{testimonial.quote}</Quote>
+                    <CustomerInfoAndControlsContainer>
+                      <CustomerInfo>
+                        <CustomerProfilePicture src={testimonial.profileImageSrc} alt={testimonial.customerName} />
+                        <CustomerTextInfo>
+                          <CustomerName>{testimonial.customerName}</CustomerName>
+                          <CustomerTitle>{testimonial.customerTitle}</CustomerTitle>
+                        </CustomerTextInfo>
+                      </CustomerInfo>
+                      <Controls>
+                        <ControlButton onClick={sliderRef?.slickPrev}>
+                          <ArrowLeftIcon />
+                        </ControlButton>
+                        <div className="divider" />
+                        <ControlButton onClick={sliderRef?.slickNext}>
+                          <ArrowRightIcon />
+                        </ControlButton>
+                      </Controls>
+                    </CustomerInfoAndControlsContainer>
+                  </Testimonial>
+                ))}
+              </TestimonialSlider>
+            </Fade>
           </TextColumn>
         </Row>
       </ContentWithPaddingXl>
