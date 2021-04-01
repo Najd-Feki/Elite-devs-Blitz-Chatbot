@@ -74,7 +74,7 @@ export default ({
   submitButtonText = "Sign In",
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = "#",
-  signupUrl = "#",
+  signupUrl = "./pages/Signup",
 }) => (
   <Fade left>
     <Container>

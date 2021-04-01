@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./Auth/auth");
+const expressListRoutes = require('express-list-routes');
+
+
 //starting express
 const app = express();
 
@@ -38,6 +41,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //importing routes
+
+
 dialogflowRoutes = require("./routes/dialogflowRoutes")(app);
 eventRoute = require("./routes/eventRoute")(app); //done
 profileRoute = require("./routes/profileRoute")(app); //done
@@ -46,3 +51,4 @@ reclamationRoute = require("./routes/reclamationRoute")(app);
 //******************************************************************rigelha *************************************/
 auth = require("./routes/authRoutes")(app);
 //***************************************************************wrasek mrigla **********************************/
+expressListRoutes(app, { prefix: '/api' });

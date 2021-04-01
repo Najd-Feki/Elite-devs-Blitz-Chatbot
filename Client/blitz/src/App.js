@@ -11,9 +11,10 @@ import About from "pages/AboutUs";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
+import Signup from "pages/Signup";
 
 function App() {
-  // return <AnimationRevealPage disabled></AnimationRevealPage>;
+  
   return (
     <Router>
       <Switch>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/contact" component={Contact}></Route>
         <Route path="/about" component={About}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/signup" component={Signup}></Route>
         <Route path="/" component={Home}></Route>
       </Switch>
     </Router>
