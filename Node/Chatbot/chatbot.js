@@ -1,6 +1,5 @@
 "use strict";
 const dialogflow = require("dialogflow");
-const mongoose = require("mongoose");
 const config = require("../config/keys");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
