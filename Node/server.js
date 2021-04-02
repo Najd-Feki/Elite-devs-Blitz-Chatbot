@@ -6,8 +6,10 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./Auth/auth");
 const resumeParse = require("./Chatbot/resumeParser");
+const cors = require("cors");
 //starting express
 const app = express();
+app.use(cors());
 
 //connecting to database
 mongoose.connect(process.env.DATABASE_URL, {
