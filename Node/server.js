@@ -6,6 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./Auth/auth");
 const cors = require("cors");
+
 //starting express
 const app = express();
 app.use(cors());
@@ -46,6 +47,7 @@ eventRoute = require("./routes/eventRoute")(app); //done
 profileRoute = require("./routes/profileRoute")(app); //done
 userRoutes = require("./routes/userRoute")(app); //done
 reclamationRoute = require("./routes/reclamationRoute")(app);
+pdfResumeRoute = require("./routes/pdfResumeRoute")(app);
 //******************************************************************rigelha *************************************/
 auth = require("./routes/authRoutes")(app);
 //***************************************************************wrasek mrigla **********************************/

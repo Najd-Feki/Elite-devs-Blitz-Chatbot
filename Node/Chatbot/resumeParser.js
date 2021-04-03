@@ -33,12 +33,13 @@
 /////////////////////
 
 const ResumeParser = require("resume-parser");
-
-// From file to file
-ResumeParser.parseResume("../CV.pdf", "../") // input file, output dir
-  .then((file) => {
-    console.log("Yay! " + file);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+module.exports = (path) => {
+  // From file to file
+  ResumeParser.parseResume(path, "../") // input file, output dir
+    .then((file) => {
+      console.log("Yay! " + file);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
