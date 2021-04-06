@@ -7,7 +7,7 @@ var Profile = new Schema({
     ref: "User",
   },
   age: Number,
-  phone: Number,
+  phone: String,
   email: String,
   education: String,
   academicProject: String,

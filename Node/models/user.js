@@ -31,6 +31,10 @@ var User = new Schema({
       ref: "Event",
     },
   ],
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile",
+  },
   third_party_auth: [ThirdPartyProviderSchema],
   date: {
     type: Date,
