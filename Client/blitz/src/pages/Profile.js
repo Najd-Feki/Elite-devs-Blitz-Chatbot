@@ -1,134 +1,199 @@
-/*!
-
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
-import { Button, Card, Container, Row, Col } from "reactstrap";
-
-// core components
-import DemoNavbar from "../components/Navbars/DemoNavbar";
-import SimpleFooter from "../components/footers/SimpleFooter.js";
-
+import Header from "../components/headers/light";
+import axios from 'axios';
+import "bootstrap/dist/js/bootstrap"
+import "../assets/profilecss/profile.css";
+//import "bootstrap/dist/css/bootstrap.min.css"
+import "jquery/dist/jquery"
 class Profile extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
+constructor(props){
+  super(props)
+  this.state = {
+    profiles:[],langtab:[],hardSkillstab:[],softSkillstab:[] 
+    
+    
   }
+axios.get('http://localhost:5000/profile/60644bc64443ef23444401a7').then(res =>{
+this.setState({profiles:res.data});
+this.setState({langtab:res.data.languages});
+this.setState({hardSkillstab:res.data.hardSkills});
+this.setState({softSkillstab:res.data.softSkills});
+})
+}
+
+
   render() {
     return (
       <>
-        <DemoNavbar />
-        <main className="profile-page" ref="main">
-          <section className="section-profile-cover section-shaped my-0">
-            {/* Circles background */}
-            <div className="shape shape-style-1 shape-default alpha-4">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            {/* SVG separator */}
-            <div className="separator separator-bottom separator-skew">
-              <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-                <polygon className="fill-white" points="2560 0 2560 100 0 100" />
-              </svg>
-            </div>
-          </section>
-          <section className="section">
-            <Container>
-              <Card className="card-profile shadow mt--300">
-                <div className="px-4">
-                  <Row className="justify-content-center">
-                    <Col className="order-lg-2" lg="3">
-                      <div className="card-profile-image">
-                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                          <img alt="pic" className="rounded-circle" src={require("../assets/img/theme/team-4-800x800.jpg")} />
-                        </a>
-                      </div>
-                    </Col>
-                    <Col className="order-lg-3 text-lg-right align-self-lg-center" lg="4">
-                      <div className="card-profile-actions py-4 mt-lg-0">
-                        <Button className="mr-4" color="info" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
-                          Connect
-                        </Button>
-                        <Button className="float-right" color="default" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
-                          Message
-                        </Button>
-                      </div>
-                    </Col>
-                    <Col className="order-lg-1" lg="4">
-                      <div className="card-profile-stats d-flex justify-content-center">
-                        <div>
-                          <span className="heading">22</span>
-                          <span className="description">Friends</span>
+    <Header />
+    {/* {console.log("inside",this.state.profiles.email)} */}
+     {/* {this.state.profiles.map(profile => <h2 key={profile._id}>{profile.age}</h2>)}  */}
+     {/* {this.state.profiles.map(profile => <h2>{profile.email}</h2>)}  */}
+      <div className="profile-body">
+      <div className="container emp-profile">
+            <form method="post">
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv8NfrKHYJHjf3FxKhrD9OEO17wd6YXGzfs_j3lDUFz7JsGQZR09IyyD9EVo6Z3jxH3MQ&usqp=CAU" alt=""/>
+                            <div className="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
                         </div>
-                        <div>
-                          <span className="heading">10</span>
-                          <span className="description">Photos</span>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="profile-head">
+                                    <h5>
+                                        Kshiti Ghelani
+                                    </h5>
+                                    <h6>
+                                        Web Developer and Designer
+                                    </h6>
+                            <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                <li className="nav-item">
+                                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <div className="text-center mt-5">
-                    <h3>
-                      Jessica Jones <span className="font-weight-light">, 27</span>
-                    </h3>
-                    <div className="h6 font-weight-300">
-                      <i className="ni location_pin mr-2" />
-                      Bucharest, Romania
                     </div>
-                    <div className="h6 mt-4">
-                      <i className="ni business_briefcase-24 mr-2" />
-                      Solution Manager - Creative Tim Officer
+                    <div className="col-md-2">
+                        <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div>
-                    <div>
-                      <i className="ni education_hat mr-2" />
-                      University of Computer Science
-                    </div>
-                  </div>
-                  <div className="mt-5 py-5 border-top text-center">
-                    <Row className="justify-content-center">
-                      <Col lg="9">
-                        <p>
-                          An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                          and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable
-                          range.
-                        </p>
-                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                          Show more
-                        </a>
-                      </Col>
-                    </Row>
-                  </div>
                 </div>
-              </Card>
-            </Container>
-          </section>
-        </main>
-        <SimpleFooter />
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="profile-work">
+                            <label style={{color:'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>hardSkills</label>
+                            <p>{this.state.hardSkillstab.map(x =>(<p>{x}</p>))}</p>
+                            {/* <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a> */}
+                            <label style={{color: 'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>softSkills</label>
+                            <p>{this.state.softSkillstab.map(x =>(<p>{x}</p>))}</p>
+                            {/* <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/> */}
+                        </div>
+                    </div>
+                    <div className="col-md-8">
+                        <div className="tab-content profile-tab" id="myTabContent">
+                            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>User Id</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>not ready</p>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>not ready</p>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                            <p>{this.state.profiles.email}</p>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                            <p>{this.state.profiles.phone}</p>                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>Web Developer and Designer</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Age</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.age}</p> 
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Adress</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.address}</p> 
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Education</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.education}</p> 
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Languages</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.langtab.map(x =>(<p>{x}</p>))}</p>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Hobbies</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.hobbies}</p> 
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Experiences</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.experiences}</p> 
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <label>Projects</label>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <p>{this.state.profiles.academicProject}</p> 
+                                            </div>
+                                        </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <label>Your Bio</label><br/>
+                                        <p>  linkedIn + github not ready</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+        </div>
       </>
     );
   }
