@@ -9,15 +9,18 @@ class Profile extends React.Component {
 constructor(props){
   super(props)
   this.state = {
-    profiles:[],langtab:[],hardSkillstab:[],softSkillstab:[] 
-    
-    
+    profiles:[],langtab:[],hardSkillstab:[],softSkillstab:[],hobbiestab:[],users:[],userid:[]     
   }
-axios.get('http://localhost:5000/profile/60644bc64443ef23444401a7').then(res =>{
+axios.get('http://localhost:5000/profile/606224e8b71f3e2264b99ed8').then(res =>{
 this.setState({profiles:res.data});
 this.setState({langtab:res.data.languages});
 this.setState({hardSkillstab:res.data.hardSkills});
 this.setState({softSkillstab:res.data.softSkills});
+this.setState({hobbiestab:res.data.hobbies});
+this.setState({userid:res.data.user});
+})
+axios.get('http://localhost:5000/user/606bc446ba94b513281140a4').then(Response =>{
+this.setState({users:Response.data});
 })
 }
 
@@ -35,7 +38,7 @@ this.setState({softSkillstab:res.data.softSkills});
                 <div className="row">
                     <div className="col-md-4">
                         <div className="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv8NfrKHYJHjf3FxKhrD9OEO17wd6YXGzfs_j3lDUFz7JsGQZR09IyyD9EVo6Z3jxH3MQ&usqp=CAU" alt=""/>
+                            <img src={this.state.users.photo} alt=""/>
                             <div className="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
@@ -45,7 +48,7 @@ this.setState({softSkillstab:res.data.softSkills});
                     <div className="col-md-6">
                         <div className="profile-head">
                                     <h5>
-                                        Kshiti Ghelani
+                                    {this.state.users.userName}
                                     </h5>
                                     <h6>
                                         Web Developer and Designer
@@ -69,16 +72,10 @@ this.setState({softSkillstab:res.data.softSkills});
                         <div className="profile-work">
                             <label style={{color:'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>hardSkills</label>
                             <p>{this.state.hardSkillstab.map(x =>(<p>{x}</p>))}</p>
-                            {/* <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a> */}
+
                             <label style={{color: 'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>softSkills</label>
                             <p>{this.state.softSkillstab.map(x =>(<p>{x}</p>))}</p>
-                            {/* <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/> */}
+
                         </div>
                     </div>
                     <div className="col-md-8">
@@ -89,7 +86,7 @@ this.setState({softSkillstab:res.data.softSkills});
                                                 <label>User Id</label>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>not ready</p>
+                                            <p>{this.state.profiles.user}</p>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -97,7 +94,7 @@ this.setState({softSkillstab:res.data.softSkills});
                                                 <label>Name</label>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>not ready</p>
+                                            <p>{this.state.users.userName}</p>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -162,7 +159,7 @@ this.setState({softSkillstab:res.data.softSkills});
                                                 <label>Hobbies</label>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>{this.state.profiles.hobbies}</p> 
+                                            <p>{this.state.hobbiestab.map(x =>(<p>{x}</p>))}</p>
                                             </div>
                                         </div>
                                         <div className="row">
