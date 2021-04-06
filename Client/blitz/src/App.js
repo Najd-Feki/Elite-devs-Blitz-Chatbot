@@ -10,7 +10,7 @@ import Contact from "pages/ContactUs";
 import About from "pages/AboutUs";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
-import "assets/scss/argon-design-system-react.scss?v1.1.0";
+import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 
 function App() {
   // return <AnimationRevealPage disabled></AnimationRevealPage>;
@@ -22,6 +22,7 @@ function App() {
         <Route path="/about" component={About}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/" component={Home}></Route>
+
       </Switch>
     </Router>
   );
