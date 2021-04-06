@@ -1,21 +1,24 @@
 "use strict";
 const dialogflow = require("dialogflow");
 const config = require("../config/keys");
-const sessionCLient = new dialogflow.SessionsClient({keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS});
+
+const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 const Profile = require("../models/profile");
+const User = require("../models/user");
 // user attributes list///
 var profilePreparation = {
+  userId: String,
   fullName: String,
   age: Number,
-  phone: Number,
+  phone: String,
   email: String,
   address: String,
   degree: String,
   degreeDomain: String,
   job: String,
   workPlace: String,
-  duration: Number,
+  duration: String,
   typeOfExperience: String,
   projectDescription: String,
   urlGithub: String,
@@ -29,14 +32,14 @@ var profilePreparation = {
 };
 
 module.exports = {
-  textQuery: async (text, parameters = {}) => {
+  textQuery: async (userid, text, parameters = {}) => {
+    profilePreparation.userId = userid;
     let self = module.exports;
     const request = {
       session: sessionPath,
       queryInput: {
         text: {
           text: text,
-
           languageCode: config.dialogFlowSessionLanguageCode,
         },
       },
@@ -48,6 +51,7 @@ module.exports = {
     };
     let responses = await sessionCLient.detectIntent(request);
     responses = await self.handleAction(responses);
+
     return responses;
   },
   handleAction: function (responses) {
@@ -55,7 +59,7 @@ module.exports = {
     let queryResult = responses[0].queryResult;
     let fields = queryResult.parameters.fields;
     let keys = Object.keys(fields);
-    if (keys.includes("age")) profilePreparation.age = console.log(fields.age);
+    if (keys.includes("age")) profilePreparation.age = fields.age.stringValue;
     if (keys.includes("person")) profilePreparation.name = fields.person.structValue.fields.name.stringValue;
     if (keys.includes("email")) profilePreparation.email = fields.email.stringValue;
     if (keys.includes("phone")) profilePreparation.phone = fields.phone.stringValue;
@@ -64,7 +68,13 @@ module.exports = {
     if (keys.includes("degreeDomain")) profilePreparation.degreeDomain = fields.degreeDomain.stringValue;
     if (keys.includes("job")) profilePreparation.job = fields.job.stringValue;
     if (keys.includes("workPlace")) profilePreparation.workPlace = fields.workPlace.stringValue;
-    if (keys.includes("duration")) profilePreparation.duration = fields.duration.stringValue;
+    if (keys.includes("duration")) {
+      console.log(JSON.stringify(fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue));
+      profilePreparation.duration =
+        fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue == "yr"
+          ? " years"
+          : " months";
+    }
     if (keys.includes("typeOfExperience")) profilePreparation.typeOfExperience = fields.typeOfExperience.stringValue;
     if (keys.includes("description")) profilePreparation.projectDescription = fields.description.stringValue;
     if (keys.includes("field")) profilePreparation.field = fields.field.stringValue;
@@ -106,7 +116,6 @@ module.exports = {
       hobbies: profilePreparation.hobbies.slice(1, profilePreparation.hobbies.length),
       languages: profilePreparation.languages.slice(1, profilePreparation.languages.length),
       experiences:
-        "I " +
         profilePreparation.typeOfExperience +
         " as a " +
         profilePreparation.job +
@@ -120,7 +129,12 @@ module.exports = {
     });
     try {
       let pro = await profile.save();
-      console.log(pro);
+      console.log("profle id is : " + pro._id);
+      const user = User.findByIdAndUpdate(profilePreparation.userId, { profile: (await pro)._id }, (err, result) => {
+        if (err) console.log(err);
+        else console.log(result);
+      });
+      console.log("user is : ", user);
     } catch (err) {
       console.log(err);
     }
