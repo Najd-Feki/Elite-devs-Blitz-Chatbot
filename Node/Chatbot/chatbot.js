@@ -1,7 +1,7 @@
 "use strict";
 const dialogflow = require("dialogflow");
 const config = require("../config/keys");
-const sessionCLient = new dialogflow.SessionsClient();
+const sessionCLient = new dialogflow.SessionsClient({keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS});
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 const Profile = require("../models/profile");
 // user attributes list///
