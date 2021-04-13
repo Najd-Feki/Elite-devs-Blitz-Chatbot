@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/headers/light";
 import axios from 'axios';
 import "bootstrap/dist/js/bootstrap"
+
 import "../assets/profilecss/profile.css";
 //import "bootstrap/dist/css/bootstrap.min.css"
 import "jquery/dist/jquery"
@@ -29,6 +30,7 @@ this.setState({users:Response.data});
     return (
       <>
     <Header />
+   
     {/* {console.log("inside",this.state.profiles.email)} */}
      {/* {this.state.profiles.map(profile => <h2 key={profile._id}>{profile.age}</h2>)}  */}
      {/* {this.state.profiles.map(profile => <h2>{profile.email}</h2>)}  */}

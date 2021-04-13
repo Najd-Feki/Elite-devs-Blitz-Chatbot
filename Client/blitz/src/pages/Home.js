@@ -15,6 +15,7 @@ import cloudImg from "images/cloud.jpg";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
   const Subheading = tw.span`uppercase tracking-widest font-bold text-primary-500`;
@@ -22,6 +23,7 @@ export default () => {
 
   return (
     <>
+
       <Hero roundedHeaderButton={true} />
       <Fade left>
         <Features
@@ -39,7 +41,7 @@ export default () => {
           }
         />
       </Fade>
-
+      
       <MainFeature
         subheading={<Subheading>Quality Work</Subheading>}
         imageSrc={conceptionImg}

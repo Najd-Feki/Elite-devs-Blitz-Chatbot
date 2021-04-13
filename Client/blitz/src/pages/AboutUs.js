@@ -15,6 +15,7 @@ export default () => {
   return (
     <>
       <Header />
+      
       <Features
         subheading={<Subheading>Our Values</Subheading>}
         heading="We follow these."

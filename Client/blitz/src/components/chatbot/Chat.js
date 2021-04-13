@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
+import img from "../../images/blitz.PNG";
+
 
 import "components/chatbot/style.css";
 import Messages from "./Messages";
 
+var myFunction = function() {
+  let x = document.getElementById("chat");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  }
 const Chat = props => {
   const [responses, setResponses] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
 
-  const handleMessageSubmit = text => {
+  const handleMessageSubmit = text => { 
     const data = {
       text
     };
@@ -46,9 +56,18 @@ const Chat = props => {
     }
     
   };
-
+   
+ 
   return (
-    <div className="chatSection">
+    <>
+    <div class="container-fluid">
+  <button onClick={myFunction}> 
+  <img  class="rounded-circle" className='chatimg' src={img} alt="logo" /> 
+    CHAT
+  </button>
+  </div>
+  
+    <div id='chat' className="chatSection">
       <div className="botContainer">
         <div className="messagesContainer">
           <Messages messages={responses} />
@@ -67,6 +86,7 @@ const Chat = props => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
