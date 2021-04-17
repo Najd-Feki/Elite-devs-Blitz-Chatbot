@@ -8,23 +8,31 @@ import Login from "pages/Login";
 import Profile from "pages/Profile";
 import Contact from "pages/ContactUs";
 import About from "pages/AboutUs";
+import Progress from "pages/Progress";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-design-system-react.scss?v1.1.0";
+import Chatbot from "./components/chatbot/chatbot";
+import MetaTags from "react-meta-tags";
 
 function App() {
-  // return <AnimationRevealPage disabled></AnimationRevealPage>;
   return (
-    <Router>
-      <Switch>
-        <Route path="/profile" component={Profile}></Route>
-        <Route path="/contact" component={Contact}></Route>
-        <Route path="/about" component={About}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/" component={Home}></Route>
-
-      </Switch>
-    </Router>
+    <>
+      <MetaTags>
+        <meta name="viewport" content="width-device-width, initial-scale=1"></meta>
+      </MetaTags>
+      <Router>
+        <Switch>
+          <Route path="/profile" component={Profile}></Route>
+          <Route path="/contact" component={Contact}></Route>
+          <Route path="/about" component={About}></Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/progress" component={Progress}></Route>
+          <Route path="/" component={Home}></Route>
+        </Switch>
+      </Router>
+      <Chatbot></Chatbot>
+    </>
   );
 }
 

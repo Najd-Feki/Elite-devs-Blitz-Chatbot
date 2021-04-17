@@ -5,8 +5,6 @@ import Header from "components/headers/light.js";
 import Footer from "components/footers/SimpleFooter";
 import ContactUsForm from "components/forms/TwoColContactUsWithIllustrationFullForm.js";
 import ContactDetails from "components/cards/ThreeColContactDetails.js";
-import Chat from "components/chatbot/Chat"
-import 'components/chatbot/style.css'
 
 const Address = tw.span`leading-relaxed`;
 const AddressLine = tw.span`block`;
@@ -100,10 +98,8 @@ export default () => {
           },
         ]}
       />
-      
+
       <Footer />
-      <Chat/>
-     
     </>
   );
 };

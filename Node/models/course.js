@@ -9,5 +9,6 @@ var Course = new Schema({
   instructorName: String,
   instructorTitle: String,
   instructorImage: String,
+  completionRatio: Number,
 });
 module.exports = mongoose.model("Course", Course);

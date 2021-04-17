@@ -37,6 +37,7 @@ module.exports = (app) => {
     user.events = req.body.events;
     user.third_party_auth = req.body.third_party_auth;
     user.date = req.body.date;
+    user.loginDates = user.loginDates.push(req.body.loginDates);
     try {
       var userlog = await user.save();
       console.log(userlog);

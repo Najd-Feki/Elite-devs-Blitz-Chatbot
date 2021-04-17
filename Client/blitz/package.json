@@ -8,28 +8,30 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "feather-icons": "^4.28.0",
+    "fetch": "^1.1.0",
     "framer-motion": "^3.10.6",
     "headroom.js": "^0.11.0",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "node-sass": "^4.13.1",
     "react": "^17.0.2",
-    "react-chartjs-2": "^2.11.1",
+    "react-customizable-progressbar": "^1.0.2",
     "react-dom": "^17.0.2",
+    "react-meta-tags": "^1.0.1",
     "react-modal": "^3.12.1",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
+    "react-typical": "^0.1.3",
     "reactstrap": "^8.9.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "tailwindcss": "^1.9.6",
     "twin.macro": "^1.12.1",
-    "use-in-view": "^1.0.15",
-    "web-vitals": "^1.1.1",
-    "node-sass": "^4.13.1"
+    "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,6 +45,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://https://courses.edx.org",
   "browserslist": {
     "production": [
       ">0.2%",

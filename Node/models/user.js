@@ -31,6 +31,12 @@ var User = new Schema({
       ref: "Event",
     },
   ],
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
   profile: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile",
@@ -40,5 +46,6 @@ var User = new Schema({
     type: Date,
     default: Date.now,
   },
+  loginDates: [Date],
 });
 module.exports = mongoose.model("User", User);

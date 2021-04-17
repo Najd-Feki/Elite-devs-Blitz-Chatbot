@@ -30,11 +30,10 @@ var profilePreparation = {
   languages: [""],
   courses: [""],
 };
-
 module.exports = {
   textQuery: async (userid, text, parameters = {}) => {
-    profilePreparation.userId = userid;
     let self = module.exports;
+    profilePreparation.userId = userid;
     const request = {
       session: sessionPath,
       queryInput: {
@@ -51,6 +50,27 @@ module.exports = {
     };
     let responses = await sessionCLient.detectIntent(request);
     responses = await self.handleAction(responses);
+
+    return responses;
+  },
+  eventQuery: async (eventName, parameters) => {
+    let self = module.exports;
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        event: {
+          name: eventName,
+          languageCode: config.dialogFlowSessionLanguageCode,
+        },
+      },
+      queryParams: {
+        payload: {
+          data: parameters,
+        },
+      },
+    };
+    let responses = await sessionCLient.detectIntent(request);
+    // responses = await self.handleAction(responses);
 
     return responses;
   },
