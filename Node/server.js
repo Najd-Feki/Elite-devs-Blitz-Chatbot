@@ -21,7 +21,7 @@ const db = mongoose.connection;
 
 //Server configuration
 app.use(express.json());
-app.listen(5000, () => console.log("Server Started !"));
+app.listen(process.env.PORT || 5000, () => console.log("Server Started !"));
 
 //DB Status on init
 db.on("error", (error) => console.error(error));
