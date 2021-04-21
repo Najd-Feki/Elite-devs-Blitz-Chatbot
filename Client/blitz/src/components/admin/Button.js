@@ -1,11 +1,11 @@
-import React from 'react';
-import './Button.css';
-import { Link } from 'react-router-dom';
+// import React from 'react';
+// import './Button.css';
+// import { Link } from 'react-router-dom';
 
-export function Button() {
-  return (
-    <Link to='/'>
-      <button className='btn'>Logout</button>
-    </Link>
-  );
-}
+// export function Button() {
+//   return (
+//     <Link to='/'>
+//       <button className='btn'>Logout</button>
+//     </Link>
+//   );
+// }

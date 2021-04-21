@@ -86,7 +86,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <Pulse forever left>
         <img src={logo} alt="logo" />
       </Pulse>
-      <Link to="/">Blitz</Link>
+      <Link to="/adminhome">Blitz</Link>
     </LogoLink>
   );
 
