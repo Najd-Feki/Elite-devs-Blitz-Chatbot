@@ -15,7 +15,7 @@
 
 .reclamation-container{
   position:relative;
-  top:100px;
+  top:50px;
 }
 
 .reclamation-container h1, .reclamation-container span{
@@ -107,7 +107,7 @@
   color:#fff;
   position:relative;
   left:9px;
-  top:25px; 
-  width:150px;
+  /* top:25px;  */
+  /* width:150px; */
   cursor:pointer;
 }
