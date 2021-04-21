@@ -1,26 +1,28 @@
 
 
-p{
+.reclamation-p{
     color: white;
 }
 
+.reclamation-body{
+  background: rgba(60,13,153);
+}
 
-
-body{
+.reclamation-body{
   counter-reset:section;
   text-align:center;
 }
 
-.container{
+.reclamation-container{
   position:relative;
   top:100px;
 }
 
-.container h1, .container span{
+.reclamation-container h1, .reclamation-container span{
   font-family:"Pt Sans", helvetica, sans-serif;
 }
 
-.container h1{
+.reclamation-container h1{
   text-align:center;
   color:#fff;
   font-weight:100;
@@ -28,7 +30,7 @@ body{
   margin-bottom:10px;
 }
 
-.container h2{
+.reclamation-container h2{
   font-family:"droid serif";
   font-style:italic;
   color:#d3b6ca; 
@@ -36,7 +38,7 @@ body{
   font-size:1.2em;
 }
 
-.container form span:before {
+.reclamation-container form span:before {
   
  
   
@@ -53,25 +55,25 @@ body{
   
 }
 
-form{
+.reclamation-form{
   margin-top:25px;
  
 }
 
-.fields{
+.reclamation-fields{
   border-left:2px solid #4c2639
 }
 
-.container span{
+.reclamation-container span{
     margin-bottom:22px; 
     display:inline-block;
 }
 
-.container span:last-child{
+.reclamation-container span:last-child{
    margin-bottom:-11px;
 }
 
-input{
+.reclamation-input{
   border:none;
   outline:none;
   display:inline-block;
@@ -100,7 +102,7 @@ input{
   padding:0 18px; 
 }*/
 
-input[type="button"]{ 
+.reclamation-input[type="button"]{ 
   background:green ! important;
   color:#fff;
   position:relative;
