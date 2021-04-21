@@ -4,9 +4,7 @@ p{
     color: white;
 }
 
-html, body{
-  background:#1d4db4;
-}
+
 
 body{
   counter-reset:section;
