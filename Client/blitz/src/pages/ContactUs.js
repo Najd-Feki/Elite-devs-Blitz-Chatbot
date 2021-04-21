@@ -19,15 +19,80 @@ export default () => {
       <ContactDetails
         cards={[
           {
-            title: "Esprit",
+            title: "Tunisia",
             description: (
               <>
                 <Address>
-                  <AddressLine>cité Ghazela</AddressLine>
-                  <AddressLine></AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>elitedev@gmail.com</Email>
-                <Phone>*******</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
+              </>
+            ),
+          },
+          {
+            title: "Tunisia",
+            description: (
+              <>
+                <Address>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
+                </Address>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
+              </>
+            ),
+          },
+          {
+            title: "Tunisia",
+            description: (
+              <>
+                <Address>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
+                </Address>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
+              </>
+            ),
+          },
+          {
+            title: "Tunisia",
+            description: (
+              <>
+                <Address>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
+                </Address>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
+              </>
+            ),
+          },
+          {
+            title: "Tunisia",
+            description: (
+              <>
+                <Address>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
+                </Address>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
+              </>
+            ),
+          },
+          {
+            title: "Tunisia",
+            description: (
+              <>
+                <Address>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
+                </Address>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },

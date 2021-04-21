@@ -11,6 +11,7 @@ import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
 import ProgressBar from "react-customizable-progressbar";
+import Skeleton from "react-loading-skeleton";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
 import Fade from "react-reveal/Fade";
 import axios from "axios";
@@ -145,9 +146,10 @@ export default () => {
   }, [setCourses]);
   /* Change this according to your needs */
   const cards = [{}];
+
   let time = 1000;
   let prog;
-  return (
+  return courses.length ? (
     <Container>
       <Content>
         <HeadingWithControl>
@@ -231,5 +233,19 @@ export default () => {
         </CardSlider>
       </Content>
     </Container>
+  ) : (
+    <>
+      <Content>
+        <Fade left>
+          <CardSlider ref={setSliderRef} {...sliderSettings}>
+            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
+
+            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
+
+            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
+          </CardSlider>
+        </Fade>
+      </Content>
+    </>
   );
 };
