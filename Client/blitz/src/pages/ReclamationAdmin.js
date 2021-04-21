@@ -50,7 +50,7 @@ export default function ReclamationAdmin() {
                 
             </td>
             
-            <td>{reclamation.date}</td>
+            <td>{reclamation.date?.slice(0,10)}</td>
             <td>{reclamation.type}</td>
             <td> {reclamation.description}</td>
             <td>
