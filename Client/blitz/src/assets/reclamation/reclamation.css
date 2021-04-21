@@ -103,7 +103,7 @@
 }*/
 
 .reclamation-input[type="button"]{ 
-  background:green ! important;
+  background:rgb(67, 93, 240) ! important;
   color:#fff;
   position:relative;
   left:9px;
