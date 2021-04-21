@@ -26,7 +26,9 @@ module.exports = (app) => {
   app.post("/reclamation/add", async function (req, res) {
     var reclamation = new Reclamation();
     reclamation.userId = req.body.userId;
+    reclamation.description = req.body.description;
     reclamation.date = req.body.date;
+    reclamation.type = req.body.type;
 
     try {
       var reclamationlog = await reclamation.save();

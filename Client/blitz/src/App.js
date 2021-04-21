@@ -15,6 +15,7 @@ import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 import Chatbot from "./components/chatbot/chatbot";
 import MetaTags from "react-meta-tags";
+import EventDetail from "pages/EventDetail";
 
 function App() {
   return (
@@ -24,11 +25,12 @@ function App() {
       </MetaTags>
       <Router>
         <Switch>
-          <Route path="/profile" component={Profile}></Route>
+        <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
           <Route path="/contact" component={Contact}></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/login" component={Login}></Route>
           <Route path="/event" component={event}></Route>
+          <Route path="/eventdetail/:id" component={EventDetail}></Route>
           <Route path="/progress" component={Progress}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
