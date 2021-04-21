@@ -78,6 +78,9 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink>
         <Link to="/event">event</Link>
       </NavLink>
+      <NavLink>
+        <Link to="/reclamation">Reclamation</Link>
+      </NavLink>
 
       <NavLink tw="lg:ml-12!">
         <Link to="/login">Login</Link>

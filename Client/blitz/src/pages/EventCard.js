@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
-
+import EventDetail from 'pages/EventDetail'
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -22,10 +22,6 @@ const useStyles = makeStyles({
   export default function EventCard({events}) {
     const classes = useStyles();
 
-    
-function hi(xx){
-  <EventCard event={xx} />
-}
 return(
 <Card className={classes.root} style={{minHeight:'25em',maxHeight:'25em'}}>
     <CardHeader
@@ -48,10 +44,8 @@ return(
         <Button size="small" color="primary">
           join
         </Button>
-        <Button size="small" color="primary" onClick={()=>hi(events) }>
-          Learn More
-        </Button>
-        {/* <Link to="/eventdetail">Learn More</Link> */}
+        
+        <Link to={"/eventdetail/"+ events._id}>Learn More</Link>
       </CardActions>
     </Card>
     );

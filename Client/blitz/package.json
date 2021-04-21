@@ -46,7 +46,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://https://courses.edx.org",
   "browserslist": {
     "production": [
       ">0.2%",
