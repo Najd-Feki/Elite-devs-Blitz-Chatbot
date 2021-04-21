@@ -20,6 +20,7 @@ import ReclamationAdmin from 'pages/ReclamationAdmin'
 import UsersAdmin from 'pages/UsersAdmin'
 import ConnectingUsers from 'pages/ConnectingUsers'
 import Classification from 'pages/Classification'
+import Reclamation from 'pages/Reclamation'
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
       </MetaTags>
       <Router>
         <Switch>
-        <Route path="/classification" component={Classification}></Route>
+        <Route path="/reclamation" component={Reclamation}></Route>
+          <Route path="/classification" component={Classification}></Route>
           <Route path="/connecting" component={ConnectingUsers}></Route>
           <Route path="/users" component={UsersAdmin}></Route>
           <Route path="/reclamationAdmin" component={ReclamationAdmin}></Route>
