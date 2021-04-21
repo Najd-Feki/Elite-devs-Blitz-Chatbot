@@ -46,7 +46,7 @@ export default function UsersAdmin() {
                 </Link>
             </td>
             <td> {user.email}</td>
-            <td>{user.date}</td>
+            <td>{user.date?.slice(0,10)}</td>
             <td>
             <button type="submit" className="btn btn-danger" onClick={()=>handelDelete(user._id)}>Delete</button>
             </td>

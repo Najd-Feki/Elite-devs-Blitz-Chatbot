@@ -1,2 +1,113 @@
 
 
+.reclamation-p{
+    color: white;
+}
+
+.reclamation-body{
+  background: rgba(60,13,153);
+}
+
+.reclamation-body{
+  counter-reset:section;
+  text-align:center;
+}
+
+.reclamation-container{
+  position:relative;
+  top:50px;
+}
+
+.reclamation-container h1, .reclamation-container span{
+  font-family:"Pt Sans", helvetica, sans-serif;
+}
+
+.reclamation-container h1{
+  text-align:center;
+  color:#fff;
+  font-weight:100;
+  font-size:2em; 
+  margin-bottom:10px;
+}
+
+.reclamation-container h2{
+  font-family:"droid serif";
+  font-style:italic;
+  color:#d3b6ca; 
+  text-align:center;
+  font-size:1.2em;
+}
+
+.reclamation-container form span:before {
+  
+ 
+  
+  width:40px;
+  height:40px;
+  color:#fff;
+  display:inline-block;
+  border-radius:50%;
+  line-height:1.6em;
+  font-size:1.5em;
+  position:relative;
+  left:-22px;
+  top:-11px;
+  
+}
+
+.reclamation-form{
+  margin-top:25px;
+ 
+}
+
+.reclamation-fields{
+  border-left:2px solid #4c2639
+}
+
+.reclamation-container span{
+    margin-bottom:22px; 
+    display:inline-block;
+}
+
+.reclamation-container span:last-child{
+   margin-bottom:-11px;
+}
+
+.reclamation-input{
+  border:none;
+  outline:none;
+  display:inline-block;
+  height:34px;
+  vertical-align:middle;
+  position:relative;
+  bottom:14px;
+  right:9px;
+  border-radius:22px;
+  width:220px;
+  box-sizing:border-box;
+  padding:0 18px; 
+}
+/*textarea{
+    border:none;
+  outline:none;
+  display:inline-block;
+  height:34px;
+  vertical-align:middle;
+  position:relative;
+  bottom:14px;
+  right:9px;
+  border-radius:22px;
+  width:220px;
+  box-sizing:border-box;
+  padding:0 18px; 
+}*/
+
+.reclamation-input[type="button"]{ 
+  background:rgb(67, 93, 240) ! important;
+  color:#fff;
+  position:relative;
+  left:9px;
+  /* top:25px;  */
+  /* width:150px; */
+  cursor:pointer;
+}
