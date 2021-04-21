@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import Header from "../components/headers/light";
 import axios from 'axios';
+import Footer from "components/footers/SimpleFooter";
 import {Grid, CircularProgress} from '@material-ui/core/';
 import EventCard from "pages/EventCard";
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,9 +29,12 @@ useEffect(() => {
     <Grid style={{backgroundColor:'rgba(60,13,153)'}} className={classes.container} container alignItems="stretch" spacing={3}  >
                 {events.map((events) => (
                     <Grid item item xs={12} sm={6} md={3}>
+                            <br/>
                         <EventCard events={events} />
+                        <br/>
                     </Grid>
                 ))}</Grid>
+    <Footer />    
       </>
     );
   }

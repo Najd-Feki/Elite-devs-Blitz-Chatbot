@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import Header from "components/headers/light.js";
 import '../assets/reclamation/reclamation.css'
 import axios from "axios";
+import Footer from "components/footers/SimpleFooter";
 
 export default () => {
   
@@ -44,7 +45,8 @@ export default () => {
     return (
       <>
         <Header />
-        <div className="reclamation-container reclamation-body">
+        
+      <div className="reclamation-container reclamation-body">
   <h2>Here you can post our complaints</h2>
   <h1>send us </h1>
   
@@ -65,13 +67,15 @@ export default () => {
        <textarea placeholder="description" type="description" rows="4" cols="50" value={reclamation.description} onChange={handledescriptionInputChange}  />
     </span>
     </div>
+    <br/>
     <div className="submit">
       <input className="submit" value="send" type="button" onClick={handleSubmit} className='reclamation-input'/>
     </div>
    
   </form>
+  <Footer /> 
 </div>
-        
+   
     </>
     );
 };

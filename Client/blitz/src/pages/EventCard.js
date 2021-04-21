@@ -26,7 +26,7 @@ return(
 <Card className={classes.root} style={{minHeight:'25em',maxHeight:'25em'}}>
     <CardHeader
         title={events.name}
-        subheader={events.date}
+        subheader={events.date?.slice(0,10)}
       />
       <CardActionArea>
         <CardMedia
