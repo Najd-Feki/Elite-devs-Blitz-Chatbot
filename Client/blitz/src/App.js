@@ -16,6 +16,12 @@ import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 import Chatbot from "./components/chatbot/chatbot";
 import MetaTags from "react-meta-tags";
 import EventDetail from "pages/EventDetail";
+import HomeAdmin from 'pages/HomeAdmin'
+import ReclamationAdmin from 'pages/ReclamationAdmin'
+import UsersAdmin from 'pages/UsersAdmin'
+import ConnectingUsers from 'pages/ConnectingUsers'
+import Classification from 'pages/Classification'
+import Reclamation from 'pages/Reclamation'
 
 function App() {
   return (
@@ -26,6 +32,13 @@ function App() {
       <Router>
         <Switch>
         <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
+        <Route path="/reclamation" component={Reclamation}></Route>
+          <Route path="/classification" component={Classification}></Route>
+          <Route path="/connecting" component={ConnectingUsers}></Route>
+          <Route path="/users" component={UsersAdmin}></Route>
+          <Route path="/reclamationAdmin" component={ReclamationAdmin}></Route>
+          <Route path="/adminhome" component={HomeAdmin}></Route>
+          <Route path="/profile" component={Profile}></Route>
           <Route path="/contact" component={Contact}></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/login" component={Login}></Route>
