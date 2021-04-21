@@ -6,12 +6,24 @@ import axios from 'axios'
 
 export default function ReclamationAdmin() {
     const [reclamations, setReclamation] = useState([])
+   
 
 
     useEffect(async() => { 
        const response = await axios.get("http://localhost:5000/reclamation")
        setReclamation(response.data)  
+
     },[])
+
+   function handelDelete(id) {
+    axios.delete("http://localhost:5000/reclamation/delete/"+id)
+    .then(()=>{ 
+      setReclamation(reclamations.filter(reclamation=>
+        reclamation._id != id
+      ))
+    })
+   }
+   
 
   return(
     <>
@@ -23,7 +35,8 @@ export default function ReclamationAdmin() {
     <thead className="thead-dark">
       <tr>
         <th>User ID</th>
-        <th>Email</th>
+        <th>Date</th>
+        <th>type</th>
         <th>Reclamation</th>
         <th>Delete</th>
       </tr>
@@ -32,13 +45,16 @@ export default function ReclamationAdmin() {
         {reclamations.map((reclamation,index) =>
             <tr>
             <td>
-                { reclamation.userId}
+            <Link to={"/profile/"+reclamation._id}> {reclamation.userId}
+                </Link>
                 
             </td>
-            <td> {reclamation.email}</td>
+            
             <td>{reclamation.date}</td>
+            <td>{reclamation.type}</td>
+            <td> {reclamation.description}</td>
             <td>
-            <button type="submit" className="btn btn-danger" >Delete</button>
+            <button type="submit" className="btn btn-danger" onClick={()=>handelDelete(reclamation._id)}>Delete</button>
             </td>
             </tr>
             

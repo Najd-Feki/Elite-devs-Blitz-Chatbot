@@ -13,7 +13,14 @@ export default function UsersAdmin() {
        setUsers(response.data)  
     },[])
 
-   
+    function handelDelete(id) {
+      axios.delete("http://localhost:5000/user/delete/"+id)
+      .then(()=>{ 
+        setUsers(users.filter(user=>
+         user._id != id
+        ))
+      })
+     }
 
   return(
     <>
@@ -28,6 +35,7 @@ export default function UsersAdmin() {
         <th>User Name</th>
         <th>Email</th>
         <th>Date of the creation of the account</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody >
@@ -39,6 +47,9 @@ export default function UsersAdmin() {
             </td>
             <td> {user.email}</td>
             <td>{user.date}</td>
+            <td>
+            <button type="submit" className="btn btn-danger" onClick={()=>handelDelete(user._id)}>Delete</button>
+            </td>
             </tr>
             
          ) }
