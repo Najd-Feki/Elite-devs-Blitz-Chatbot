@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/headers/light";
 import axios from 'axios';
+import Footer from "components/footers/SimpleFooter";
 import "bootstrap/dist/js/bootstrap"
 import "../assets/profilecss/profile.css";
 //import "bootstrap/dist/css/bootstrap.min.css"
@@ -34,7 +35,9 @@ componentDidMount(){
     return (
       <>
     <Header />
+  
       <div className="profile-body">
+      <br/>
       <div className="container emp-profile">
             <form method="post">
                 <div className="row">
@@ -192,7 +195,10 @@ componentDidMount(){
                 </div>
             </form>           
         </div>
+        <Footer /> 
         </div>
+   
+
       </>
     );
   }

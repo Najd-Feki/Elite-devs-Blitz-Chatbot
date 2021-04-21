@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './NavbarAdmin.css';
 
@@ -90,7 +89,6 @@ function Navbar() {
             </Link>
           </li>
         </ul>
-        <Button />
       </nav>
     </>
   );
