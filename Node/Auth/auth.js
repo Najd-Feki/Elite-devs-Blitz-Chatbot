@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const User = require('../models/user');
 const passport = require('passport');
+/* const bcrypt = require('bcryptjs');
+const User = require('../models/user');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
@@ -117,3 +117,4 @@ passport.use(
   )
 );
 module.exports = passport;
+ */

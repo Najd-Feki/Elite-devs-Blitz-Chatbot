@@ -21,16 +21,21 @@
     "react-dom": "^17.0.2",
     "react-meta-tags": "^1.0.1",
     "react-modal": "^3.12.1",
+    "react-redux": "^7.2.3",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "react-typical": "^0.1.3",
     "reactstrap": "^8.9.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
     "tailwindcss": "^1.9.6",
     "twin.macro": "^1.12.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -45,7 +50,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://https://courses.edx.org",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -57,5 +61,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
+
 }

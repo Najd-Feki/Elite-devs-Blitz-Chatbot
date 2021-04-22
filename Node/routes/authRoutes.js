@@ -1,4 +1,4 @@
-module.exports = (app) => {
+/* module.exports = (app) => {
   var express = require("express");
   var router = express.Router();
   const passport = require("passport");
@@ -51,3 +51,4 @@ module.exports = (app) => {
     })
   );
 };
+ */
