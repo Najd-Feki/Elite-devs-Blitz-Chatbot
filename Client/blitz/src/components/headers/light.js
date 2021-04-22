@@ -8,6 +8,9 @@ import Pulse from "react-reveal/Pulse";
 import Fade from "react-reveal/Fade";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import "./ligh.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
@@ -60,14 +63,17 @@ export const DesktopNavLinks = tw.nav`
   hidden lg:flex flex-1 justify-between items-center sticky top-0
 `;
 
-export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
-  const defaultLinks = [
+const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg", auth: { isAuthenticated }, logout }) => {
+  const authLinks = [
     <NavLinks>
       <NavLink>
         <Link to="/about">About Us</Link>
       </NavLink>
       <NavLink>
         <Link to="/contact">Contact Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/posts">Posts</Link>
       </NavLink>
       <NavLink>
         <Link to="/profile">Profile</Link>
@@ -81,11 +87,24 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink>
         <Link to="/reclamation">Claims</Link>
       </NavLink>
+      <a onClick={logout} href="/">
+        <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+      </a>
+    </NavLinks>,
+  ];
 
+  const guestLinks = [
+    <NavLinks>
+      <NavLink>
+        <Link to="/about">About Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/contact">Contact Us</Link>
+      </NavLink>
       <NavLink tw="lg:ml-12!">
         <Link to="/login">Login</Link>
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/register">
         Sign Up
       </PrimaryLink>
     </NavLinks>,
@@ -104,14 +123,14 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   );
 
   logoLink = logoLink || defaultLogoLink;
-  links = links || defaultLinks;
-
+  /*   links = links || defaultLinks;
+   */
   return (
     <Fade bottom duration={3000}>
       <Header className={"sticky"}>
         <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
           {logoLink}
-          {links}
+          {isAuthenticated ? authLinks : guestLinks}
         </DesktopNavLinks>
 
         <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
@@ -127,6 +146,17 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
     </Fade>
   );
 };
+
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
 
 const collapseBreakPointCssMap = {
   sm: {

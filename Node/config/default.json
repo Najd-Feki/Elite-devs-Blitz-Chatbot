@@ -1,0 +1,7 @@
+{
+    "mongoURI": "mongodb+srv://dev:elitedevs0000@chatbot.r6nhq.mongodb.net/Chatbot?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "0ade3f3d027ddc595933",
+    "githubSecret": "95f2187c6bc430d4fbaeb2135a0e1f7e090a175b",
+    "githubToken": "secret"
+}
