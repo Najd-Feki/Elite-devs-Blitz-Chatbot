@@ -53,8 +53,8 @@ import { unmountComponentAtNode, render } from "react-dom";
 // };
 export default () => {
   var pagelist = {
-    "localhost:3000/profile": "This is your profile, you can find all your info and your resume here.",
-    "localhost:3000/progress": "This is your progress page, here you can keep track of your achievements.",
+    "http://localhost:3000/profile": "This is your profile, you can find all your info and your resume here.",
+    "http://localhost:3000/progress": "This is your progress page, here you can keep track of your achievements.",
   };
   const [text, setText] = useState([]);
   useEffect(() => {
@@ -80,6 +80,7 @@ export default () => {
           }
         },
       };
+
       var s = document.createElement("script");
       s.type = "text/javascript";
       s.async = true;
