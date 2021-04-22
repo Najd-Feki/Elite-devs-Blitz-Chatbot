@@ -1,38 +1,47 @@
 import React from "react";
 import Header from "../components/headers/light";
 import axios from 'axios';
+import Footer from "components/footers/SimpleFooter";
 import "bootstrap/dist/js/bootstrap"
 import "../assets/profilecss/profile.css";
 //import "bootstrap/dist/css/bootstrap.min.css"
-import "jquery/dist/jquery"
+import "jquery/dist/jquery";
 class Profile extends React.Component {
-constructor(props){
-  super(props)
-  this.state = {
-    profiles:[],langtab:[],hardSkillstab:[],softSkillstab:[],hobbiestab:[],users:[],userid:[]     
+  constructor(props) {
+    super(props);
+    console.log("id", this.props.match.params.id);
+    this.state = {
+      profiles: [],
+      langtab: [],
+      hardSkillstab: [],
+      softSkillstab: [],
+      hobbiestab: [],
+      users: [],
+      userid: [],
+    };
   }
-axios.get('http://localhost:5000/profile/606224e8b71f3e2264b99ed8').then(res =>{
-this.setState({profiles:res.data});
-this.setState({langtab:res.data.languages});
-this.setState({hardSkillstab:res.data.hardSkills});
-this.setState({softSkillstab:res.data.softSkills});
-this.setState({hobbiestab:res.data.hobbies});
-this.setState({userid:res.data.user});
-})
-axios.get('http://localhost:5000/user/606bc446ba94b513281140a4').then(Response =>{
-this.setState({users:Response.data});
-})
-}
-
+  componentDidMount() {
+    axios.get("http://localhost:5000/user/" + this.props.match.params.id).then((Response) => {
+      this.setState({ users: Response.data });
+      console.log("users", Response.data);
+      axios.get("http://localhost:5000/profile/" + Response.data.profile).then((res) => {
+        console.log("profile", res.data);
+        this.setState({ profiles: res.data });
+        this.setState({ langtab: res.data.languages });
+        this.setState({ hardSkillstab: res.data.hardSkills });
+        this.setState({ softSkillstab: res.data.softSkills });
+        this.setState({ hobbiestab: res.data.hobbies });
+        this.setState({ userid: res.data.user });
+      });
+    });
+  }
 
   render() {
     return (
       <>
     <Header />
-    {/* {console.log("inside",this.state.profiles.email)} */}
-     {/* {this.state.profiles.map(profile => <h2 key={profile._id}>{profile.age}</h2>)}  */}
-     {/* {this.state.profiles.map(profile => <h2>{profile.email}</h2>)}  */}
-      <div className="profile-body">
+    <div className="profile-body">
+      <br/>
       <div className="container emp-profile">
             <form method="post">
                 <div className="row">
@@ -71,10 +80,10 @@ this.setState({users:Response.data});
                     <div className="col-md-4">
                         <div className="profile-work">
                             <label style={{color:'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>hardSkills</label>
-                            <p>{this.state.hardSkillstab.map(x =>(<p>{x}</p>))}</p>
+                            <div>{this.state.hardSkillstab.map((x,index) =>(<div key={index}>{x}</div>))}</div>
 
                             <label style={{color: 'rgba(60,13,153)',fontWeight:'bold',fontSize:'20px'}}>softSkills</label>
-                            <p>{this.state.softSkillstab.map(x =>(<p>{x}</p>))}</p>
+                            <div>{this.state.softSkillstab.map((x,index) =>(<div key={index}>{x}</div>))}</div>
 
                         </div>
                     </div>
@@ -151,7 +160,7 @@ this.setState({users:Response.data});
                                                 <label>Languages</label>
                                             </div>
                                             <div className="col-md-6">
-                                                <p>{this.state.langtab.map(x =>(<p>{x}</p>))}</p>
+                                                <div>{this.state.langtab.map((x,index) =>(<p key={index}>{x}</p>))}</div>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -159,7 +168,7 @@ this.setState({users:Response.data});
                                                 <label>Hobbies</label>
                                             </div>
                                             <div className="col-md-6">
-                                            <p>{this.state.hobbiestab.map(x =>(<p>{x}</p>))}</p>
+                                            <div>{this.state.hobbiestab.map((x,index) =>(<p key={index}>{x}</p>))}</div>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -190,8 +199,8 @@ this.setState({users:Response.data});
                 </div>
             </form>           
         </div>
-        </div>
-      </>
+        <Footer />    
+      </div>      </>
     );
   }
 }

@@ -4,7 +4,7 @@ import { isWindow } from "jquery";
 import React, { useEffect, useState } from "react";
 import { unmountComponentAtNode, render } from "react-dom";
 // import MetaTags from "react-meta-tags";
-import axios from "axios";
+//import axios from "axios";
 // import "./chatbot.css";
 // export default () => {
 //   useEffect(() => {
@@ -104,7 +104,7 @@ export default () => {
           setText(text.push(event.target.textContent));
           console.log(text);
         });
-        let button = iframeDoc.getElementById("mck-msg-sbmt");
+        /* let button = iframeDoc.getElementById("mck-msg-sbmt");
         button.addEventListener("click", async () => {
           axios.post("http://localhost:5000/api/text_query", { text: text[text.length - 1] });
           setText([]);
@@ -115,7 +115,7 @@ export default () => {
             axios.post("http://localhost:5000/api/text_query", { text: text[text.length - 1] });
             setText([]);
           }
-        });
+        });*/
         // //console.log(message);
         // if (window.addEventListener) {
         //   // Normal browsers

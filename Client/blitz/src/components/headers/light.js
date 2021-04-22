@@ -113,7 +113,10 @@ const Navbar = ({
       <NavLink tw='lg:ml-12!'>
         <Link to='/login'>Login</Link>
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href='/#'>
+      <PrimaryLink
+        css={roundedHeaderButton && tw`rounded-full`}
+        href='/register'
+      >
         Sign Up
       </PrimaryLink>
     </NavLinks>,

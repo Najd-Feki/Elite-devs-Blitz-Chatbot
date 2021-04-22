@@ -28,13 +28,8 @@
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
-    "react-redux": "^7.2.3",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0",
-    "resume-parser": "^1.1.0",
-    "textract": "^2.5.0",
-    "uuid": "^8.3.2"
+    "resume-parser-object": "^1.7.0",
+    "textract": "^2.5.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

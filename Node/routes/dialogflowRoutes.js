@@ -8,8 +8,11 @@ const chatbot = require("../Chatbot/chatbot");
 module.exports = (app) => {
   app.post("/api/text_query", async (req, res) => {
     console.log(req.body);
-    let responses = await chatbot.textQuery(req.header("userid"), req.body.text, req.body.parameters);
-    res.send(responses[0].queryResult);
+    let responses;
+    if (req.body.eventName != "") responses = await chatbot.eventQuery(req.body, req.body.parameters);
+    else responses = await chatbot.textQuery(req.header("userid"), req.body.text || req.body.message, req.body.parameters);
+    //if (req.body.text) res.send(responses[0].queryResult);
+    res.send([{ message: responses[0].queryResult.fulfillmentMessages[0].text.text[0] }]);
   });
   // the event query request
   app.post("/api/event_query", async (req, res) => {

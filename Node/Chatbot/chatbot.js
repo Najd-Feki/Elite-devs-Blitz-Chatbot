@@ -6,6 +6,7 @@ const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 const Profile = require("../models/profile");
 const User = require("../models/user");
+const parser = require("./resumeParser");
 // user attributes list///
 var profilePreparation = {
   userId: String,
@@ -30,6 +31,7 @@ var profilePreparation = {
   languages: [""],
   courses: [""],
 };
+
 module.exports = {
   textQuery: async (userid, text, parameters = {}) => {
     let self = module.exports;
@@ -53,13 +55,13 @@ module.exports = {
 
     return responses;
   },
-  eventQuery: async (eventName, parameters) => {
+  eventQuery: async (body, parameters) => {
     let self = module.exports;
     const request = {
       session: sessionPath,
       queryInput: {
         event: {
-          name: eventName,
+          name: body.eventName,
           languageCode: config.dialogFlowSessionLanguageCode,
         },
       },
@@ -70,8 +72,9 @@ module.exports = {
       },
     };
     let responses = await sessionCLient.detectIntent(request);
-    // responses = await self.handleAction(responses);
-
+    if (body.eventName === "KOMMUNICATE_MEDIA_EVENT") {
+      self.handleFile(body.metadata.KM_CHAT_CONTEXT.attachments[0].payload.url, true);
+    }
     return responses;
   },
   handleAction: function (responses) {
@@ -158,5 +161,9 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+
+  handleFile: function (file, isUri) {
+    parser(file, isUri);
   },
 };
