@@ -1,24 +1,22 @@
-import React, { Fragment, useState } from 'react';
-import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
-import PropTypes from 'prop-types';
+import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
+import PropTypes from "prop-types";
 /********* */
 
-import { Container as ContainerBase } from 'components/misc/Layouts';
-import tw from 'twin.macro';
-import styled from 'styled-components';
-import { css } from 'styled-components/macro'; //eslint-disable-line
-import illustration from 'images/signup-illustration.svg';
-import logo from 'images/blitz.PNG';
-import googleIconImageSrc from 'images/google-icon.png';
-import twitterIconImageSrc from 'images/twitter-icon.png';
-import { ReactComponent as SignUpIcon } from 'feather-icons/dist/icons/user-plus.svg';
+import { Container as ContainerBase } from "components/misc/Layouts";
+import tw from "twin.macro";
+import styled from "styled-components";
+import { css } from "styled-components/macro"; //eslint-disable-line
+import illustration from "images/signup-illustration.svg";
+import logo from "images/blitz.PNG";
+import googleIconImageSrc from "images/google-icon.png";
+import twitterIconImageSrc from "images/twitter-icon.png";
+import { ReactComponent as SignUpIcon } from "feather-icons/dist/icons/user-plus.svg";
 
-const Container = tw(
-  ContainerBase
-)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
+const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const LogoLink = tw.a``;
@@ -65,28 +63,27 @@ const IllustrationImage = styled.div`
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
   });
 
   const { name, email, password, password2 } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      setAlert("Passwords do not match", "danger");
     } else {
       register({ name, email, password });
     }
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -94,61 +91,30 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <Content>
         <MainContainer>
           <MainContent>
-            <h1 className='large text-primary'>Sign Up</h1>
-            <p className='lead'>
-              <i className='fas fa-user' /> Create Your Account
+            <h1 className="large text-primary">Sign Up</h1>
+            <p className="lead">
+              <i className="fas fa-user" /> Create Your Account
             </p>
             <Form>
-              <form className='form' onSubmit={onSubmit}>
-                <div className='form-group'>
-                  <Input
-                    type='text'
-                    placeholder='Name'
-                    name='name'
-                    value={name}
-                    onChange={onChange}
-                  />
+              <form className="form" onSubmit={onSubmit}>
+                <div className="form-group">
+                  <Input type="text" placeholder="Name" name="name" value={name} onChange={onChange} />
                 </div>
-                <div className='form-group'>
-                  <Input
-                    type='email'
-                    placeholder='Email Address'
-                    name='email'
-                    value={email}
-                    onChange={onChange}
-                  />
-                  <small className='form-text'>
-                    This site uses Gravatar so if you want a profile image, use
-                    a Gravatar email
-                  </small>
+                <div className="form-group">
+                  <Input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} />
+                  <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                 </div>
-                <div className='form-group'>
-                  <Input
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                    value={password}
-                    onChange={onChange}
-                  />
+                <div className="form-group">
+                  <Input type="password" placeholder="Password" name="password" value={password} onChange={onChange} />
                 </div>
-                <div className='form-group'>
-                  <Input
-                    type='password'
-                    placeholder='Confirm Password'
-                    name='password2'
-                    value={password2}
-                    onChange={onChange}
-                  />
+                <div className="form-group">
+                  <Input type="password" placeholder="Confirm Password" name="password2" value={password2} onChange={onChange} />
                 </div>
-                <input
-                  type='submit'
-                  className='btn btn-primary'
-                  value='Register'
-                />
+                <input type="submit" className="btn btn-primary" value="Register" onClick={onSubmit} />
               </form>
             </Form>
-            <p className='my-1'>
-              Already have an account? <Link to='/login'>Sign In</Link>
+            <p className="my-1">
+              Already have an account? <Link to="/login">Sign In</Link>
             </p>
           </MainContent>
         </MainContainer>
