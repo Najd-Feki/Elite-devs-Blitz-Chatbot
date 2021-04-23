@@ -12,7 +12,23 @@ const MongoStore = require('connect-mongo')(session);
 //starting express
 const app = express();
 app.use(cors());
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const passport = require("./Auth/auth");
+const Routes = require("./routes/course.js");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+//starting express
+const app = express();
+var router = express.Router();
 
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({  extended: true }));
+app.use(cors());
 //connecting to database
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
@@ -42,6 +58,10 @@ app.use(
 /* // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session()); */
+
+//courses
+
+app.use('/course', Routes);
 
 //importing routes
 dialogflowRoutes = require('./routes/dialogflowRoutes')(app);
