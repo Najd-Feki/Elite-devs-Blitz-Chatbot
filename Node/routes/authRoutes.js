@@ -27,9 +27,9 @@ app.get("/google/callback", passport.authenticate("google", { failureRedirect: "
   res.redirect("/");
 });
 // GET /auth/Facebook
-app.get("/facebook", passport.authenticate("facebook"), {
-  scope: ["profile", "email"],
-});
+// app.get("/facebook", passport.authenticate("facebook"), {
+//   scope: ["profile", "email"],
+// });
 app.get(
   "/facebook/callback",
   passport.authenticate("facebook", {

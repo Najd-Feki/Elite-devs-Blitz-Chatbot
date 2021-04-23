@@ -6,9 +6,11 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "pages/Login";
 import Profile from "pages/Profile";
-import "assets/vendor/nucleo/css/nucleo.css";
-import "assets/vendor/font-awesome/css/font-awesome.min.css";
-import "assets/scss/argon-design-system-react.scss?v1.1.0";
+import "./assets/vendor/nucleo/css/nucleo.css";
+import "./assets/vendor/font-awesome/css/font-awesome.min.css";
+import "./assets/scss/argon-design-system-react.scss?v1.1.0";
+import CoursesHome from "components/coursesHome/CoursesHome";
+import '../node_modules/mdbreact/dist/css/mdb.css';
 
 function App() {
   // return <AnimationRevealPage disabled></AnimationRevealPage>;
@@ -17,7 +19,8 @@ function App() {
       <Switch>
         <Route path="/profile" component={Profile}></Route>
         <Route path="/login" component={Login}></Route>
-        <Route path="/" component={Home}></Route>
+        <Route path="/course" component={CoursesHome} ></Route>
+        <Route path="/" exact component={Home}></Route>
       </Switch>
     </Router>
   );
