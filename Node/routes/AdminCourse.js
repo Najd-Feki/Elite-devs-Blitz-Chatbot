@@ -1,6 +1,6 @@
 module.exports = (app) => {
     var express = require("express");
-    const Course = require("../models/courseMessage");
+    const Course = require("../models/AdminCourse");
     const User = require("../models/user");
     // GET all events
     app.get("/allcourses", async function (req, res, next) {

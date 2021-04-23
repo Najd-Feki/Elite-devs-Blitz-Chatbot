@@ -79,6 +79,9 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
         <Link to="/profile">Profile</Link>
       </NavLink>
       <NavLink>
+        <Link to="/course">Courses</Link>
+      </NavLink>
+      <NavLink>
         <Link to="/progress">Progress</Link>
       </NavLink>
       <NavLink>
