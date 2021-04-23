@@ -1,31 +1,45 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-
-
-
-
-const Course = ({ course, setCurrentId }) => {
-    const dispatch =useDispatch();
-
-    const openInNewTab = (c) => {
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+});
+const Course = ({ course }) => {
+  const classes = useStyles();
+  
+     const openInNewTab = (c) => {
       const newWindow = window.open('https://www.udemy.com'+c, '_blank', 'noopener,noreferrer')
       console.log(c.url);
       if (newWindow) newWindow.opener = null
     }
-
+   console.log(course);
     return (
-      <MDBCol style={{ "padding-top" : "50px" }} onClick={() => openInNewTab(`${course.url}`)}>
-      <MDBCard alignItems="stretch">
-        <MDBCardImage className="img-fluid" src={course.image_480x270}
-          waves />
-        <MDBCardBody style={{"height" : "120px"}}>
-          <MDBCardTitle style={{"padding-left" : "10px", "padding-right" : "10px"}}>{course.title}</MDBCardTitle>
-          <MDBCardText style={{"padding-left" : "10px", "padding-right" : "10px"}}>Some quick example text to build on the card title and make up the bulk of the card's content.</MDBCardText>
-        </MDBCardBody>
-      </MDBCard>
-      </MDBCol>
-        
+				
+       <Card className={classes.root}>
+      <CardActionArea onClick={() => openInNewTab(`${course.url}`)}>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="100"
+          image={course.image_480x270}
+          title={course.title}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {course.title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {course.headline}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+        </Card>
     )
 }
 

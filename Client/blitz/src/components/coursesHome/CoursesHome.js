@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import {useDispatch} from 'react-redux';
-import {getCourses} from '../../actions/courses'
-import {Container, Grow, Grid, Typography} from '@material-ui/core';
-import Courses from '../courses/Courses';
-import Search from '../courses/Search';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { Grow, Grid} from '@material-ui/core';
+import { selectcourses,getCourses } from 'store/CoursesSlice';
+import Courses from 'components/courses/Courses';
+import Header from "components/headers/light";
+import Footer from "components/footers/SimpleFooter";
 function CoursesHome (){
-    const [currentId, setCurrentId] = useState(null); 
-    const [query, setQuery] = useState(''); 
+   
+    const [ setCurrentId] = useState(null); 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getCourses());
-        return () => {
-            console.log(dispatch(getCourses()));
-        }
-    }, [dispatch])
+    const courses= useSelector(selectcourses);
+	useEffect(() => {
+		dispatch(getCourses());
+	}, [dispatch]);
     return (
+        <>
+        <Header />
         <Grow in>
-                <Grid >
-                   <Courses setCurrentId={setCurrentId} /> 
+                <Grid style={{backgroundColor:"rgb(214, 214, 214)" , paddingLeft:"200px",paddingRight:"200px"}}>
+                    <Courses courses={courses} setCurrentId={setCurrentId}/>
                 </Grid>
     </Grow>
+    <Footer />
+    </>
     )
 }
 
