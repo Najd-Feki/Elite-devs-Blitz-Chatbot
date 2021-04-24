@@ -48,9 +48,6 @@ function App() {
   }, []);
   return (
     <>
-      <MetaTags>
-        <meta name="viewport" content="width-device-width, initial-scale=1"></meta>
-      </MetaTags>
       <Provider store={store}>
         <Router>
           <Fragment>
@@ -74,8 +71,8 @@ function App() {
             </Switch>
           </Fragment>
         </Router>
+        <Chatbot></Chatbot>
       </Provider>
-      <Chatbot></Chatbot>
     </>
   );
 }

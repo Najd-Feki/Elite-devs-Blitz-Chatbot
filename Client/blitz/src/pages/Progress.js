@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Header from "components/headers/light";
 import Zoom from "react-reveal/Flash";
@@ -13,46 +13,38 @@ import Typical from "react-typical";
 import ProgressCards from "components/progress/ProgressCards";
 import Footer from "components/footers/SimpleFooter";
 
+import { connect } from "react-redux";
+
 import axios from "axios";
-export default () => {
+const Progress = ({ auth }) => {
   const Subheading = tw.div`uppercase  font-bold text-primary-500`;
   const HighlightedText = tw.div`text-primary-500 `;
   const Legend = tw.span` block italic text-primary-100 text-center`;
   const LegendTitle = tw.span` block font-bold text-lg text-primary-500 text-center`;
 
   const [date, setdate] = useState(moment().format("YYYY-MM-D"));
+  const [open, setOpen] = useState(false);
 
   const data = {
     name: "Active status grid",
-    days: ["2021-01-28", "2021-01-29", "2021-01-30", "2021-01-3", "2021-01-2", "2020-01-10", "2020-01-12", "2020-06-2", "2020-07-4"],
+    days: ["2021-04-22", "2021-04-23"],
   };
 
-  // for (let i = 0; i < 365; i++) {
-  //   let dayGridDate = moment().subtract(i, "days").format("YYYY-MM-D");
-  //   if (daysRecorded.includes(dayGridDate.toString())) {
-  //     dayGrids.unshift(
-  //       <Zoom duration={3500}>
-  //         <button id="PopoverFocus" onMouseEnter={() => setdate(dayGridDate)} type="button">
-  //           <div className="day day--active" key={i} />
-  //         </button>
-  //       </Zoom>
-  //     );
-  //   } else {
-  //     dayGrids.unshift(<div className="day" key={i} />);
-  //   }
-  // }
+  let daysRecordedA = [];
+  auth.user?.loginDates.forEach((element) => {
+    daysRecordedA.push(element.slice(0, 10));
+  });
+  let daysRecorded = [...new Set(daysRecordedA)];
 
-  /////////////////////////////////////////
-  let daysRecorded = data.days;
+  console.log(daysRecorded);
   const dayGrids = [];
-  for (var i = 1; i < 365; i++) {
-    //const level = Math.floor(Math.random() * 3);
-    let dayGridDate = moment().subtract(i, "days").format("YYYY-MM-D");
-
+  for (var i = 0; i < 365; i++) {
+    let dayGridDate = moment("2021-01-01").add(i, "days").format("YYYY-MM-D");
     if (daysRecorded.includes(dayGridDate.toString())) {
+      if (!open) setOpen(true);
       dayGrids.push(
         <Zoom duration={3500}>
-          <div onMouseEnter={() => setdate(dayGridDate)} id="PopoverFocus" dataLevel={2} key={i} />
+          <div onMouseEnter={() => setdate(dayGridDate)} id={"PopoverFocus"} dataLevel={2} key={i} />
         </Zoom>
       );
     } else {
@@ -62,7 +54,6 @@ export default () => {
   return (
     <>
       <Header />
-
       <Features
         imageSrc={assist}
         subheading={<Subheading>Progress</Subheading>}
@@ -80,7 +71,6 @@ export default () => {
         textOnLeft={false}
         imageDecoratorBlob={true}
       ></Features>
-
       <br></br>
       <br></br>
       <br></br>
@@ -88,9 +78,6 @@ export default () => {
       <br></br>
       <Fade top right duration={1200}>
         <LegendTitle>{data.name}</LegendTitle>
-        {/* <div>
-          <div className="days">{dayGrids}</div>
-        </div> */}
         <div className="graph">
           <ul className="months">
             <li>Jan</li>
@@ -118,13 +105,23 @@ export default () => {
           <div className="squares">{dayGrids}</div>
         </div>
         <Legend>Last 365 Days</Legend>
-        <UncontrolledPopover children="hover focus click" trigger="hover" placement="bottom" target="PopoverFocus">
-          <PopoverHeader>{date}</PopoverHeader>
-          <PopoverBody>You were active on this day</PopoverBody>
-        </UncontrolledPopover>
+        {open ? (
+          <UncontrolledPopover children="hover focus click" trigger="hover" placement="bottom" target="PopoverFocus">
+            <PopoverHeader>{date}</PopoverHeader>
+            <PopoverBody>You were active on this day</PopoverBody>
+          </UncontrolledPopover>
+        ) : (
+          <div></div>
+        )}
       </Fade>
       <ProgressCards></ProgressCards>
       <Footer></Footer>
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Progress);

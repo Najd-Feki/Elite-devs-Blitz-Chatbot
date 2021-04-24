@@ -1,8 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { isWindow } from "jquery";
 import React, { useEffect, useState } from "react";
-import { unmountComponentAtNode, render } from "react-dom";
+import { connect } from "react-redux";
 // import MetaTags from "react-meta-tags";
 //import axios from "axios";
 // import "./chatbot.css";
@@ -51,94 +50,53 @@ import { unmountComponentAtNode, render } from "react-dom";
 //     </>
 //   );
 // };
-export default () => {
-  var pagelist = {
-    "http://localhost:3000/profile": "This is your profile, you can find all your info and your resume here.",
-    "http://localhost:3000/progress": "This is your progress page, here you can keep track of your achievements.",
-  };
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+const Chatbot = ({ auth }) => {
   const [text, setText] = useState([]);
+
   useEffect(() => {
-    (function (d, m) {
-      var kommunicateSettings = {
-        appId: "f3444ef308eca1dcf11bd3dd9c11a4ab",
-        popupWidget: false,
-        automaticChatOpenOnNavigation: true,
-        openConversationOnNewMessage: false,
-        voiceInput: true,
-        onInit: function () {
-          //Kommunicate.displayKommunicateWidget(true);
+    start();
+  }, [auth]);
 
-          //window.Kommunicate.launchConversation();
+  return <div></div>;
+  function start() {
+    if (auth.user != null) {
+      //  let userId = auth?.user?._id;
+      console.log(auth);
+      (function (d, m) {
+        var kommunicateSettings = {
+          defaultMessageMetaData: { _id: auth.user._id },
 
-          var defaultSettings = {
-            WELCOME_MESSAGE: pagelist[window.location.pathname],
-            //page URL array
-          };
-
-          if (pagelist[window.location.pathname]) {
-            window.kommunicate.updateSettings(defaultSettings);
-          }
-        },
-      };
-
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.async = true;
-      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-      var h = document.getElementsByTagName("head")[0];
-      h.appendChild(s);
-      window.kommunicate = m;
-      m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-    console.log("bruh");
-    window.addEventListener("load", async function () {
-      setTimeout(async () => {
-        console.log("c bon t3ada");
+          appId: "f3444ef308eca1dcf11bd3dd9c11a4ab",
+          popupWidget: false,
+          automaticChatOpenOnNavigation: true,
+          openConversationOnNewMessage: false,
+          voiceInput: true,
+        };
+        //  console.log(userId);
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0];
+        h.appendChild(s);
+        window.kommunicate = m;
+        m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+      window.addEventListener("load", async function () {
         var iframe = await document.getElementById("kommunicate-widget-iframe"),
-          iframeDoc = !!iframe["contentDocument"] ? iframe.contentDocument : iframe.contentWindow.document,
-          cell = await iframeDoc.getElementsByClassName("mck-running-on notranslate vis");
-        console.log("cell 0", cell[0]);
-        await cell[0]?.remove();
-        ///////////////////////////
+          iframeDoc = !!iframe["contentDocument"] ? iframe.contentDocument : iframe.contentWindow.document;
+
         let message = iframeDoc.getElementById("mck-text-box");
-        message.addEventListener("input", (event) => {
+        message?.addEventListener("input", (event) => {
           setText(text.push(event.target.textContent));
           console.log(text);
         });
-        /* let button = iframeDoc.getElementById("mck-msg-sbmt");
-        button.addEventListener("click", async () => {
-          axios.post("http://localhost:5000/api/text_query", { text: text[text.length - 1] });
-          setText([]);
-        });
-        message.addEventListener("keyup", async (field) => {
-          if (field.keyCode === 13) {
-            console.log(text[text.length - 1]);
-            axios.post("http://localhost:5000/api/text_query", { text: text[text.length - 1] });
-            setText([]);
-          }
-        });*/
-        // //console.log(message);
-        // if (window.addEventListener) {
-        //   // Normal browsers
-        //   message.addEventListener("DOMSubtreeModified", contentChanged, false);
-        // } else if (window.attachEvent) {
-        //   // IE
-        //   message.attachEvent("DOMSubtreeModified", contentChanged);
-        // }
-
-        // async function contentChanged(e) {
-        //   // await axios.post("http://localhost:5000/api/text_query", { text: e });
-        //   console.log(e.target);
-        //}
-      }, 2500);
-
-      //while (cell.hasChildNodes()) {
-      //  console.log(cell);
-      //}
-
-      //cell[0].parentNode.removeChild(cell[0]);
-    });
-  }, []);
-
-  return <div></div>;
+      });
+    }
+  }
 };
+
+export default connect(mapStateToProps)(Chatbot);

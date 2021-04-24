@@ -1,9 +1,9 @@
 module.exports = (app) => {
   const mongoose = require("mongoose");
-  const User = require("../models/user");
+  const User = require("../models-auth/User");
 
   // GET all users
-  app.get("/user", async function (req, res, next) {
+  app.get("/users", async function (req, res, next) {
     await User.find(function (err, data) {
       if (err) {
         console.log(err);
@@ -15,9 +15,6 @@ module.exports = (app) => {
   // GET user by id
   app.get("/user/:id", async function (req, res, next) {
     var id = req.params.id;
-    var myid = mongoose.Types.ObjectId(id);
-    console.log("id is :" + id + " type of id is : " + typeof id);
-    console.log("myid is :" + myid + " type of myid is : " + typeof myid);
     await User.findById(id, function (err, data) {
       if (err) {
         console.log(err);

@@ -95,23 +95,21 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <p className="lead">
               <i className="fas fa-user" /> Create Your Account
             </p>
-            <Form>
-              <form className="form" onSubmit={onSubmit}>
-                <div className="form-group">
-                  <Input type="text" placeholder="Name" name="name" value={name} onChange={onChange} />
-                </div>
-                <div className="form-group">
-                  <Input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} />
-                  <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
-                </div>
-                <div className="form-group">
-                  <Input type="password" placeholder="Password" name="password" value={password} onChange={onChange} />
-                </div>
-                <div className="form-group">
-                  <Input type="password" placeholder="Confirm Password" name="password2" value={password2} onChange={onChange} />
-                </div>
-                <input type="submit" className="btn btn-primary" value="Register" onClick={onSubmit} />
-              </form>
+            <Form className="form" onSubmit={onSubmit}>
+              <div className="form-group">
+                <Input type="text" placeholder="Name" name="name" value={name} onChange={onChange} />
+              </div>
+              <div className="form-group">
+                <Input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} />
+                <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+              </div>
+              <div className="form-group">
+                <Input type="password" placeholder="Password" name="password" value={password} onChange={onChange} />
+              </div>
+              <div className="form-group">
+                <Input type="password" placeholder="Confirm Password" name="password2" value={password2} onChange={onChange} />
+              </div>
+              <input type="submit" className="btn btn-primary" value="Register" onClick={onSubmit} />
             </Form>
             <p className="my-1">
               Already have an account? <Link to="/login">Sign In</Link>

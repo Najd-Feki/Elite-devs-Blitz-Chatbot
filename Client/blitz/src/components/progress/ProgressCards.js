@@ -10,9 +10,10 @@ import { ReactComponent as PenIcon } from "feather-icons/dist/icons/pen-tool.svg
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
-import ProgressBar from "react-customizable-progressbar";
 import Skeleton from "react-loading-skeleton";
 import { UncontrolledPopover, PopoverHeader, PopoverBody } from "reactstrap";
+import { Line } from "rc-progress";
+
 import Fade from "react-reveal/Fade";
 import axios from "axios";
 const Container = tw.div`relative`;
@@ -203,23 +204,8 @@ export default () => {
                       </SecondaryInfoContainer>
                       <Description onMouseEnter={() => handleBody(course.headline)}>{course.headline}</Description>
                       <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
-                      <ProgressBar
-                        radius={100}
-                        progress={prog}
-                        rotate={-210}
-                        strokeWidth={16}
-                        strokeColor="#5d9cec"
-                        strokeLinecap="square"
-                        trackStrokeWidth={8}
-                        trackStrokeColor="#e6e6e6"
-                        trackStrokeLinecap="square"
-                        pointerRadius={0}
-                        initialAnimation={true}
-                        transition="2.5s ease 1.5s"
-                        trackTransition="0s ease"
-                      >
-                        <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
-                      </ProgressBar>
+                      <Line percent={80}></Line>
+                      <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
                     </TextInfo>
 
                     <PrimaryButton href={`https://www.udemy.com${course.url}`} target="_blank" rel="noopener noreferrer">
@@ -237,12 +223,17 @@ export default () => {
     <>
       <Content>
         <Fade left>
+          <Heading style={{ textAlign: "left" }}>Your Courses</Heading>
           <CardSlider ref={setSliderRef} {...sliderSettings}>
-            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
-
-            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
-
-            <Skeleton width={"20rem"} height={"40rem"}></Skeleton>
+            <div>
+              <Skeleton style={{ borderRadius: "5rem" }} width={"23rem"} height={"35rem"}></Skeleton>
+            </div>
+            <div>
+              <Skeleton style={{ borderRadius: "5rem" }} width={"23rem"} height={"35rem"}></Skeleton>
+            </div>
+            <div>
+              <Skeleton style={{ borderRadius: "5rem" }} width={"23rem"} height={"35rem"}></Skeleton>
+            </div>
           </CardSlider>
         </Fade>
       </Content>
