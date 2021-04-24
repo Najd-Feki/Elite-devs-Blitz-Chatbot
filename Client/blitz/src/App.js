@@ -32,6 +32,9 @@ import UsersAdmin from "pages/UsersAdmin";
 import ConnectingUsers from "pages/ConnectingUsers";
 import Classification from "pages/Classification";
 import Reclamation from "pages/Reclamation";
+import Login from "pages/Login";
+import CoursesHome from "components/coursesHome/CoursesHome";
+import '../node_modules/mdbreact/dist/css/mdb.css';
 
 function App() {
   useEffect(() => {
@@ -65,6 +68,7 @@ function App() {
               <Route path="/event" component={event}></Route>
               <Route path="/eventdetail/:id" component={EventDetail}></Route>
               <Route path="/progress" component={Progress}></Route>
+              <Route path="/course" component={CoursesHome} ></Route>
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />
@@ -74,6 +78,7 @@ function App() {
         <Chatbot></Chatbot>
       </Provider>
     </>
+   
   );
 }
 
