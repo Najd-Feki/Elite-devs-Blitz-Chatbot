@@ -33,7 +33,7 @@
 /////////////////////
 const ResumeParser = require("resume-parser-object");
 const Profile = require("../models/profile");
-const User = require("../models/user");
+const User = require("../models-auth/User");
 module.exports = (path, isUri, userId) => {
   // From file to file
   if (!isUri) {

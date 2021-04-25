@@ -5,7 +5,7 @@ const config = require("../config/keys");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 const Profile = require("../models/profile");
-const User = require("../models/user");
+const User = require("../models-auth/User");
 const parser = require("./resumeParser");
 // user attributes list///
 var profilePreparation = {

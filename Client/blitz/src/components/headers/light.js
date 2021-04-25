@@ -63,7 +63,7 @@ export const DesktopNavLinks = tw.nav`
   hidden lg:flex flex-1 justify-between items-center sticky top-0
 `;
 
-const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg", auth: { isAuthenticated }, logout }) => {
+const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg", auth, logout }) => {
   const authLinks = [
     <NavLinks>
       <NavLink>
@@ -76,7 +76,7 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
         <Link to="/posts">Posts</Link>
       </NavLink>
       <NavLink>
-        <Link to="/profile">Profile</Link>
+        <Link to={`/profile/${auth?.user?._id}`}> Profile</Link>
       </NavLink>
       <NavLink>
         <Link to="/course">Courses</Link>
@@ -133,7 +133,7 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
       <Header className={"sticky"}>
         <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
           {logoLink}
-          {isAuthenticated ? authLinks : guestLinks}
+          {auth.isAuthenticated ? authLinks : guestLinks}
         </DesktopNavLinks>
 
         <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
