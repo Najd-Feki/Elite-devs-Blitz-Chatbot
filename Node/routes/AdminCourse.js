@@ -39,7 +39,8 @@ module.exports = (app) => {
       //res.send(req.body);
       try {
         var courselog = await course.save();
-        console.log(eventlog);
+        console.log(courselog);
+        console.log("added");
         res.send("course added");
       } catch (err) {
         console.log(err);
