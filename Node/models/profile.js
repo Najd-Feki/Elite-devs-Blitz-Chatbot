@@ -25,7 +25,6 @@ var Profile = new Schema({
   hobbies: [String],
   languages: [String],
   experiences: [String],
-  contacts: String,
   courses: [
     String,
     //{type: mongoose.Schema.Types.ObjectId, ref: "Course",},
