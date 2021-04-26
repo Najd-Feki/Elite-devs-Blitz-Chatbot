@@ -4,9 +4,10 @@ const courseSchema = mongoose.Schema({
 
     title : String,
     description : String,
+    field : [String],
     link : String,
     tags : [String],
-    selectedFile : [String],
+    selectedFile : [{String}],
     likeCount: {
         type: Number,
         default: 0,
@@ -18,7 +19,8 @@ const courseSchema = mongoose.Schema({
     quiz : [String],
     numberOfEnrolls : Number,
     tutorName : String,
-    tutorDetails : [String]
+    tutorDetails : [String],
+    active : Boolean
 
 });
 
