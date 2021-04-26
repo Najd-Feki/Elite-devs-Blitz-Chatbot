@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { Grow, Grid} from '@material-ui/core';
-import { selectcourses,getCourses } from 'store/CoursesSlice';
-import Courses from 'components/courses/Courses';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Grow, Grid } from "@material-ui/core";
+import { selectcourses, getCourses } from "store/CoursesSlice";
+import Courses from "components/courses/Courses";
 import Header from "components/headers/light";
 import Footer from "components/footers/SimpleFooter";
 import axios from 'axios';
@@ -33,7 +33,8 @@ function CoursesHome (){
     </Grow>
     <Footer />
     </>
-    )
+
+  );
 }
 
-export default CoursesHome
+export default CoursesHome;
