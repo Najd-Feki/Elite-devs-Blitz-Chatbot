@@ -34,7 +34,7 @@ import Classification from "pages/Classification";
 import Reclamation from "pages/Reclamation";
 import Login from "pages/Login";
 import CoursesHome from "components/coursesHome/CoursesHome";
-
+import { CourseForm } from "components/courseForm/CourseForm";
 function App() {
   useEffect(() => {
     // check for token in LS
@@ -68,6 +68,7 @@ function App() {
               <Route path="/eventdetail/:id" component={EventDetail}></Route>
               <Route path="/progress" component={Progress}></Route>
               <Route path="/course" component={CoursesHome}></Route>
+              <Route path="/admin" component={CourseForm}></Route>
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />
