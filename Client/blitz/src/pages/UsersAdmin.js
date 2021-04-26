@@ -9,7 +9,7 @@ export default function UsersAdmin() {
 
 
     useEffect(async() => { 
-       const response = await axios.get("http://localhost:5000/user")
+       const response = await axios.get("http://localhost:5000/users")
        setUsers(response.data)  
     },[])
 
@@ -42,7 +42,7 @@ export default function UsersAdmin() {
         {users.map((user,index) =>
             <tr>
             <td>
-                <Link to={"/profile/"+user._id}> {user.userName}
+                <Link to={"/profile/"+user._id}> {user.name}
                 </Link>
             </td>
             <td> {user.email}</td>
