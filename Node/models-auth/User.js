@@ -26,6 +26,12 @@ const UserSchema = new mongoose.Schema({
       type: Date,
     },
   ],
+  tempCourses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
   courses: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -185,7 +185,7 @@ export default () => {
                         </button>
                         <RatingsInfo>
                           <StarIcon />
-                          <Rating>{course.rating}</Rating>
+                          {course.rating ? <Rating>{course.rating}</Rating> : <div></div>}
                         </RatingsInfo>
                       </TitleReviewContainer>
                       <SecondaryInfoContainer>
