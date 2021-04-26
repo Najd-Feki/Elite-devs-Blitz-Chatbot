@@ -2,29 +2,14 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import {useDropzone} from 'react-dropzone';
+import FileBase from 'react-file-base64';
 
 import Button from '@material-ui/core/Button';
 
 
 const CourseDetails = ({courseData, setCourseData,activeStep, handleNext,steps,classes}) => {
-    const { getRootProps, getInputProps } = useDropzone({
-        accept : "image/*",
-        onDrop : (acceptedFiles) => {
-            setCourseData({...courseData, selectedFile : acceptedFiles.map((file) =>
-                    Object.assign(file, {
-                        preview : URL.createObjectURL(file)
-                    })
-                )})
-        }
-    })
-    const images = courseData.selectedFile.map((file)=>(
-        <div key={file.name}>
-            <div>
-                <img src={file.preview} style={{width : "200px"}} alt="preview" />
-            </div>
-        </div>
-    ))
+    
+   
     return (
         <React.Fragment>
         <Typography variant="h6" gutterBottom>
@@ -79,13 +64,7 @@ const CourseDetails = ({courseData, setCourseData,activeStep, handleNext,steps,c
             />
           </Grid>
           <Grid item xs={12}>
-            <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Drop files here</p>
-            </div>
-            <div>
-                {images}
-            </div>
+          <div className={classes.fileInput}><FileBase type="File" multiple={false} onDone={({base64}) => setCourseData({...courseData, selectedFile : base64})}/></div>
           </Grid>
           <Button
                     variant="contained"

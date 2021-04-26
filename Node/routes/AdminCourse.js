@@ -26,6 +26,7 @@ module.exports = (app) => {
     app.post("/blitzcourse/add", async function (req, res) {
       var course = new Course();
       course.title = req.body.title;
+      course.field = req.body.field;
       course.description = req.body.description;
       course.tags = req.body.tags;
       course.selectedFile = req.body.selectedFile;

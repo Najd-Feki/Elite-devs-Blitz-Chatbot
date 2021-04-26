@@ -7,7 +7,7 @@ const courseSchema = mongoose.Schema({
     field : [String],
     link : String,
     tags : [String],
-    selectedFile : [{String}],
+    selectedFile : String,
     likeCount: {
         type: Number,
         default: 0,

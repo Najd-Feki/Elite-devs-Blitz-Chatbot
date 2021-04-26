@@ -64,7 +64,7 @@ function Copyright() {
     },
   }));
   
-  const steps = ['Shipping address', 'Payment details', 'Review your order'];
+  const steps = ['Course', 'Tutor', 'Confirmation'];
   
   
 
@@ -77,7 +77,7 @@ export const CourseForm = () => {
     description : '',
     field : [''],
     tags : [''],
-    selectedFile : [''],
+    selectedFile : '',
     numberOfEnrolls : 0,
     tutorName : '',
     tutorDetails : [''],
