@@ -17,7 +17,7 @@ class SimpleFooter extends React.Component {
               <Col className="text-lg-center btn-wrapper" lg="6">
                 <Button className="btn-icon-only rounded-circle" color="twitter" href="https://twitter.com/" id="tooltip475038074" target="_blank">
                   <span className="">
-                    <i className="fa fa-twitter" style={{ display: "block", marginLeft: "auto", marginRight: "auto", width: "50%" }} />
+                    <i className="fa fa-twitter" />
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip475038074">
@@ -31,7 +31,7 @@ class SimpleFooter extends React.Component {
                   target="_blank"
                 >
                   <span className="btn-inner--icon">
-                    <i className="fa fa-facebook-square" style={{ display: "block", marginLeft: "auto", marginRight: "auto", width: "50%" }} />
+                    <i className="fa fa-facebook-square" />
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip837440414">
@@ -45,7 +45,7 @@ class SimpleFooter extends React.Component {
                   target="_blank"
                 >
                   <span className="btn-inner--icon">
-                    <i className="fa fa-dribbble" style={{ display: "block", marginLeft: "auto", marginRight: "auto", width: "50%" }} />
+                    <i className="fa fa-dribbble" />
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip829810202">
@@ -53,7 +53,7 @@ class SimpleFooter extends React.Component {
                 </UncontrolledTooltip>
                 <Button className="btn-icon-only rounded-circle ml-1" color="github" href="https://github.com/" id="tooltip495507257" target="_blank">
                   <span className="btn-inner--icon">
-                    <i className="fa fa-github" style={{ display: "block", marginLeft: "auto", marginRight: "auto", width: "50%" }} />
+                    <i className="fa fa-github" />
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip495507257">
