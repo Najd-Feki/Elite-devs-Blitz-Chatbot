@@ -24,7 +24,7 @@ module.exports = (app) => {
       });
     });
   
-    // add event
+   
     app.post("/blitzcourse/add", async function (req, res) {
       var course = new Course();
       course.title = req.body.title;
@@ -79,11 +79,10 @@ module.exports = (app) => {
           req.params.idCourse
         },
       };
-      await User.updateOne({"_id":req.params.idUser}, idCourse , function (err, doc) {
+      await User.updateOne({"_id":filter}, idCourse , function (err, doc) {
         if (err) {
           console.log(err);
         }
-        console.log(doc);
       });
     });
     

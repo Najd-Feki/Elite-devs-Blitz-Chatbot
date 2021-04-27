@@ -79,6 +79,7 @@ useEffect(() => {
       </Drawer>
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
+          <br></br>
           <Courses courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse setId={setId} courseData={adminCourse} />
         </Grid>
