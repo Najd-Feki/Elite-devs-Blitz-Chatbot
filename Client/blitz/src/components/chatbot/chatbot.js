@@ -50,9 +50,7 @@ import { connect } from "react-redux";
 //     </>
 //   );
 // };
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+
 const Chatbot = ({ auth }) => {
   const [text, setText] = useState([]);
 
@@ -67,6 +65,10 @@ const Chatbot = ({ auth }) => {
       console.log(auth);
       (function (d, m) {
         var kommunicateSettings = {
+          userId: auth.user._id,
+          email: auth.user.email,
+          password: auth.token,
+          authenticationTypeId: 0,
           defaultMessageMetaData: { _id: auth.user._id },
 
           appId: "f3444ef308eca1dcf11bd3dd9c11a4ab",
@@ -98,5 +100,7 @@ const Chatbot = ({ auth }) => {
     }
   }
 };
-
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 export default connect(mapStateToProps)(Chatbot);
