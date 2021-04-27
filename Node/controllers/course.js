@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const CourseMessage = require("../models/courseMessage.js");
 const Course = require("../models/course.js");
 const request = require("request");
+const User = require("../models-auth/User");
 
 const getCourse = async (req, res) => {
   const options = {
@@ -31,13 +32,26 @@ const getCourseDb = async (req, res) => {
   }
 };
 const getTempCourseDb = async (req, res) => {
+  let done = false;
   try {
-    const course = await Course.find((err, data) => {
-      res.json(data);
-    });
-    res.status(200).json(courseMessage);
+    let coursesTable = [];
+    const user = await User.findById(req.query.id)
+      .then(async (data) => {
+        if (data) {
+          let tmp = data.tempCourses;
+          for (i in tmp)
+            Course.findById(tmp[i], (err, data2) => {
+              coursesTable.push(data2);
+            });
+        }
+      })
+      .then(() => {
+        setTimeout(() => {
+          res.send(coursesTable.filter((x) => x));
+        }, 2000);
+      });
   } catch (error) {
-    res.status(404).json({ message: error.message() });
+    console.log(error);
   }
 };
 

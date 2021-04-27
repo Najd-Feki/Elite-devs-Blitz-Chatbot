@@ -96,9 +96,8 @@ module.exports = {
     if (keys.includes("job")) profilePreparation.job = fields.job.stringValue;
     if (keys.includes("workPlace")) profilePreparation.workPlace = fields.workPlace.stringValue;
     if (keys.includes("duration")) {
-      console.log(JSON.stringify(fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue));
       profilePreparation.duration =
-        fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue == "yr"
+        fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue === "yr"
           ? " years"
           : " months";
     }
@@ -148,12 +147,12 @@ module.exports = {
         for (var i in result.tempCourses) {
           //delete the search temp courses for the user
           const u = await Course.findByIdAndDelete(result.tempCourses[i].toString(), (err, succ) => {});
-          console.log(result.tempCourses.shift());
+          //console.log(result.tempCourses.shift());
         }
-
-      await result.save();
     });
+    USER.tempCourses = [];
 
+    USER.save();
     //start inserting the new temp courses in DB
     for (var j in newCourse) {
       const c2 = new Course({
@@ -171,7 +170,7 @@ module.exports = {
         //insert course in courses db
         let c = await c2.save();
         //insert the course id in the user tempcourses attribute
-        const user = await User.findByIdAndUpdate(profilePreparation.userId, { $push: { tempCourses: (await c)._id } }, (err, result) => {});
+        const user = await User.findByIdAndUpdate(profilePreparation.userId, { $push: { tempCourses: (await c)._id } });
       } catch (err) {
         console.log(err);
       }
