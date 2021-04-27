@@ -54,6 +54,7 @@ const Courses = ({ courses, setCurrentId, auth }) => {
       dispatch(getCoursesById(search));
     };
   }, [search, dispatch]);
+
   const pageCount = Math.ceil(courses.length / coursesPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);

@@ -12,6 +12,11 @@ export const getCoursesById = createAsyncThunk("search", async (_data, { dispatc
   return data;
 });
 
+export const getCourseById = createAsyncThunk("search", async (_data, { dispatch, getState }) => {
+  const { data } = await axios.get(`http://localhost:5000/blitzcourse/${_data}`);
+  return data;
+});
+
 const coursesAdapter = createEntityAdapter({
   selectId: (courses) => courses.id,
 });

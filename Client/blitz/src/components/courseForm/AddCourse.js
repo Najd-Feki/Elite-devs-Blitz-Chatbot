@@ -7,7 +7,7 @@ const AddCourse = ({courseData}) => {
     }, [])
     return (
         <div>
-                Added
+               Course added successfully  
         </div>
     )
 }
