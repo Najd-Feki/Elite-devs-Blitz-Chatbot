@@ -19,19 +19,23 @@ const Courses = ({ courses, setCurrentId }) => {
   const onChange = (q) => {
     setSearch(q);
   };
-  const displayCourses = courses.slice(pagesVisited, pagesVisited + coursesPerPage).map((course) => {
-    return (
-      <Grid style={{ paddingLeft: "30px" }}>
-        <Course course={course} setCurrentId={setCurrentId} />
-      </Grid>
-    );
-  });
+  const displayCourses = courses
+    .slice(pagesVisited, pagesVisited + coursesPerPage)
+    .map((course) => {
+      return (
+        <Grid style={{ paddingLeft: "30px" }}>
+          <Course course={course} setCurrentId={setCurrentId} />
+        </Grid>
+      );
+    });
+
   useEffect(() => {
     //lena fergha bech ma ya3malch recherche ki tebda input fergha
     return () => {
       dispatch(getCoursesById(search));
     };
   }, [search, dispatch]);
+
   const pageCount = Math.ceil(courses.length / coursesPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -44,7 +48,12 @@ const Courses = ({ courses, setCurrentId }) => {
       <br></br>
       <br></br>
       <br></br>
-      <Grid className={classes.container} style={{ paddingBottom: "50px" }} container spacing={3}>
+      <Grid
+        className={classes.container}
+        style={{ paddingBottom: "50px" }}
+        container
+        spacing={3}
+      >
         {displayCourses}{" "}
       </Grid>
 

@@ -18,7 +18,6 @@ const Course = ({ course }) => {
       console.log(c.url);
       if (newWindow) newWindow.opener = null
     }
-   console.log(course);
     return (
 				
        <Card className={classes.root}>
