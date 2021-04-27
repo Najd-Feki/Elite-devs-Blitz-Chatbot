@@ -16,7 +16,8 @@ function CoursesHome({ auth }) {
   const [adminCourse, setAdminCourse] = useState([]);
   const courses = useSelector(selectcourses);
   const [id, setId] = useState();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [courseEnrolled, setcourseEnrolled] = useState([]);
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const showDrawer = () => {
     setState({
@@ -51,14 +52,31 @@ function CoursesHome({ auth }) {
     });
     showDrawer();
   }, [id]);
-
+const Actionenroll =(data) =>{
+ setcourseEnrolled(data);
+ console.log(data);
+}
+useEffect(() => {
+  if(auth.user._id!=null && courseEnrolled._id != null){
+    console.log("id user : "+ auth.user._id);
+    axios.put(`http://localhost:5000/enroll/${auth.user._id }/${courseEnrolled._id}`); } 
+    console.log(courseEnrolled);  
+}, [courseEnrolled])
   return (
     <>
       <Header />
-      <Button type="primary" onClick={showDrawer}>
-        Open drawer
-      </Button>
-      <Drawer title="Multi-level drawer" width={520} closable={false} onClose={onClose} visible={state.visible}></Drawer>
+     
+      <Drawer  
+      width={520} 
+      closable={false} 
+      onClose={onClose} 
+      visible={state.visible}
+      >
+          <h1>{data.title}</h1>
+          <h2>description</h2>
+          <p>{data.description}</p>
+          <Button onClick={() =>Actionenroll(data)} >Enroll</Button>
+      </Drawer>
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
           <Courses courses={courses} setCurrentId={setCurrentId} auth={auth} />
