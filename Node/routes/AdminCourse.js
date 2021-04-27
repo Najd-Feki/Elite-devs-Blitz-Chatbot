@@ -1,7 +1,9 @@
+const { isValidObjectId } = require("mongoose");
+
 module.exports = (app) => {
     var express = require("express");
     const Course = require("../models/AdminCourse");
-    // GET all events
+    const User = require('../models-auth/User');
     app.get("/allcourses", async function (req, res, next) {
       await Course.find(function (err, data) {
         if (err) {
@@ -69,16 +71,21 @@ module.exports = (app) => {
         console.log(doc);
       });
     });
-    app.put("/blitzcourse/participer/:idUser/:idCourse", async function (req, res) {
-        var idUser = req.params.idUser;
-        var idCourse = req.params.idCourse
-        await Course.findByIdAndUpdate(idUser, { $courses: idCourse }, function (err, doc) {
-          if (err) {
-            console.log(err);
-          }
-          res.send("course added to the user "+idUser);
-          console.log(doc);
-        });
+    app.put("/enroll/:idUser/:idCourse", async function (req, res) {
+      const filter = req.params.idUser;
+      const idCourse = {
+        $set: {
+          courses:
+          req.params.idCourse
+        },
+      };
+      await User.updateOne({"_id":req.params.idUser}, idCourse , function (err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        console.log(doc);
       });
+    });
+    
   };
   
