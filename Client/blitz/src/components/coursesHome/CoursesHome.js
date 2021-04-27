@@ -8,8 +8,9 @@ import Footer from "components/footers/SimpleFooter";
 import axios from "axios";
 import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
-import "antd/dist/antd.css";
-function CoursesHome() {
+import { connect } from "react-redux";
+//import "antd/dist/antd.css";
+function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
   const dispatch = useDispatch();
   const [adminCourse, setAdminCourse] = useState([]);
@@ -31,6 +32,10 @@ function CoursesHome() {
 
   useEffect(() => {
     dispatch(getCourses());
+    require("antd/dist/antd.css");
+    return () => {
+      window.location.reload();
+    };
   }, []);
 
   useEffect(() => {
@@ -56,7 +61,7 @@ function CoursesHome() {
       <Drawer title="Multi-level drawer" width={520} closable={false} onClose={onClose} visible={state.visible}></Drawer>
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
-          <Courses courses={courses} setCurrentId={setCurrentId} />
+          <Courses courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse setId={setId} courseData={adminCourse} />
         </Grid>
       </Grow>
