@@ -22,6 +22,7 @@ import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 import Chatbot from "./components/chatbot/chatbot";
 import MetaTags from "react-meta-tags";
 import Profile from "pages/Profile";
+import ProfileUpdate from "pages/ProfileUpdate";
 import Contact from "pages/ContactUs";
 import About from "pages/AboutUs";
 import event from "pages/Event";
@@ -56,6 +57,7 @@ function App() {
           <Fragment>
             <Switch>
               <Route path="/profile/:id" render={(props) => <Profile {...props} />} />
+              <Route path="/profileupdate/:id" render={(props) => <ProfileUpdate {...props} />} />
               <Route path="/reclamation" component={Reclamation}></Route>
               <Route path="/classification" component={Classification}></Route>
               <Route path="/connecting" component={ConnectingUsers}></Route>
