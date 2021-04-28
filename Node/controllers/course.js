@@ -32,13 +32,12 @@ const getCourseDb = async (req, res) => {
   }
 };
 const getTempCourseDb = async (req, res) => {
-  let done = false;
   try {
     let coursesTable = [];
     const user = await User.findById(req.query.id)
       .then(async (data) => {
         if (data) {
-          let tmp = data.tempCourses;
+          let tmp = req.query.temp ? data.tempCourses : data.courses;
           for (i in tmp)
             Course.findById(tmp[i], (err, data2) => {
               coursesTable.push(data2);

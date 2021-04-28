@@ -72,7 +72,7 @@ const IconContainer = styled.div`
 const Text = tw.div`ml-2 text-sm font-semibold text-gray-800`;
 const PrimaryButton = tw(PrimaryButtonBase)`mt-auto sm:text-lg rounded-none w-full rounded sm:rounded-none sm:rounded-br-4xl py-3 sm:py-6`;
 
-export default () => {
+const ProgressCards = ({ auth }) => {
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [sliderRef, setSliderRef] = useState(null);
   const sliderSettings = {
@@ -95,13 +95,17 @@ export default () => {
     ],
   };
 
-  const enpoint = "https://www.udemy.com/api-2.0/";
+  const enpoint = "http://localhost:5000/";
   const getCourses = async () => {
     try {
-      const courses = await axios.get(`${enpoint}courses`, {
+      const courses = await axios.get(`${enpoint}course/temp`, {
         auth: {
           username: process.env.REACT_APP_UDEMY_CLIENT_ID,
           password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
+        },
+        params: {
+          id: auth.user._id,
+          temp: false,
         },
       });
       courses.data.results.forEach((course) => {
@@ -240,3 +244,4 @@ export default () => {
     </>
   );
 };
+export default ProgressCards;

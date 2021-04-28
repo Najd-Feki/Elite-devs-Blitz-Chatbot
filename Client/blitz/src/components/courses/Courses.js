@@ -27,7 +27,7 @@ const Courses = ({ courses, setCurrentId, auth }) => {
       console.log(auth.user?._id);
       if (auth.user) {
         let id = auth.user._id;
-        await axios.get("http://localhost:5000/course/temp", { params: { id: id } }).then((res) => {
+        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: true } }).then((res) => {
           setCrs(res.data);
         });
       }

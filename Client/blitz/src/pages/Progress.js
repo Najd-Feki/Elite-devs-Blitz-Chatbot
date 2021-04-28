@@ -114,7 +114,7 @@ const Progress = ({ auth }) => {
           <div></div>
         )}
       </Fade>
-      <ProgressCards></ProgressCards>
+      <ProgressCards auth={auth}></ProgressCards>
       <Footer></Footer>
     </>
   );

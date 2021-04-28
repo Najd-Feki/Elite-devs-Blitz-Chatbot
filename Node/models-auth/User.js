@@ -32,9 +32,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Course",
     },
   ],
-  courses: [
-   String
-  ],
+  courses: [String],
   profile: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile",
