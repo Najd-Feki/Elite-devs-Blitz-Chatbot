@@ -20,6 +20,7 @@ function CoursesHome({ auth }) {
   const [courseEnrolled, setcourseEnrolled] = useState();
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const [flag,setFlag] = useState(false);
+  const [udemyId,setUdemyid] = useState();
   const showDrawer = () => {
     setState({
       visible: true,
@@ -65,6 +66,10 @@ useEffect(() => {
     axios.put(`http://localhost:5000/enroll/${auth.user._id }/${courseEnrolled._id}`); } 
     console.log(courseEnrolled);  
 },[flag])
+useEffect(() => {
+  console.log(udemyId);
+  
+}, [udemyId])
   return (
     <>
       <Header />
@@ -83,8 +88,8 @@ useEffect(() => {
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
           <br></br>
-          <Courses courses={courses} setCurrentId={setCurrentId} auth={auth} />
-          <AdminCourse setId={setId} courseData={adminCourse} />
+          <Courses  setUdemyid={setUdemyid} courses={courses} setCurrentId={setCurrentId} auth={auth} />
+          <AdminCourse ssetId={setId} courseData={adminCourse} />
         </Grid>
       </Grow>
       <Footer />

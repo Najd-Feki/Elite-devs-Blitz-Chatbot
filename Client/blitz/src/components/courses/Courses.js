@@ -8,9 +8,10 @@ import { getCoursesById } from "store/CoursesSlice";
 import axios from "axios";
 import Pagination from "react-paginate";
 import "./style.css";
+import {  Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
-const Courses = ({ courses, setCurrentId, auth }) => {
+const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -22,6 +23,7 @@ const Courses = ({ courses, setCurrentId, auth }) => {
   };
   let a = [];
   const [crs, setCrs] = useState([]);
+
   useEffect(() => {
     async function ll() {
       console.log(auth.user?._id);
@@ -36,6 +38,9 @@ const Courses = ({ courses, setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
+ const handle = (b) => {
+  setUdemyid(b);
+ }
   if (search) a = courses;
   else a = crs;
   console.log("courses A : ", a);
@@ -43,7 +48,8 @@ const Courses = ({ courses, setCurrentId, auth }) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
-          <Course course={a} setCurrentId={setCurrentId} />
+          <Course  course={a} setCurrentId={setCurrentId} />
+          <Button onClick={()=>handle(a.id)}>enroll</Button>
         </Grid>
       </>
     );

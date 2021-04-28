@@ -71,13 +71,14 @@ module.exports = (app) => {
     });
     app.put("/enroll/:idUser/:idCourse", async function (req, res) {
       const filter = req.params.idUser;
+      const c = new Course({_id :req.params.idCourse });
       const idCourse = {
-        $set: {
+        $push: {
           courses:
-          req.params.idCourse,
+          c._id,
         },
       };
-      await User.updateOne({"_id":req.params.idUser}, idCourse , function (err, doc) {
+      await User.findByIdAndUpdate({"_id":req.params.idUser}, idCourse   , function (err, doc) {
         if (err) {
           console.log(err);
         }
