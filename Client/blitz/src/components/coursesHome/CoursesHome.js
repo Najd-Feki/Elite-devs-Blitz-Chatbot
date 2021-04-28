@@ -17,8 +17,9 @@ function CoursesHome({ auth }) {
   const courses = useSelector(selectcourses);
   const [id, setId] = useState();
   const [data, setData] = useState([]);
-  const [courseEnrolled, setcourseEnrolled] = useState([]);
+  const [courseEnrolled, setcourseEnrolled] = useState();
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
+  const [flag,setFlag] = useState(false);
   const showDrawer = () => {
     setState({
       visible: true,
@@ -55,13 +56,15 @@ function CoursesHome({ auth }) {
 const Actionenroll =(data) =>{
  setcourseEnrolled(data);
  console.log(data);
+ setFlag(true);
 }
 useEffect(() => {
-  if(auth.user._id!=null && courseEnrolled._id != null){
+  if(flag){
+    console.log("id course: "+courseEnrolled._id);
     console.log("id user : "+ auth.user._id);
     axios.put(`http://localhost:5000/enroll/${auth.user._id }/${courseEnrolled._id}`); } 
     console.log(courseEnrolled);  
-}, [courseEnrolled])
+},[flag])
   return (
     <>
       <Header />

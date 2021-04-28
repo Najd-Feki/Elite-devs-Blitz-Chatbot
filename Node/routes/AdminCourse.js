@@ -1,5 +1,3 @@
-const { isValidObjectId } = require("mongoose");
-
 module.exports = (app) => {
     var express = require("express");
     const Course = require("../models/AdminCourse");
@@ -24,7 +22,7 @@ module.exports = (app) => {
       });
     });
   
-   
+    // add event
     app.post("/blitzcourse/add", async function (req, res) {
       var course = new Course();
       course.title = req.body.title;
@@ -76,13 +74,14 @@ module.exports = (app) => {
       const idCourse = {
         $set: {
           courses:
-          req.params.idCourse
+          req.params.idCourse,
         },
       };
-      await User.updateOne({"_id":filter}, idCourse , function (err, doc) {
+      await User.updateOne({"_id":req.params.idUser}, idCourse , function (err, doc) {
         if (err) {
           console.log(err);
         }
+        console.log(doc);
       });
     });
     
