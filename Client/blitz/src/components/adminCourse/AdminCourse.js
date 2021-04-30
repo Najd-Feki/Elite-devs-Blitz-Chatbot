@@ -1,14 +1,16 @@
-import React,{useState,useEffect} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react'
 import '../../assets/css/all.min.css'
 import '../../assets/css/bootstrap.css'
 import '../../assets/css/responsive.css'
 import '../../assets/css/ui.css'
 
-const AdminCourse = ({setId, courseData}) => {
+const AdminCourse = ({setId, courseData,setcourseEnrolled}) => {
   
     const action =(a)=>{ 
         setId(a);
+    }
+    const handleAction =(a) => {
+      setcourseEnrolled(a);
     }
     const displayCourses = courseData
     .map((course) => {
@@ -25,7 +27,7 @@ const AdminCourse = ({setId, courseData}) => {
                 <div class="col-md-6">
                     <div class="info-main">
                       <br/>
-                        <a href="#" class="h5 title"> {course.title}  </a>
+                        <a class="h5 title" onClick={()=>action(course._id)}> {course.title}  </a>
                        <br></br>
                         <br/>
                         <p> {course.description} </p>
@@ -42,8 +44,8 @@ const AdminCourse = ({setId, courseData}) => {
                         <br />
                         <p>
                             <a  class="btn btn-primary btn-block" onClick={()=>action(course._id)}> Details </a>
-                            <a  class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
-                                <span class="text">Add to wishlist</span>
+                            <a  class="btn btn-light btn-block" onClick={()=>handleAction(course)}><i class="fa fa-book"></i> 
+                                <span class="text">Enroll</span>
                             </a>
                         </p>
                     </div> 

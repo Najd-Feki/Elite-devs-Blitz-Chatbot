@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Grow, Grid } from "@material-ui/core";
-import { selectcourses, getCourses } from "store/CoursesSlice";
+import { selectcourses, getCourses, sortbyfield } from "store/CoursesSlice";
 import Courses from "components/courses/Courses";
 import Header from "components/headers/light";
 import Footer from "components/footers/SimpleFooter";
@@ -11,7 +11,10 @@ import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
-  const [setCurrentId] = useState(null);
+  const [setCurrentId] = useState(null);  
+  const [selectedOption, setselectedOption] = useState({
+    name: 'default'
+});
   const dispatch = useDispatch();
   const [adminCourse, setAdminCourse] = useState([]);
   const courses = useSelector(selectcourses);
@@ -60,6 +63,7 @@ const Actionenroll =(data) =>{
  console.log(data);
  setFlag(true);
 }
+
 useEffect(() => {
   if(flag){
     console.log("id course: "+courseEnrolled._id);
@@ -68,7 +72,19 @@ useEffect(() => {
   } 
     console.log(courseEnrolled);  
 },[flag])
-
+useEffect(() => {
+  if (selectedOption.name !== 'default') {
+      if (selectedOption.name === 'field') {
+          dispatch(sortbyfield());
+      }
+      else if (selectedOption.name === 'MostFrequent') {
+          console.log("most frequent");
+      }
+  } 
+  else {
+      console.log("else");
+  }
+}, [selectedOption]);
 useEffect(() => {
  //
  console.log(udemy);
@@ -100,7 +116,21 @@ useEffect(() => {
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
           <br></br>
           <Courses  setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
-          <AdminCourse setId={setId} courseData={adminCourse} />
+          <select
+                                        defaultValue={'default'}
+                                        value={selectedOption.name}
+                                        onChange={e => setselectedOption({ ...selectedOption, name: e.target.value })}
+                                        displayEmpty
+                                        name="filter"
+                                    >
+<option value="default" disable>
+                                            <em>Order by</em>
+                                        </option>
+                                        <option value="Newest">Newest</option>
+                                        <option value="MostLiked">Most Liked</option>
+                                        <option value="MostFrequent">Most Frequent</option>
+                                    </select>
+          <AdminCourse setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br/><br/>
         </Grid>
       </Grow>

@@ -20,7 +20,6 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 import Chatbot from "./components/chatbot/chatbot";
-import MetaTags from "react-meta-tags";
 import Profile from "pages/Profile";
 import ProfileUpdate from "pages/ProfileUpdate";
 import Contact from "pages/ContactUs";
@@ -33,11 +32,9 @@ import UsersAdmin from "pages/UsersAdmin";
 import ConnectingUsers from "pages/ConnectingUsers";
 import Classification from "pages/Classification";
 import Reclamation from "pages/Reclamation";
-import Login from "pages/Login";
 import CoursesHome from "components/coursesHome/CoursesHome";
 import { CourseForm } from "components/courseForm/CourseForm";
 import CourseDetails from "components/adminCourse/CourseDetails";
-import Courses from "pages/Courses";
 function App() {
   useEffect(() => {
     // check for token in LS
@@ -74,7 +71,6 @@ function App() {
               <Route path="/course" component={CoursesHome}></Route>
               <Route path="/admin" component={CourseForm}></Route>
               <Route path="/details" component={CourseDetails}></Route>
-              <Route path="/hi" component={Courses}></Route>
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />
