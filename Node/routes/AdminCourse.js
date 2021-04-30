@@ -2,6 +2,22 @@ module.exports = (app) => {
     var express = require("express");
     const Course = require("../models/AdminCourse");
     const User = require('../models-auth/User');
+    const nodemailer = require('nodemailer');
+
+    let trasporter = nodemailer.createTransport({
+        service :'gmail',
+        auth :{
+          user: 'mehdihrairi6@gmail.com',
+          pass :'lol06061997mhlol'
+        }
+    });
+    let mailOptions = {
+      from :'mehdihrairi6@gmail.com',
+      to:'mehdi.hrairi@esprit.tn',
+      subject:'test',
+      text:'IT WORKS !!!'
+    };
+
     app.get("/allcourses", async function (req, res, next) {
       await Course.find(function (err, data) {
         if (err) {
@@ -13,7 +29,7 @@ module.exports = (app) => {
   
     // GET event by id
     app.get("/blitzcourse/:id", async function (req, res, next) {
-      var id = req.params.id;
+      const id = req.params.id;
       await Course.findById(id, function (err, data) {
         if (err) {
           console.log(err);
@@ -72,6 +88,7 @@ module.exports = (app) => {
     app.put("/enroll/:idUser/:idCourse", async function (req, res) {
       const filter = req.params.idUser;
       const c = new Course({_id :req.params.idCourse });
+      
       const idCourse = {
         $push: {
           courses:
@@ -82,6 +99,10 @@ module.exports = (app) => {
         if (err) {
           console.log(err);
         }
+        trasporter.sendMail(mailOptions,function(err,data){
+          if(err){console.log(err);}
+          console.log('email sent');
+        });
         console.log(doc);
       });
     });

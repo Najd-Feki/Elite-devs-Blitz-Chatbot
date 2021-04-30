@@ -9,6 +9,7 @@ import axios from "axios";
 import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
+import emailjs from 'emailjs-com';
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
@@ -20,6 +21,7 @@ function CoursesHome({ auth }) {
   const [courseEnrolled, setcourseEnrolled] = useState();
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const [flag,setFlag] = useState(false);
+  const [Udemyflag,setUdemyflag] = useState(false);
   const [udemyId,setUdemyid] = useState();
   const showDrawer = () => {
     setState({
@@ -32,7 +34,7 @@ function CoursesHome({ auth }) {
       visible: false,
     });
   };
-
+  
   useEffect(() => {
     dispatch(getCourses());
     require("antd/dist/antd.css");
@@ -63,12 +65,20 @@ useEffect(() => {
   if(flag){
     console.log("id course: "+courseEnrolled._id);
     console.log("id user : "+ auth.user._id);
-    axios.put(`http://localhost:5000/enroll/${auth.user._id }/${courseEnrolled._id}`); } 
+    axios.put(`http://localhost:5000/enroll/${auth.user._id }/${courseEnrolled._id}`);
+  } 
     console.log(courseEnrolled);  
 },[flag])
+
 useEffect(() => {
-  console.log(udemyId);
-  
+ //
+ console.log(udemyId);
+   setUdemyflag(true);
+}, [udemyId])
+useEffect(() => {
+ if(Udemyflag){
+  axios.put(`http://localhost:5000/enroll/${auth.user._id }/${udemyId}`);
+ }
 }, [udemyId])
   return (
     <>
@@ -89,7 +99,7 @@ useEffect(() => {
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
           <br></br>
           <Courses  setUdemyid={setUdemyid} courses={courses} setCurrentId={setCurrentId} auth={auth} />
-          <AdminCourse ssetId={setId} courseData={adminCourse} />
+          <AdminCourse setId={setId} courseData={adminCourse} />
         </Grid>
       </Grow>
       <Footer />
