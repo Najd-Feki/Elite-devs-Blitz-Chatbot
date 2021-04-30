@@ -7,8 +7,8 @@ module.exports = (app) => {
     let trasporter = nodemailer.createTransport({
         service :'gmail',
         auth :{
-          user: 'mehdihrairi6@gmail.com',
-          pass :'lol06061997mhlol'
+          user: 'blitz.devs@gmail.com',
+          pass :'elitedevs0000'
         }
     });
     let mailOptions = {
