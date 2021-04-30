@@ -78,7 +78,9 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
       <p style={{ textAlign: "center" }}> ask Blitz for a course or type in the search bar </p>
     </>
   ) : (
+    
     <div style={{ paddingTop: "50px", paddingBottom: "10px" }}>
+      
       <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
       <br></br>
       <br></br>

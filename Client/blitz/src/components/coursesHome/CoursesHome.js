@@ -101,6 +101,7 @@ useEffect(() => {
           <br></br>
           <Courses  setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse setId={setId} courseData={adminCourse} />
+          <br/><br/>
         </Grid>
       </Grow>
       <Footer />

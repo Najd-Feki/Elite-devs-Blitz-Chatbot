@@ -37,6 +37,7 @@ import Login from "pages/Login";
 import CoursesHome from "components/coursesHome/CoursesHome";
 import { CourseForm } from "components/courseForm/CourseForm";
 import CourseDetails from "components/adminCourse/CourseDetails";
+import Courses from "pages/Courses";
 function App() {
   useEffect(() => {
     // check for token in LS
@@ -73,6 +74,7 @@ function App() {
               <Route path="/course" component={CoursesHome}></Route>
               <Route path="/admin" component={CourseForm}></Route>
               <Route path="/details" component={CourseDetails}></Route>
+              <Route path="/hi" component={Courses}></Route>
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />
