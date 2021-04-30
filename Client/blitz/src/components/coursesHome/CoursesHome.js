@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Grow, Grid } from "@material-ui/core";
-import { selectcourses, getCourses, sortbyfield } from "store/CoursesSlice";
+import { selectcourses, getCourses } from "store/CoursesSlice";
 import Courses from "components/courses/Courses";
 import Header from "components/headers/light";
 import Footer from "components/footers/SimpleFooter";
@@ -18,7 +18,7 @@ function CoursesHome({ auth }) {
   const dispatch = useDispatch();
   const [adminCourse, setAdminCourse] = useState([]);
   const courses = useSelector(selectcourses);
-  const [id, setId] = useState();
+  const [id, setId] = useState("id");
   const [data, setData] = useState([]);
   const [courseEnrolled, setcourseEnrolled] = useState();
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
@@ -44,7 +44,22 @@ function CoursesHome({ auth }) {
       window.location.reload();
     };
   }, []);
-
+  useEffect(() => {
+    if (selectedOption.name !== 'default') {
+        if (selectedOption.name === 'field') {
+          axios.get(`http://localhost:5000/blitzcourse/field`).then(function (response) {
+            console.log("fel filter");
+            setAdminCourse(response.data);
+          });
+        }
+        else if (selectedOption.name === 'MostFrequent') {
+            console.log("most frequent");
+        }
+    } 
+    else {
+        console.log("else");
+    }
+  }, [selectedOption]);
   useEffect(() => {
     axios.get("http://localhost:5000/allcourses").then(function (response) {
       setAdminCourse(response.data);
@@ -52,11 +67,12 @@ function CoursesHome({ auth }) {
   }, []);
 
   useEffect(() => {
+    if(id !== "id"){
     console.log("id in 1 : " + id);
     axios.get(`http://localhost:5000/blitzcourse/${id}`).then(function (response) {
       setData(response.data);
     });
-    showDrawer();
+    showDrawer();}
   }, [id]);
 const Actionenroll =(data) =>{
  setcourseEnrolled(data);
@@ -72,19 +88,7 @@ useEffect(() => {
   } 
     console.log(courseEnrolled);  
 },[flag])
-useEffect(() => {
-  if (selectedOption.name !== 'default') {
-      if (selectedOption.name === 'field') {
-          dispatch(sortbyfield());
-      }
-      else if (selectedOption.name === 'MostFrequent') {
-          console.log("most frequent");
-      }
-  } 
-  else {
-      console.log("else");
-  }
-}, [selectedOption]);
+
 useEffect(() => {
  //
  console.log(udemy);
@@ -126,7 +130,7 @@ useEffect(() => {
 <option value="default" disable>
                                             <em>Order by</em>
                                         </option>
-                                        <option value="Newest">Newest</option>
+                                        <option value="field">field</option>
                                         <option value="MostLiked">Most Liked</option>
                                         <option value="MostFrequent">Most Frequent</option>
                                     </select>
