@@ -9,7 +9,6 @@ import axios from "axios";
 import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
-import emailjs from 'emailjs-com';
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
@@ -22,7 +21,7 @@ function CoursesHome({ auth }) {
   const [state, setState] = useState({ visible: false, childrenDrawer: false });
   const [flag,setFlag] = useState(false);
   const [Udemyflag,setUdemyflag] = useState(false);
-  const [udemyId,setUdemyid] = useState();
+  const [udemy,setUdemy] = useState();
   const showDrawer = () => {
     setState({
       visible: true,
@@ -72,14 +71,16 @@ useEffect(() => {
 
 useEffect(() => {
  //
- console.log(udemyId);
+ console.log(udemy);
    setUdemyflag(true);
-}, [udemyId])
+}, [udemy])
 useEffect(() => {
  if(Udemyflag){
-  axios.put(`http://localhost:5000/enroll/${auth.user._id }/${udemyId}`);
+  axios.put(`http://localhost:5000/enroll/${auth.user._id }/${udemy}`);
+  axios.post("http://localhost:5000/addcourse",udemy);
+  
  }
-}, [udemyId])
+}, [udemy])
   return (
     <>
       <Header />
@@ -98,7 +99,7 @@ useEffect(() => {
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>
           <br></br>
-          <Courses  setUdemyid={setUdemyid} courses={courses} setCurrentId={setCurrentId} auth={auth} />
+          <Courses  setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse setId={setId} courseData={adminCourse} />
         </Grid>
       </Grow>

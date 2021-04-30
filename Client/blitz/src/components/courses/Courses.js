@@ -11,7 +11,7 @@ import "./style.css";
 import {  Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
-const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
+const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -39,7 +39,7 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
     }, 0);
   }, [auth]);
  const handle = (b) => {
-  setUdemyid(b);
+  setUdemy(b);
   console.log(b);
  }
   if (search) a = courses;
@@ -50,7 +50,7 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
           <Course  course={a} setCurrentId={setCurrentId} />
-          <Button onClick={()=>handle(a.id)}>enroll</Button>
+          <Button onClick={()=>handle(a)}>enroll</Button>
         </Grid>
       </>
     );
