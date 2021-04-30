@@ -3,15 +3,20 @@ import NavbarAdmin from '../components/admin/NavbarAdmin'
 import './Admin.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import _ from "lodash"
 
+const pageSize =4;
 export default function UsersAdmin() {
     const [users, setUsers] = useState([])
+    const [paginationUsers,setpaginationUsers]=useState();
+    const [currentPage ,setcurrentPage] = useState(1)
 
 
     useEffect(async() => { 
        const response = await axios.get("http://localhost:5000/users")
-       setUsers(response.data)  
-    },[])
+       setUsers(response.data) 
+       setpaginationUsers(_(response.data).slice(0).take(pageSize).value()); 
+    },[]);
 
     function handelDelete(id) {
       axios.delete("http://localhost:5000/user/delete/"+id)
@@ -20,27 +25,42 @@ export default function UsersAdmin() {
          user._id != id
         ))
       })
-     }
+     };
+
+    const pageCount = users? Math.ceil(users.length/pageSize):0;
+    
+    const pages =_.range(1,pageCount+1 )
+
+    const pagination =( pageNo)=>{
+      setcurrentPage(pageNo);
+      const startIndex =(pageNo - 1 )* pageSize;
+      const paginatedUser = _(users).slice(startIndex).take(pageSize).value();
+      setpaginationUsers(paginatedUser)
+    }
+
 
   return(
     <>
     
         <NavbarAdmin/>
+
+    
   
-    <div className="container" >
+    <div className="container" >{
+      !paginationUsers ? ("no data found") : (
  
   <table className="table">
     <thead className="thead-dark">
       <tr>
         <th>User Name</th>
         <th>Email</th>
-        <th>Date of the creation of the account</th>
+        <th>Date of the creation</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody >
-        {users.map((user,index) =>
-            <tr>
+        {paginationUsers.map((user,index) =>
+            <tr key = {index}>
             <td>
                 <Link to={"/profile/"+user._id}> {user.name}
                 </Link>
@@ -58,7 +78,23 @@ export default function UsersAdmin() {
     </tbody>
 
   </table>
-  
+  ) }
+    
+    <nav className="d-flex justify-content-center">
+      <ul className="pagination">
+        {
+          pages.map((page)=> (
+            <li className={
+              page== currentPage ? "page-item active" : "page-item"
+            }>
+              <p className="page-link"
+              onClick={()=> pagination(page)}>{page}</p> 
+            </li>
+          )) 
+        }
+      
+      </ul>
+    </nav>
 </div>
 
 
