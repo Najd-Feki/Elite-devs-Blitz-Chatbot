@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "emailjs-com": "^2.6.4",
     "feather-icons": "^4.28.0",
     "fetch": "^1.1.0",
     "font-awesome": "^4.7.0",
@@ -20,6 +21,7 @@
     "google-maps-react": "^2.0.2",
     "headroom.js": "^0.11.0",
     "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
     "material-ui": "^0.20.2",
     "material-ui-search-bar": "^1.0.0",
     "moment": "^2.29.1",
@@ -56,6 +58,7 @@
     "tailwindcss": "^1.9.6",
     "tsutils": "^3.7.0",
     "twin.macro": "^1.12.1",
+    "use-in-view": "^1.0.15",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },

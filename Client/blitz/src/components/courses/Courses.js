@@ -11,7 +11,11 @@ import "./style.css";
 import { Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
+<<<<<<< HEAD
 const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
+=======
+const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
+>>>>>>> 98a17e80abecbde273e0f9ee5f7a9a9eb8babce2
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -38,10 +42,17 @@ const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
+<<<<<<< HEAD
   const handle = (b) => {
     setUdemyid(b);
     axios.post("https://blitz-chatbot.herokuapp.com/api/text_query", { eventName: "enroll" });
   };
+=======
+ const handle = (b) => {
+  setUdemy(b);
+  console.log(b);
+ }
+>>>>>>> 98a17e80abecbde273e0f9ee5f7a9a9eb8babce2
   if (search) a = courses;
   else a = crs;
   console.log("courses A : ", a);
@@ -49,8 +60,13 @@ const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
+<<<<<<< HEAD
           <Course course={a} setCurrentId={setCurrentId} />
           <Button onClick={() => handle(a.id)}>enroll</Button>
+=======
+          <Course  course={a} setCurrentId={setCurrentId} />
+          <Button onClick={()=>handle(a)}>enroll</Button>
+>>>>>>> 98a17e80abecbde273e0f9ee5f7a9a9eb8babce2
         </Grid>
       </>
     );
@@ -68,7 +84,7 @@ const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
   };
   return a.length === 0 ? (
     <>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} /><br/>
       <div style={{ position: "absolute", left: "0px", right: "0px", marginLeft: "auto", marginRight: "auto", width: "100px" }}>
         <CircularProgress className={classes.circularLoading} />
       </div>
@@ -78,7 +94,9 @@ const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
       <p style={{ textAlign: "center" }}> ask Blitz for a course or type in the search bar </p>
     </>
   ) : (
+    
     <div style={{ paddingTop: "50px", paddingBottom: "10px" }}>
+      
       <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
       <br></br>
       <br></br>

@@ -16,6 +16,11 @@ export const getCourseById = createAsyncThunk("search", async (_data, { dispatch
   const { data } = await axios.get(`http://localhost:5000/blitzcourse/${_data}`);
   return data;
 });
+export const sortbyfield = createAsyncThunk('Course/sortbyfield', async () => {
+  const { data } = await axios.get('http://localhost:5000/blitzcourse/field');
+
+  return data;
+});
 
 const coursesAdapter = createEntityAdapter({
   selectId: (courses) => courses.id,
@@ -28,6 +33,8 @@ const coursesSlice = createSlice({
   extraReducers: {
     [getCourses.fulfilled]: coursesAdapter.setAll,
     [getCoursesById.fulfilled]: coursesAdapter.setAll,
+    [sortbyfield.fulfilled]: coursesAdapter.setAll,
+
   },
 });
 
