@@ -8,10 +8,10 @@ import { getCoursesById } from "store/CoursesSlice";
 import axios from "axios";
 import Pagination from "react-paginate";
 import "./style.css";
-import {  Button } from "antd";
+import { Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
-const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
+const Courses = ({ courses, setUdemyid, setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -26,11 +26,11 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
 
   useEffect(() => {
     async function ll() {
-      console.log(auth.user?._id);
       if (auth.user) {
         let id = auth.user._id;
-        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: true } }).then((res) => {
+        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: "temp" } }).then((res) => {
           setCrs(res.data);
+          console.log("DATA IS ", res.data);
         });
       }
     }
@@ -38,9 +38,10 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
- const handle = (b) => {
-  setUdemyid(b);
- }
+  const handle = (b) => {
+    setUdemyid(b);
+    axios.post("https://blitz-chatbot.herokuapp.com/api/text_query", { eventName: "enroll" });
+  };
   if (search) a = courses;
   else a = crs;
   console.log("courses A : ", a);
@@ -48,8 +49,8 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
-          <Course  course={a} setCurrentId={setCurrentId} />
-          <Button onClick={()=>handle(a.id)}>enroll</Button>
+          <Course course={a} setCurrentId={setCurrentId} />
+          <Button onClick={() => handle(a.id)}>enroll</Button>
         </Grid>
       </>
     );

@@ -104,7 +104,7 @@ const ProgressCards = ({ auth }) => {
         .get(endpoint + "course/temp", {
           params: {
             id: auth.user._id,
-            temp: false,
+            temp: 2,
           },
         })
         .then((result) => {
@@ -112,6 +112,7 @@ const ProgressCards = ({ auth }) => {
             getCourseById(course.id);
             course.completion_ratio = progress;
           });
+          console.log("COURSE IS :", result.data);
           setCourses(result.data);
         });
     } catch (err) {
@@ -203,8 +204,8 @@ const ProgressCards = ({ auth }) => {
                   </SecondaryInfoContainer>
                   <Description onMouseEnter={() => handleBody(courses[0].headline)}>{courses[0].headline}</Description>
                   <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
-                  <Line percent={prog}></Line>
-                  <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
+                  <Line percent={0}></Line>
+                  <Title style={{ textAlign: "center" }}>{0 + "%"}</Title>
                 </TextInfo>
 
                 <PrimaryButton
@@ -254,8 +255,8 @@ const ProgressCards = ({ auth }) => {
                     </SecondaryInfoContainer>
                     <Description onMouseEnter={() => handleBody(course.headline)}>{course.headline}</Description>
                     <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
-                    <Line percent={80}></Line>
-                    <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
+                    <Line percent={0}></Line>
+                    <Title style={{ textAlign: "center" }}>{0 + "%"}</Title>
                   </TextInfo>
 
                   <PrimaryButton

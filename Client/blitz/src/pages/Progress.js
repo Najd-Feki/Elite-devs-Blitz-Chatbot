@@ -131,7 +131,9 @@ const Progress = ({ auth }) => {
         {open ? (
           <UncontrolledPopover children="hover focus click" trigger="hover" placement="bottom" target="PopoverFocus">
             <PopoverHeader>{date}</PopoverHeader>
-            <PopoverBody>{selectedCourseName}</PopoverBody>
+            <PopoverBody>
+              <b>On this day you started :</b> {selectedCourseName}
+            </PopoverBody>
           </UncontrolledPopover>
         ) : (
           <div></div>

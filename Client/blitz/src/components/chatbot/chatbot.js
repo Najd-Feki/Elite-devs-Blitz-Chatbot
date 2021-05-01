@@ -65,10 +65,10 @@ const Chatbot = ({ auth }) => {
       console.log(auth);
       (function (d, m) {
         var kommunicateSettings = {
-          userId: auth.user._id,
-          email: auth.user.email,
-          password: auth.token,
-          authenticationTypeId: 0,
+          // userId: auth.user._id,
+          // email: auth.user.email,
+          // password: auth.token,
+          // authenticationTypeId: 0,
           defaultMessageMetaData: { _id: auth.user._id },
 
           appId: "f3444ef308eca1dcf11bd3dd9c11a4ab",
@@ -93,6 +93,7 @@ const Chatbot = ({ auth }) => {
 
         let message = iframeDoc.getElementById("mck-text-box");
         message?.addEventListener("input", (event) => {
+          console.log("AAAAAAAAAAAAAAAAAA");
           setText(text.push(event.target.textContent));
           console.log(text);
         });
