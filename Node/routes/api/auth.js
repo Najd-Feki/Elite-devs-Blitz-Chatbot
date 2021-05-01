@@ -54,12 +54,8 @@ router.post("/", check("email", "Please include a valid email").isEmail(), check
 
     jwt.sign(payload, config.get("jwtSecret"), { expiresIn: "5 days" }, (err, token) => {
       if (err) throw err;
-<<<<<<< HEAD
-      res.json({ token });
-=======
       res.json({ token, user });
       User.updateOne({ _id: payload.user.id }, { $push: { loginDates: Date.now() } }).exec();
->>>>>>> 98a17e80abecbde273e0f9ee5f7a9a9eb8babce2
     });
   } catch (err) {
     console.error(err.message);
