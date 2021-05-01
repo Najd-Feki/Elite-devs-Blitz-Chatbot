@@ -5,7 +5,11 @@ const config = require("../config/keys");
 const sessionCLient = new dialogflow.SessionsClient();
 const sessionPath = sessionCLient.sessionPath(config.googleProjectID, config.dialogFlowSessionID);
 const Profile = require("../models/profile");
-const User = require("../models/user");
+const User = require("../models-auth/User");
+const parser = require("./resumeParser");
+const courseController = require("../controllers/course");
+const Course = require("../models/course");
+const axios = require("axios");
 // user attributes list///
 var profilePreparation = {
   userId: String,
@@ -33,8 +37,8 @@ var profilePreparation = {
 
 module.exports = {
   textQuery: async (userid, text, parameters = {}) => {
-    profilePreparation.userId = userid;
     let self = module.exports;
+    profilePreparation.userId = userid;
     const request = {
       session: sessionPath,
       queryInput: {
@@ -54,6 +58,29 @@ module.exports = {
 
     return responses;
   },
+  eventQuery: async (body, parameters) => {
+    let self = module.exports;
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        event: {
+          name: body.eventName,
+          languageCode: config.dialogFlowSessionLanguageCode,
+        },
+      },
+      queryParams: {
+        payload: {
+          data: parameters,
+        },
+      },
+    };
+
+    let responses = await sessionCLient.detectIntent(request);
+    if (body.eventName === "KOMMUNICATE_MEDIA_EVENT") {
+      self.handleFile(body.metadata.KM_CHAT_CONTEXT.attachments[0].payload.url, true);
+    }
+    return responses;
+  },
   handleAction: function (responses) {
     let self = module.exports;
     let queryResult = responses[0].queryResult;
@@ -69,9 +96,8 @@ module.exports = {
     if (keys.includes("job")) profilePreparation.job = fields.job.stringValue;
     if (keys.includes("workPlace")) profilePreparation.workPlace = fields.workPlace.stringValue;
     if (keys.includes("duration")) {
-      console.log(JSON.stringify(fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue));
       profilePreparation.duration =
-        fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue == "yr"
+        fields.duration.structValue.fields.amount.numberValue + " " + fields.duration.structValue.fields.unit.stringValue === "yr"
           ? " years"
           : " months";
     }
@@ -92,16 +118,63 @@ module.exports = {
       fields.hobbies.listValue.values.forEach((element) => {
         profilePreparation.hobbies.push(element.stringValue);
       });
-    if (keys.includes("language1"))
+    if (keys.includes("language1")) {
       fields.language1.listValue.values.forEach((element) => {
         profilePreparation.languages.push(element.stringValue);
       });
-    if (keys.includes("course")) {
-      profilePreparation.courses.push(fields.course.stringValue);
-      console.log(JSON.stringify(profilePreparation, null, 4));
       self.saveUser();
     }
+    if (keys.includes("course")) {
+      profilePreparation.courses.push(fields.course.stringValue);
+
+      //////////////////////////////
+      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${fields.course.stringValue}`;
+      axios.defaults.headers.common["Authorization"] =
+        "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
+      axios.get(UdemyUrl).then((response) => {
+        let newCourse = response.data.results.slice(0, 3);
+        this.saveCourseToDb(newCourse);
+      });
+
+      ///////////////////////////////
+    }
     return responses;
+  },
+  saveCourseToDb: async function (newCourse) {
+    //get the user
+    const USER = await User.findById(profilePreparation.userId, async (err, result) => {
+      if (result.tempCourses)
+        for (var i in result.tempCourses) {
+          //delete the search temp courses for the user
+          const u = await Course.findByIdAndDelete(result.tempCourses[i].toString(), (err, succ) => {});
+          //console.log(result.tempCourses.shift());
+        }
+    });
+    USER.tempCourses = [];
+
+    USER.save();
+    //start inserting the new temp courses in DB
+    for (var j in newCourse) {
+      const c2 = new Course({
+        title: newCourse[j].title,
+        price: newCourse[j].price,
+        url: newCourse[j].url,
+        headline: newCourse[j].headline,
+        isPaid: newCourse[j].isPaid,
+        rating: newCourse[j].rating ? newCourse[j].rating : "",
+        visible_instructors: newCourse[j].visible_instructors,
+        image_480x270: newCourse[j].image_480x270,
+        completionRatio: newCourse[j].completionRatio ? newCourse[j].completionRatio : "",
+      });
+      try {
+        //insert course in courses db
+        let c = await c2.save();
+        //insert the course id in the user tempcourses attribute
+        const user = await User.findByIdAndUpdate(profilePreparation.userId, { $push: { tempCourses: (await c)._id } });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
   saveUser: async function () {
     const profile = new Profile({
@@ -129,14 +202,16 @@ module.exports = {
     });
     try {
       let pro = await profile.save();
-      console.log("profle id is : " + pro._id);
       const user = User.findByIdAndUpdate(profilePreparation.userId, { profile: (await pro)._id }, (err, result) => {
         if (err) console.log(err);
         else console.log(result);
       });
-      console.log("user is : ", user);
     } catch (err) {
       console.log(err);
     }
+  },
+
+  handleFile: function (file, isUri) {
+    parser(file, isUri);
   },
 };

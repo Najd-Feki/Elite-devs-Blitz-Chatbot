@@ -62,7 +62,7 @@ export default ({ roundedHeaderButton }) => {
               </Paragraph>
               <Actions>
                 {/* <input type="text" placeholder="Your E-mail Address" /> */}
-                <button>Get Started</button>
+                {/* <button>Get Started</button> */}
               </Actions>
               <CustomersLogoStrip>
                 <p>Our TRUSTED Customers</p>

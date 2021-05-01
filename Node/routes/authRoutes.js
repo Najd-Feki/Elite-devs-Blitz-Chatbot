@@ -1,4 +1,4 @@
-module.exports = (app) => {
+/* module.exports = (app) => {
   var express = require("express");
   var router = express.Router();
   const passport = require("passport");
@@ -40,6 +40,21 @@ module.exports = (app) => {
       failureRedirect: "/login",
     })
   );
+// GET /auth/google/callback
+app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login" }), function (req, res) {
+  res.redirect("/");
+});
+// GET /auth/Facebook
+// app.get("/facebook", passport.authenticate("facebook"), {
+//   scope: ["profile", "email"],
+// });
+app.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
 
   // GET /auth/Twitter
   app.get("/twitter", passport.authenticate("twitter"));
@@ -52,3 +67,4 @@ module.exports = (app) => {
   );
   
 };
+ */

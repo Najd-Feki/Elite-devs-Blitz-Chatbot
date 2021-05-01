@@ -1,0 +1,126 @@
+/* .days {
+  grid-area: days;
+  display: grid;
+  gap: 4px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: rgb(243, 243, 243);
+  border-radius: 40px;
+  grid-template-columns: repeat(auto-fill, 16px);
+  box-shadow: 0 15px 35px 0 rgba(42, 51, 83, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+.day {
+  height: 16px;
+  background-color: #d4d8fe;
+}
+
+.day--active {
+  background-color: #6607ff;
+} */
+
+:root {
+  --square-size: 15px;
+  --square-gap: 5px;
+  --week-width: calc(var(--square-size) + var(--square-gap));
+}
+
+.months {
+  grid-area: months;
+}
+.days {
+  grid-area: days;
+}
+.squares {
+  grid-area: squares;
+}
+
+.graph {
+  display: inline-grid;
+  grid-template-areas:
+    "empty months"
+    "days squares";
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+}
+
+.months {
+  display: grid;
+  grid-template-columns:
+    calc(var(--week-width) * 4) /* Jan */
+    calc(var(--week-width) * 4) /* Feb */
+    calc(var(--week-width) * 4) /* Mar */
+    calc(var(--week-width) * 5) /* Apr */
+    calc(var(--week-width) * 4) /* May */
+    calc(var(--week-width) * 4) /* Jun */
+    calc(var(--week-width) * 5) /* Jul */
+    calc(var(--week-width) * 4) /* Aug */
+    calc(var(--week-width) * 4) /* Sep */
+    calc(var(--week-width) * 5) /* Oct */
+    calc(var(--week-width) * 4) /* Nov */
+    calc(var(--week-width) * 5) /* Dec */;
+}
+
+.days,
+.squares {
+  display: grid;
+  grid-gap: var(--square-gap);
+  grid-template-rows: repeat(7, var(--square-size));
+}
+
+.squares {
+  grid-auto-flow: column;
+  grid-auto-columns: var(--square-size);
+}
+
+/* Other styling */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
+}
+
+.graph {
+  overflow: hidden;
+  padding: 20px;
+  border: 1px #e1e4e8 solid;
+  margin: 20px;
+  background-color: rgb(243, 243, 243);
+  border-radius: 40px;
+  box-shadow: 0 15px 35px 0 rgba(42, 51, 83, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
+  grid-area: days;
+  display: grid;
+}
+
+.days div:nth-child(odd) {
+  visibility: hidden;
+}
+
+.squares div {
+  background-color: #ebedf0;
+}
+
+.squares div[dataLevel="1"] {
+  background-color: #c6e48b;
+}
+
+.squares div[dataLevel="2"] {
+  background-color: #7bc96f;
+}
+
+.squares div[dataLevel="3"] {
+  background-color: #196127;
+}
+
+@media only screen and (max-width: 600px) {
+  .graph {
+    width: 350px;
+  }
+  .squares {
+    grid-template-columns: auto;
+    grid-gap: 10px 10px;
+  }
+  .graph .squares {
+    width: 300px;
+    height: 100px;
+  }
+}

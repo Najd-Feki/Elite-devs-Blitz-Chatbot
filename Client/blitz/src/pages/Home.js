@@ -12,6 +12,7 @@ import conceptionImg from "images/concept.jpg";
 import responsiveImg from "images/smartphone.jpg";
 import securityImg from "images/security.jpg";
 import cloudImg from "images/cloud.jpg";
+import Typical from "react-typical";
 import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
 import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
 
@@ -28,7 +29,10 @@ export default () => {
           subheading={<Subheading>Features</Subheading>}
           heading={
             <>
-              <HighlightedText>Blitz </HighlightedText> provides an amazing Service.
+              <HighlightedText>
+                <Typical steps={["Blitz.", 1500]} loop={Infinity} wrapper="div" />
+              </HighlightedText>{" "}
+              provides an amazing Service.
             </>
           }
           description={

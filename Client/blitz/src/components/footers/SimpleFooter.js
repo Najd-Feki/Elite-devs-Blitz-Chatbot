@@ -16,7 +16,7 @@ class SimpleFooter extends React.Component {
               </Col>
               <Col className="text-lg-center btn-wrapper" lg="6">
                 <Button className="btn-icon-only rounded-circle" color="twitter" href="https://twitter.com/" id="tooltip475038074" target="_blank">
-                  <span className="btn-inner--icon">
+                  <span className="">
                     <i className="fa fa-twitter" />
                   </span>
                 </Button>

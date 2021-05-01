@@ -31,15 +31,62 @@
 // });
 
 /////////////////////
-
-const ResumeParser = require("resume-parser");
-module.exports = (path) => {
+const ResumeParser = require("resume-parser-object");
+const Profile = require("../models/profile");
+const User = require("../models-auth/User");
+module.exports = (path, isUri, userId) => {
   // From file to file
-  ResumeParser.parseResume(path, "../") // input file, output dir
-    .then((file) => {
-      console.log("Yay! " + file);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  if (!isUri) {
+    ResumeParser.parseResumeFile(path, "../") // input file, output dir
+      .then((file) => {
+        console.log("Yay! " + file);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    //From url
+    ResumeParser.parseResumeUrl(path)
+      .then((data) => {
+        console.log("parsed " + data);
+        saveUser(data, userId);
+      })
+      .catch((error) => {
+        console.log("parser error : ", error);
+      });
+  }
 };
+async function saveUser(data, userId) {
+  const profile = new Profile({
+    name: data.name,
+    headline: data.headline != undefined ? data.headline : "",
+    age: data.age,
+    phone: data.phone,
+    email: data.email,
+    contacts: data.contacts,
+    personal: data.personal,
+    website: data.website,
+    address: data.address,
+    education: data.education,
+    academicProject: data.projectDescription,
+    interests: data.interests,
+    hardSkills: data.skills,
+    awards: data.awards,
+    positions: data.positions,
+    languages: data.languages,
+    experiences: data.experience,
+    courses: data.courses,
+    socialProfiles: data.profiles,
+  });
+  try {
+    let pro = await profile.save();
+    console.log("profle id is : " + pro._id);
+    const user = User.findByIdAndUpdate(userId, { profile: (await pro)._id }, (err, result) => {
+      if (err) console.log(err);
+      else console.log(result);
+    });
+    console.log("user is : ", user);
+  } catch (err) {
+    console.log(err);
+  }
+}

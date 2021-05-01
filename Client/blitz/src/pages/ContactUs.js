@@ -1,12 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
-import tw from "twin.macro";
-import Header from "components/headers/light.js";
-import Footer from "components/footers/SimpleFooter";
-import ContactUsForm from "components/forms/TwoColContactUsWithIllustrationFullForm.js";
-import ContactDetails from "components/cards/ThreeColContactDetails.js";
-import Chat from "components/chatbot/Chat"
-import 'components/chatbot/style.css'
+import React from 'react';
+import tw from 'twin.macro';
+import Header from 'components/headers/light.js';
+import Footer from 'components/footers/SimpleFooter';
+import ContactUsForm from 'components/forms/TwoColContactUsWithIllustrationFullForm.js';
+import ContactDetails from 'components/cards/ThreeColContactDetails.js';
+import Chat from 'components/chatbot/Chat';
+import 'components/chatbot/style.css';
 
 const Address = tw.span`leading-relaxed`;
 const AddressLine = tw.span`block`;
@@ -21,89 +21,88 @@ export default () => {
       <ContactDetails
         cards={[
           {
-            title: "New York",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>40 Gates Court</AddressLine>
-                  <AddressLine>Endicott, NY 13760</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
           {
-            title: "Illinois",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>602 Annadale Drive</AddressLine>
-                  <AddressLine>Dekalb, IL 60115</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
           {
-            title: "California",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>96 NE. Delaware Lane</AddressLine>
-                  <AddressLine>Sacramento, CA 95820</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
           {
-            title: "Tennessee",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>74 Peachtree Ave.</AddressLine>
-                  <AddressLine>Dyersburg, TN 38024</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
           {
-            title: "New Jersey",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>8355 Summer Street</AddressLine>
-                  <AddressLine>Manchester, NJ 08759</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
           {
-            title: "Ohio",
+            title: 'Tunisia',
             description: (
               <>
                 <Address>
-                  <AddressLine>7713 Snake Hill Ave.</AddressLine>
-                  <AddressLine>Piqua, OH 45356</AddressLine>
+                  <AddressLine>14 rue 11145</AddressLine>
+                  <AddressLine>Ghazela</AddressLine>
                 </Address>
-                <Email>contact@treact.com</Email>
-                <Phone>+1 (203) 991-6988</Phone>
+                <Email>elite.devs@gmail.com</Email>
+                <Phone>+(216)99999999</Phone>
               </>
             ),
           },
         ]}
       />
-      
+
       <Footer />
-      <Chat/>
-     
+      <Chat />
     </>
   );
 };

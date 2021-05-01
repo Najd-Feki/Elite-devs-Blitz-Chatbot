@@ -1,11 +1,16 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Pulse from "react-reveal/Pulse";
 import Fade from "react-reveal/Fade";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import "./ligh.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
@@ -14,11 +19,10 @@ import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 
 const Header = tw.header`
-  flex justify-between items-center
-  max-w-screen-xl mx-auto
+sticky top-0
 `;
 
-export const NavLinks = tw.div`inline-block`;
+export const NavLinks = tw.div`inline-block sticky top-0`;
 
 /* hocus: stands for "on hover or focus"
  * hocus:bg-primary-700 will apply the bg-primary-700 class on hover or focus
@@ -46,30 +50,65 @@ export const LogoLink = styled(NavLink)`
 
 export const MobileNavLinksContainer = tw.nav`flex flex-1 items-center justify-between`;
 export const NavToggle = tw.button`
-  lg:hidden z-20 focus:outline-none hocus:text-primary-500 transition duration-300
+  lg:hidden z-50 focus:outline-none hocus:text-primary-500 transition duration-300
 `;
 export const MobileNavLinks = motion.custom(styled.div`
-  ${tw`lg:hidden z-10 fixed top-0 inset-x-0 mx-4 my-6 p-8 border text-center rounded-lg text-gray-900 bg-white`}
+  ${tw`lg:hidden z-50 fixed top-0 inset-x-0 mx-4 my-6 p-8 border text-center rounded-lg text-gray-900 bg-white`}
   ${NavLinks} {
-    ${tw`flex flex-col items-center`}
+    ${tw`flex flex-col items-center z-50`}
   }
 `);
 
 export const DesktopNavLinks = tw.nav`
-  hidden lg:flex flex-1 justify-between items-center
+  hidden lg:flex flex-1 justify-between items-center sticky top-0
 `;
 
-export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
-  const defaultLinks = [
-    <NavLinks key={1}>
-      <NavLink href="/about">About</NavLink>
-      <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/contact">Contact Us</NavLink>
-      <NavLink href="/profile">Profile</NavLink>
-      <NavLink href="/login" tw="lg:ml-12!">
-        Login
+const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg", auth, logout }) => {
+  const authLinks = [
+    <NavLinks>
+      <NavLink>
+        <Link to="/about">About Us</Link>
       </NavLink>
       <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/signup">
+      <NavLink>
+        <Link to="/contact">Contact Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/posts">Posts</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={`/profile/${auth?.user?._id}`}> Profile</Link>
+      </NavLink>
+      <NavLink>
+        <a href="/course">Courses</a>
+      </NavLink>
+      <NavLink>
+        <Link to="/progress">Progress</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/event">Events</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/reclamation">Claims</Link>
+      </NavLink>
+      <a onClick={logout} href="/">
+        <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+      </a>
+    </NavLinks>,
+  ];
+
+  const guestLinks = [
+    <NavLinks>
+      <NavLink>
+        <Link to="/about">About Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/contact">Contact Us</Link>
+      </NavLink>
+      <NavLink tw="lg:ml-12!">
+        <Link to="/login">Login</Link>
+      </NavLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/register">
         Sign Up
       </PrimaryLink>
     </NavLinks>,
@@ -79,23 +118,23 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink href="/">
+    <LogoLink style={{ top: "100rem" }}>
       <Pulse forever left>
         <img src={logo} alt="logo" />
       </Pulse>
-      Blitz
+      <Link to="/">Blitz</Link>
     </LogoLink>
   );
 
   logoLink = logoLink || defaultLogoLink;
-  links = links || defaultLinks;
-
+  /*   links = links || defaultLinks;
+   */
   return (
     <Fade bottom duration={3000}>
-      <Header className={className || "header-light"}>
+      <Header className={"sticky"}>
         <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
           {logoLink}
-          {links}
+          {auth.isAuthenticated ? authLinks : guestLinks}
         </DesktopNavLinks>
 
         <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
@@ -111,6 +150,17 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
     </Fade>
   );
 };
+
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
 
 const collapseBreakPointCssMap = {
   sm: {
