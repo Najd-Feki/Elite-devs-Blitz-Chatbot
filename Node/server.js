@@ -5,16 +5,17 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./Auth/auth");
-const expressListRoutes = require('express-list-routes');
-
+const cors = require("cors");
 
 //starting express
 const app = express();
+app.use(cors());
 
 //connecting to database
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 const db = mongoose.connection;
 
@@ -48,7 +49,8 @@ eventRoute = require("./routes/eventRoute")(app); //done
 profileRoute = require("./routes/profileRoute")(app); //done
 userRoutes = require("./routes/userRoute")(app); //done
 reclamationRoute = require("./routes/reclamationRoute")(app);
+pdfResumeRoute = require("./routes/pdfResumeRoute")(app);
 //******************************************************************rigelha *************************************/
 auth = require("./routes/authRoutes")(app);
 //***************************************************************wrasek mrigla **********************************/
-expressListRoutes(app, { prefix: '/api' });
+//expressListRoutes(app, { prefix: '/api' });

@@ -4,14 +4,14 @@ import "tailwindcss/dist/base.css";
 //import "styles/globalStyles.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from "pages/Login";
+import Login from "./components/auth/login";
 import Profile from "pages/Profile";
 import Contact from "pages/ContactUs";
 import About from "pages/AboutUs";
+import Signup from "pages/Signup";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
-import "assets/scss/argon-design-system-react.scss?v1.1.0";
-import Signup from "pages/Signup";
+import "./assets/scss/argon-design-system-react.scss?v1.1.0";
 
 function App() {
   
@@ -24,6 +24,7 @@ function App() {
         <Route path="/login" component={Login}></Route>
         <Route path="/signup" component={Signup}></Route>
         <Route path="/" component={Home}></Route>
+
       </Switch>
     </Router>
   );
