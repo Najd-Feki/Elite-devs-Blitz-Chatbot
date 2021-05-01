@@ -31,16 +31,34 @@ const getCourseDb = async (req, res) => {
     res.status(404).json({ message: error.message() });
   }
 };
+const getCourseDbById = async (req, res) => {
+  try {
+    const course = await Course.findById(req.query.id).then((result) => {
+      res.send(result);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 const getTempCourseDb = async (req, res) => {
   try {
     let coursesTable = [];
     const user = await User.findById(req.query.id)
       .then(async (data) => {
         if (data) {
-          let tmp = req.query.temp ? data.tempCourses : data.courses;
+          let tmp;
+          console.log("REQ TypE : ", req.query.temp);
+          if (req.query.temp == "temp") {
+            tmp = data.tempCourses;
+            console.log("TEMP ! ");
+          } else {
+            tmp = data.courses;
+            console.log("Course !??? ");
+          }
           for (i in tmp)
             Course.findById(tmp[i], (err, data2) => {
               coursesTable.push(data2);
+              console.log(data2);
             });
         }
       })
@@ -92,12 +110,35 @@ const getCourseUdemyBySearch = (req, res) => {
     console.log(error);
   }
 };
+const setCourseAndDate = async (req, res) => {
+  try {
+    console.log("bdé user id is :", req.body.userId);
+    console.log("bdé course id is :", req.body.courseId);
+    User.updateOne(
+      { _id: req.body.userId },
+      {
+        $push: {
+          loginDates: {
+            loginDate: Date.now(),
+            courseId: req.body.courseId,
+          },
+        },
+      }
+    )
+      .exec()
+      .then((result) => {
+        console.log("Result is :", result);
+      });
+  } catch (error) {}
+};
 
 module.exports = {
   getCourse,
+  getCourseDbById,
   getCourseDb,
   getCourseUdemy,
   getCourseUdemyBySearch,
   DeleteCourseDb,
   getTempCourseDb,
+  setCourseAndDate,
 };

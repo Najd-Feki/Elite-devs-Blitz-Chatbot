@@ -23,9 +23,11 @@ const UserSchema = new mongoose.Schema({
   },
   loginDates: [
     {
-      type: Date,
+      loginDate: Date,
+      courseId: String,
     },
   ],
+
   tempCourses: [
     {
       type: mongoose.Schema.Types.ObjectId,

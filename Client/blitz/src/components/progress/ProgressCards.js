@@ -75,9 +75,11 @@ const PrimaryButton = tw(PrimaryButtonBase)`mt-auto sm:text-lg rounded-none w-fu
 const ProgressCards = ({ auth }) => {
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [sliderRef, setSliderRef] = useState(null);
+
+  const [courses, setCourses] = useState([]);
   const sliderSettings = {
     arrows: false,
-    slidesToShow: 3,
+    slidesToShow: courses.length === 1 ? 1 : 3,
     responsive: [
       {
         breakpoint: 1280,
@@ -95,25 +97,24 @@ const ProgressCards = ({ auth }) => {
     ],
   };
 
-  const enpoint = "http://localhost:5000/";
+  const endpoint = "http://localhost:5000/";
   const getCourses = async () => {
     try {
-      const courses = await axios.get(`${enpoint}course/temp`, {
-        auth: {
-          username: process.env.REACT_APP_UDEMY_CLIENT_ID,
-          password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
-        },
-        params: {
-          id: auth.user._id,
-          temp: false,
-        },
-      });
-      courses.data.results.forEach((course) => {
-        getCourseById(course.id);
-        course.completion_ratio = progress;
-      });
-      setCourses(courses.data.results);
-      //console.log(courses.data.results);
+      const courses = await axios
+        .get(endpoint + "course/temp", {
+          params: {
+            id: auth.user._id,
+            temp: 2,
+          },
+        })
+        .then((result) => {
+          result.data.forEach((course) => {
+            getCourseById(course.id);
+            course.completion_ratio = progress;
+          });
+          console.log("COURSE IS :", result.data);
+          setCourses(result.data);
+        });
     } catch (err) {
       console.error(err);
     }
@@ -121,7 +122,7 @@ const ProgressCards = ({ auth }) => {
   const getCourseById = async (id) => {
     const params = "?fields[course]=@all&?fields[user]=@all";
     try {
-      const courseProgress = await axios.get(`${enpoint}courses/756150/${params}`, {
+      const courseProgress = await axios.get(`${endpoint}courses/756150/${params}`, {
         auth: {
           username: process.env.REACT_APP_UDEMY_CLIENT_ID,
           password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
@@ -129,28 +130,26 @@ const ProgressCards = ({ auth }) => {
       });
 
       setProgress(courseProgress.data);
-      console.log(courseProgress.data);
     } catch (err) {
       console.error(err);
     }
   };
   const handleTitle = (title) => {
-    console.log(title);
     setTitle(title);
   };
   const handleBody = (body) => {
-    console.log(body);
     setBody(body);
   };
-  const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     getCourses();
-  }, [setCourses]);
-  /* Change this according to your needs */
-  const cards = [{}];
+  }, [setCourses, auth]);
+
+  const setCourseAndDate = async (id) => {
+    await axios.post(endpoint + "course/date", { userId: auth.user._id, courseId: id });
+  };
 
   let time = 1000;
   let prog;
@@ -171,54 +170,108 @@ const ProgressCards = ({ auth }) => {
           </Controls>
         </HeadingWithControl>
         <CardSlider ref={setSliderRef} {...sliderSettings}>
-          {courses.map(
-            (course, id) => (
-              (time += 500),
-              (
-                <Fade left duration={time}>
-                  <Card key={id}>
-                    <UncontrolledPopover trigger="hover" placement="bottom" target="Popover1">
-                      <PopoverBody>{title}</PopoverBody>
-                      <PopoverHeader>{body}</PopoverHeader>
-                    </UncontrolledPopover>
-                    <CardImage imageSrc={course.image_480x270} />
-                    <TextInfo>
-                      <TitleReviewContainer>
-                        <button id="Popover1">
-                          <Title onMouseEnter={() => handleTitle(course.title)}>{course.title}</Title>
-                        </button>
-                        <RatingsInfo>
-                          <StarIcon />
-                          {course.rating ? <Rating>{course.rating}</Rating> : <div></div>}
-                        </RatingsInfo>
-                      </TitleReviewContainer>
-                      <SecondaryInfoContainer>
-                        <IconWithText>
-                          <IconContainer>
-                            <PenIcon />
-                          </IconContainer>
-                          <Text>{course.visible_instructors[0].display_name}</Text>
-                        </IconWithText>
-                        <IconWithText>
-                          <IconContainer>
-                            <PriceIcon />
-                          </IconContainer>
-                          <Text>{course.price}</Text>
-                        </IconWithText>
-                      </SecondaryInfoContainer>
-                      <Description onMouseEnter={() => handleBody(course.headline)}>{course.headline}</Description>
-                      <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
-                      <Line percent={80}></Line>
-                      <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
-                    </TextInfo>
+          {courses.length === 1 ? (
+            <Fade left duration={time}>
+              <Card>
+                <UncontrolledPopover trigger="hover" placement="bottom" target="Popover1">
+                  <PopoverBody>{title}</PopoverBody>
+                  <PopoverHeader>{body}</PopoverHeader>
+                </UncontrolledPopover>
+                <CardImage imageSrc={courses[0].image_480x270} />
+                <TextInfo>
+                  <TitleReviewContainer>
+                    <button id="Popover1">
+                      <Title onMouseEnter={() => handleTitle(courses[0].title)}>{courses[0].title}</Title>
+                    </button>
+                    <RatingsInfo>
+                      <StarIcon />
+                      {courses[0].rating ? <Rating>{courses[0].rating}</Rating> : <div></div>}
+                    </RatingsInfo>
+                  </TitleReviewContainer>
+                  <SecondaryInfoContainer>
+                    <IconWithText>
+                      <IconContainer>
+                        <PenIcon />
+                      </IconContainer>
+                      <Text>{courses[0].visible_instructors[0].display_name}</Text>
+                    </IconWithText>
+                    <IconWithText>
+                      <IconContainer>
+                        <PriceIcon />
+                      </IconContainer>
+                      <Text>{courses[0].price}</Text>
+                    </IconWithText>
+                  </SecondaryInfoContainer>
+                  <Description onMouseEnter={() => handleBody(courses[0].headline)}>{courses[0].headline}</Description>
+                  <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
+                  <Line percent={0}></Line>
+                  <Title style={{ textAlign: "center" }}>{0 + "%"}</Title>
+                </TextInfo>
 
-                    <PrimaryButton href={`https://www.udemy.com${course.url}`} target="_blank" rel="noopener noreferrer">
-                      Start Now
-                    </PrimaryButton>
-                  </Card>
-                </Fade>
-              )
-            )
+                <PrimaryButton
+                  href={`https://www.udemy.com${courses[0].url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    setCourseAndDate(courses[0]._id);
+                  }}
+                >
+                  Start Now
+                </PrimaryButton>
+              </Card>
+            </Fade>
+          ) : (
+            courses.map((course, id) => (
+              <Fade left duration={time}>
+                <Card key={id}>
+                  <UncontrolledPopover trigger="hover" placement="bottom" target="Popover1">
+                    <PopoverBody>{title}</PopoverBody>
+                    <PopoverHeader>{body}</PopoverHeader>
+                  </UncontrolledPopover>
+                  <CardImage imageSrc={course.image_480x270} />
+                  <TextInfo>
+                    <TitleReviewContainer>
+                      <button id="Popover1">
+                        <Title onMouseEnter={() => handleTitle(course.title)}>{course.title}</Title>
+                      </button>
+                      <RatingsInfo>
+                        <StarIcon />
+                        {course.rating ? <Rating>{course.rating}</Rating> : <div></div>}
+                      </RatingsInfo>
+                    </TitleReviewContainer>
+                    <SecondaryInfoContainer>
+                      <IconWithText>
+                        <IconContainer>
+                          <PenIcon />
+                        </IconContainer>
+                        <Text>{course.visible_instructors[0].display_name}</Text>
+                      </IconWithText>
+                      <IconWithText>
+                        <IconContainer>
+                          <PriceIcon />
+                        </IconContainer>
+                        <Text>{course.price}</Text>
+                      </IconWithText>
+                    </SecondaryInfoContainer>
+                    <Description onMouseEnter={() => handleBody(course.headline)}>{course.headline}</Description>
+                    <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
+                    <Line percent={0}></Line>
+                    <Title style={{ textAlign: "center" }}>{0 + "%"}</Title>
+                  </TextInfo>
+
+                  <PrimaryButton
+                    href={`https://www.udemy.com${course.url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      setCourseAndDate(course._id);
+                    }}
+                  >
+                    Start Now
+                  </PrimaryButton>
+                </Card>
+              </Fade>
+            ))
           )}
         </CardSlider>
       </Content>

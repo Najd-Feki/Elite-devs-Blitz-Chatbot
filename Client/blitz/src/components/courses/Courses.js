@@ -8,10 +8,10 @@ import { getCoursesById } from "store/CoursesSlice";
 import axios from "axios";
 import Pagination from "react-paginate";
 import "./style.css";
-import {  Button } from "antd";
+import { Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
-const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
+const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -26,11 +26,11 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
 
   useEffect(() => {
     async function ll() {
-      console.log(auth.user?._id);
       if (auth.user) {
         let id = auth.user._id;
-        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: true } }).then((res) => {
+        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: "temp" } }).then((res) => {
           setCrs(res.data);
+          console.log("DATA IS ", res.data);
         });
       }
     }
@@ -38,10 +38,10 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
- const handle = (b) => {
-  setUdemy(b);
-  console.log(b);
- }
+  const handle = (b) => {
+    setUdemy(b);
+    console.log(b);
+  };
   if (search) a = courses;
   else a = crs;
   console.log("courses A : ", a);
@@ -49,8 +49,8 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
-          <Course  course={a} setCurrentId={setCurrentId} />
-          <Button onClick={()=>handle(a)}>enroll</Button>
+          <Course course={a} setCurrentId={setCurrentId} />
+          <Button onClick={() => handle(a)}>enroll</Button>
         </Grid>
       </>
     );
@@ -68,7 +68,8 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
   };
   return a.length === 0 ? (
     <>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} /><br/>
+      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <br />
       <div style={{ position: "absolute", left: "0px", right: "0px", marginLeft: "auto", marginRight: "auto", width: "100px" }}>
         <CircularProgress className={classes.circularLoading} />
       </div>
@@ -78,9 +79,7 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
       <p style={{ textAlign: "center" }}> ask Blitz for a course or type in the search bar </p>
     </>
   ) : (
-    
     <div style={{ paddingTop: "50px", paddingBottom: "10px" }}>
-      
       <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
       <br></br>
       <br></br>
