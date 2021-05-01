@@ -77,6 +77,7 @@ export default ({
   privacyPolicyUrl = '#',
   signInUrl = '#',
 }) => (
+  //<AnimationRevealPage>
   <Container>
     <Content>
       <MainContainer>

@@ -75,6 +75,8 @@ export default ({
   submitButtonText = 'Sign In',
   SubmitButtonIcon = LoginIcon,
   forgotPasswordUrl = '#',
+  signupUrl = './pages/Signup',
+  forgotPasswordUrl = '#',
   signupUrl = '#',
 }) => (
   <Fade left>

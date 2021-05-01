@@ -69,6 +69,7 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
       <NavLink>
         <Link to="/about">About Us</Link>
       </NavLink>
+      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/signup">
       <NavLink>
         <Link to="/contact">Contact Us</Link>
       </NavLink>
