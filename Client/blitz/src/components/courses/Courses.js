@@ -68,7 +68,7 @@ const Courses = ({ courses, setUdemy ,setCurrentId, auth }) => {
   };
   return a.length === 0 ? (
     <>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} /><br/>
       <div style={{ position: "absolute", left: "0px", right: "0px", marginLeft: "auto", marginRight: "auto", width: "100px" }}>
         <CircularProgress className={classes.circularLoading} />
       </div>

@@ -67,7 +67,7 @@ function CoursesHome({ auth }) {
   }, []);
 
   useEffect(() => {
-    if(id !== "id"){
+    if(id !== "id" && id!== undefined){
     console.log("id in 1 : " + id);
     axios.get(`http://localhost:5000/blitzcourse/${id}`).then(function (response) {
       setData(response.data);
@@ -106,15 +106,17 @@ useEffect(() => {
       <Header />
      
       <Drawer  
-      width={520} 
+      width={800} 
       closable={false} 
       onClose={onClose} 
       visible={state.visible}
       >
-          <h1>{data.title}</h1>
-          <h2>description</h2>
-          <p>{data.description}</p>
-          <Button onClick={() =>Actionenroll(data)} >Enroll</Button>
+          <h1 style={{textAlign :'center'}}>{data.title}</h1><br/>
+          <h2>Course Description</h2>
+          <p style={{marginLeft:'30px'}}>{data.description}</p>
+          <h2>Course Field</h2>
+          <p style={{marginLeft:'30px'}}>{data.field}</p>
+          <Button  onClick={() =>Actionenroll(data)} style={{width:'200px' , textAlign:'center' , marginLeft:'250px'}}>Enroll</Button>
       </Drawer>
       <Grow in>
         <Grid style={{ backgroundColor: "rgb(214, 214, 214)", paddingLeft: "200px", paddingRight: "200px" }}>

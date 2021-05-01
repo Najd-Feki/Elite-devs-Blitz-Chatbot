@@ -68,36 +68,28 @@ const AdminCourse = ({setId, courseData,setcourseEnrolled}) => {
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
                                 <i class="icon-control fa fa-chevron-down"></i>
-                                <h6 class="title">Brands </h6>
+                                <h6 class="title">Field </h6>
                             </a>
                         </header>
                         <div class="filter-content collapse show" id="collapse_2">
                             <div class="card-body">
                                 <label class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input" />
-                                  <div class="custom-control-label">Mercedes  
-                                      <b class="badge badge-pill badge-light float-right">120</b>  </div>
+                                  <div class="custom-control-label">Front End</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input" />
-                                  <div class="custom-control-label">Toyota 
-                                      <b class="badge badge-pill badge-light float-right">15</b>  </div>
+                                  <div class="custom-control-label">Back end</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input" />
-                                  <div class="custom-control-label">Mitsubishi 
-                                      <b class="badge badge-pill badge-light float-right">35</b> </div>
+                                  <div class="custom-control-label">Soft Skills</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input" />
-                                  <div class="custom-control-label">Nissan 
-                                      <b class="badge badge-pill badge-light float-right">89</b> </div>
+                                  <div class="custom-control-label">Hard Skills</div>
                                 </label>
-                                <label class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" />
-                                  <div class="custom-control-label">Honda 
-                                      <b class="badge badge-pill badge-light float-right">30</b>  </div>
-                                </label>
+                                
                     </div> 
                         </div>
                     </article> 
