@@ -64,7 +64,7 @@ const IllustrationImage = styled.div`
 `;
 
 /******** */
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated, auth }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -80,8 +80,11 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
-  if (isAuthenticated) {
-    return <Redirect to='/' />;
+  if (isAuthenticated && !auth.user.isAdmin) {
+    return <Redirect to='/jobs' />;
+  }
+  if (isAuthenticated && auth.user.isAdmin) {
+    return <Redirect to='/posts' />;
   }
 
   return (
@@ -138,7 +141,6 @@ const Login = ({ login, isAuthenticated }) => {
     </Fade>
   );
 };
-
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
@@ -146,6 +148,7 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { login })(Login);

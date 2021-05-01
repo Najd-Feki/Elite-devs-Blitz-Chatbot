@@ -14,8 +14,6 @@ import "style.css";
 import Home from "pages/Home.js";
 import "tailwindcss/dist/base.css";
 //import "styles/globalStyles.css";
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/auth/login";
 
 import Progress from "pages/Progress";
@@ -31,21 +29,6 @@ import Signup from "pages/Signup";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-design-system-react.scss?v1.1.0";
-
-function App() {
-  
-  return (
-    <Router>
-      <Switch>
-        <Route path="/profile" component={Profile}></Route>
-        <Route path="/contact" component={Contact}></Route>
-        <Route path="/about" component={About}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/signup" component={Signup}></Route>
-        <Route path="/" component={Home}></Route>
-
-      </Switch>
-    </Router>
 import event from "pages/Event";
 import EventDetail from "pages/EventDetail";
 import HomeAdmin from "pages/HomeAdmin";
@@ -57,6 +40,7 @@ import Reclamation from "pages/Reclamation";
 import CoursesHome from "components/coursesHome/CoursesHome";
 import { CourseForm } from "components/courseForm/CourseForm";
 import CourseDetails from "components/adminCourse/CourseDetails";
+
 function App() {
   useEffect(() => {
     // check for token in LS
@@ -71,6 +55,9 @@ function App() {
     });
   }, []);
   return (
+    
+
+
     <>
       <Provider store={store}>
         <Router>
@@ -93,6 +80,12 @@ function App() {
               <Route path="/course" component={CoursesHome}></Route>
               <Route path="/admin" component={CourseForm}></Route>
               <Route path="/details" component={CourseDetails}></Route>
+              <Route path="/profile" component={Profile}></Route>
+              <Route path="/contact" component={Contact}></Route>
+              <Route path="/about" component={About}></Route>
+              <Route path="/login" component={Login}></Route>
+              <Route path="/signup" component={Signup}></Route>
+              <Route path="/" component={Home}></Route>
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />

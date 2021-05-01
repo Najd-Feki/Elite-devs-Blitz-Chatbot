@@ -5,15 +5,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./Auth/auth');
 const cors = require('cors');
-
-//starting express
-const app = express();
-app.use(cors());
 const Routes = require('./routes/course.js');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 //starting express
 const app = express();
+
 var router = express.Router();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));

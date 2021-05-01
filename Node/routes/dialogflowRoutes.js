@@ -16,7 +16,6 @@ module.exports = (app) => {
       req.body.parameters
     );
     res.send(responses[0].queryResult);
-    let responses;
     if (req.body.eventName && req.body.eventName != '')
       responses = await chatbot.eventQuery(req.body, req.body.parameters);
     else
