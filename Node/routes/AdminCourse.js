@@ -135,6 +135,28 @@ module.exports = (app) => {
     res.status(200).json(doc);}
     catch(error){next(error)}
     });
+    app.post("/addUdemy", async function (req, res) {
+      var course = new Courses();
+      course.title = req.body.title;
+      course.url = req.body.url;
+      course.price = req.body.price_detail.amount;
+      course.isPaid = req.body.is_paid;
+      course.headline = req.body.headline;
+      course.rating = req.body.rating;
+      course.image_480x270 = req.body.image_480x270;
+      course.completionRatio = req.body.completionRatio;
+      course.visible_instructors = req.body.visible_instructors;
+      console.log(course.title);
+      //res.send(req.body);
+      try {
+        var courselog = await course.save();
+        console.log(courselog);
+        console.log("added");
+        res.send("course added");
+      } catch (err) {
+        console.log(err);
+      }
+    });
   };
   
   
