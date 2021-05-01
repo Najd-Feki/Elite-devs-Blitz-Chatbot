@@ -1,22 +1,26 @@
-import React, { useState,useEffect } from 'react'
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import { Container as ContainerBase } from "components/misc/Layouts";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import illustration from "images/login-illustration.svg";
-import logo from "images/logo.svg";
-import googleIconImageSrc from "images/google-icon.png";
-import twitterIconImageSrc from "images/twitter-icon.png";
-import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
-import { Fade } from "react-reveal";
-import axios from 'axios';
+import React, { Fragment, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
+import './App.css';
 
-export const Login = () => {
-    
-const [login, setlogin] = useState({email : '', password : ''}); 
-const [data,setData] = useState('');
-const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
+/********* */
+
+import { Container as ContainerBase } from 'components/misc/Layouts';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import illustration from 'images/login-illustration.svg';
+import logo from 'images/logo.svg';
+import googleIconImageSrc from 'images/google-icon.png';
+import twitterIconImageSrc from 'images/twitter-icon.png';
+import { ReactComponent as LoginIcon } from 'feather-icons/dist/icons/log-in.svg';
+import { Fade } from 'react-reveal';
+
+const Container = tw(
+  ContainerBase
+)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const LogoLink = tw.a``;
@@ -59,74 +63,89 @@ const IllustrationImage = styled.div`
   ${tw`m-12 xl:m-16 w-full max-w-sm bg-contain bg-center bg-no-repeat`}
 `;
 
- async function log(){
-  console.log(login);
-  await axios.post('http://localhost:5000/register_login', login )
-}
+/******** */
+const Login = ({ login, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-const  handleSubmit = (e) => {
-  
-  e.preventDefault();
-   log();
-}
-useEffect(() => {
-  return () => {
-    console.log(data);
+  const { email, password } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(email, password);
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
   }
-}, [data])
 
-    return (
-        <Fade left>
-        <Container>
-          <Content>
-            <MainContainer>
-{/*               <LogoLink href={logoLinkUrl}>
- */}                <LogoImage src={logo} />
-              <MainContent>
-               {/*  <Heading>{headingText}</Heading> */}
-                <FormContainer>
-                  {/* <SocialButtonsContainer>
-                    {socialButtons.map((socialButton, index) => (
-                      <SocialButton key={index} href={socialButton.url}>
-                        <span className="iconContainer">
-                          <img src={socialButton.iconImageSrc} className="icon" alt="" />
-                        </span>
-                        <span className="text">{socialButton.text}</span>
-                      </SocialButton> }
-                    ))}
-{                  </SocialButtonsContainer>
- */}                  <DividerTextContainer>
-                    <DividerText>Or Sign in with your e-mail</DividerText>
-                  </DividerTextContainer>
-                  <Form onSubmit={handleSubmit}>
-                    <Input value={login.email} onChange={(e) => setlogin({...login, email : e.target.value})} type="email" placeholder="Email" />
-                    <Input value={login.password} onChange={(e) => setlogin({...login, password : e.target.value})} type="password" placeholder="Password" />
-                    <SubmitButton type="submit">
-                      {/* <SubmitButtonIcon className="icon" /> */}
-                    {/*   <span className="text">{submitButtonText}</span> */}
-                    </SubmitButton>
-                  </Form>
-                  <p tw="mt-6 text-xs text-gray-600 text-center">
-                    {/* <a href={forgotPasswordUrl} tw="border-b border-gray-500 border-dotted">
-                      Forgot Password ?
-                    </a> */}
-                  </p>
-                  <p tw="mt-8 text-sm text-gray-600 text-center">
-                    Dont have an account?{" "}
-                    {/* <a href={signupUrl} tw="border-b border-gray-500 border-dotted">
-                      Sign Up
-                    </a> */}
-                  </p>
-                </FormContainer>
-              </MainContent>
-            </MainContainer>
-            <IllustrationContainer>
-             {/*  <IllustrationImage imageSrc={illustrationImageSrc} /> */}
-            </IllustrationContainer>
-          </Content>
-        </Container>
-      </Fade>
-    )
-}
+  return (
+    <Fade left>
+      <Container>
+        <Content>
+          <FormContainer>
+            <DividerTextContainer>
+              <DividerText>
+                {' '}
+                <h1 className='large text-primary'>Sign In</h1>
+                <p className='lead'>
+                  <i className='fas fa-user' /> Sign Into Your Account
+                </p>
+              </DividerText>
+            </DividerTextContainer>
+            <br />
+            <Form className='form' onSubmit={onSubmit}>
+              <div className='form-group'>
+                <Input
+                  type='email'
+                  placeholder='Email Address'
+                  name='email'
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
+              </div>
+              <div className='form-group'>
+                <Input
+                  type='password'
+                  placeholder='Password'
+                  name='password'
+                  value={password}
+                  onChange={onChange}
+                  minLength='6'
+                />
+              </div>
+              <input type='submit' className='btn btn-primary' value='Login' />
+            </Form>
+            <p tw='mt-8 text-sm text-gray-600 text-center'>
+              Don't have an account?{' '}
+              <Link to='/register' tw='border-b border-gray-500 border-dotted'>
+                Sign Up
+              </Link>
+            </p>
+          </FormContainer>
 
-export default Login;
+          <IllustrationContainer>
+            <IllustrationImage imageSrc={illustration} />
+          </IllustrationContainer>
+        </Content>
+      </Container>
+    </Fade>
+  );
+};
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);
