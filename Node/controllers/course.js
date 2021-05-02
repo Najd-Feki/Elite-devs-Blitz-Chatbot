@@ -129,7 +129,9 @@ const setCourseAndDate = async (req, res) => {
       .then((result) => {
         console.log("Result is :", result);
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {

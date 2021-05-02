@@ -79,12 +79,12 @@ const ProgressCards = ({ auth }) => {
   const [courses, setCourses] = useState([]);
   const sliderSettings = {
     arrows: false,
-    slidesToShow: courses.length === 1 ? 1 : 3,
+    slidesToShow: courses.length === 1 ? 1 : courses.length === 2 ? 2 : 3,
     responsive: [
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
         },
       },
 
@@ -100,20 +100,21 @@ const ProgressCards = ({ auth }) => {
   const endpoint = "http://localhost:5000/";
   const getCourses = async () => {
     try {
-      const courses = await axios.get(endpoint + "course/temp", {
-        params: {
-          id: auth.user._id,
-          temp: 2,
-        },
-      });
-      // .then((result) => {
-      //   result.data.forEach((course) => {
-      //     getCourseById(course.id);
-      //     course.completion_ratio = progress;
-      //   });
-      //   console.log("COURSE IS :", result.data);
-      //   setCourses(result.data);
-      // });
+      const courses = await axios
+        .get(endpoint + "course/temp", {
+          params: {
+            id: auth.user._id,
+            temp: 2,
+          },
+        })
+        .then((result) => {
+          result.data.forEach((course) => {
+            //getCourseById(course.id);
+            course.completion_ratio = progress;
+          });
+          console.log("COURSE IS :", result.data);
+          setCourses(result.data);
+        });
     } catch (err) {
       console.error(err);
     }
