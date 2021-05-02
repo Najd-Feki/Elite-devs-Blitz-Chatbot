@@ -98,6 +98,9 @@ const Navbar = ({
       <NavLink>
         <Link to='/event'>Events</Link>
       </NavLink>
+      <NavLink>
+        <Link to='/reclamation'>Claims</Link>
+      </NavLink>
 
       <a onClick={logout} href='/'>
         <i className='fas fa-sign-out-alt' />{' '}
@@ -110,32 +113,14 @@ const Navbar = ({
     <NavLinks>
       <NavLink>
         <Link to='/about'>About Us</Link>
-        <a href='/course'>Courses</a>
       </NavLink>
       <NavLink>
-        <Link to='/contact'>Contact Us</Link>
+        <Link to='/users'>Users</Link>
       </NavLink>
       <NavLink>
-        <Link to='/jobs'>Jobs</Link>
+        <Link to='/reclamationAdmin'>Reclamation </Link>
       </NavLink>
-      <NavLink>
-        <Link to='/posts'>Posts</Link>
-      </NavLink>
-      <NavLink>
-        <Link to={`/profile/${auth?.user?._id}`}> Profile</Link>
-      </NavLink>
-      <NavLink>
-        <Link to='/course'>Courses</Link>
-      </NavLink>
-      <NavLink>
-        <Link to='/progress'>Progress</Link>
-      </NavLink>
-      <NavLink>
-        <Link to='/event'>Events</Link>
-      </NavLink>
-      <NavLink>
-        <Link to='/reclamation'>Claims</Link>
-      </NavLink>
+
       <a onClick={logout} href='/'>
         <i className='fas fa-sign-out-alt' />{' '}
         <span className='hide-sm'>Logout</span>
