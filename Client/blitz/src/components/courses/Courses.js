@@ -38,12 +38,12 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
-  const handle = (b) => {
-    setUdemy(b);
+  const handle = (udemy) => {
+    alert("Course added with succes !");
+    axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("UDEMyyyy : ", udemy));
   };
   if (search) a = courses;
   else a = crs;
-  console.log("courses A : ", a);
   const displayCourses = a.slice(pagesVisited, pagesVisited + coursesPerPage).map((a) => {
     return (
       <>

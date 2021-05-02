@@ -73,11 +73,9 @@ function CoursesHome({ auth }) {
   useEffect(() => {
     if (id !== "id" && id !== undefined) {
       console.log("id in 1 : " + id);
-      axios
-        .get(`http://localhost:5000/blitzcourse/${id}`)
-        .then(function (response) {
-          setData(response.data);
-        });
+      axios.get(`http://localhost:5000/blitzcourse/${id}`).then(function (response) {
+        setData(response.data);
+      });
       showDrawer();
     }
   }, [id]);
@@ -89,10 +87,10 @@ function CoursesHome({ auth }) {
 
   useEffect(() => {
     if (flag) {
-      axios.put(
-        `http://localhost:5000/enroll/${auth.user._id}/${courseEnrolled._id}`);
-        axios.post("http://localhost:5000/addUdemy", courseEnrolled);
-      
+      console.log("id course: " + courseEnrolled._id);
+      console.log("id user : " + auth.user._id);
+      axios.put(`http://localhost:5000/enroll/${auth.user._id}/${courseEnrolled._id}`);
+      axios.post("http://localhost:5000/addUdemy", courseEnrolled);
     }
     console.log(courseEnrolled);
   }, [flag]);
@@ -102,32 +100,23 @@ function CoursesHome({ auth }) {
     console.log(udemy);
     setUdemyflag(true);
   }, [udemy]);
-  useEffect(() => {
-    if (Udemyflag) {
-      axios.put(`http://localhost:5000/enroll/${auth.user._id}/${udemy}`);
-      axios.post("http://localhost:5000/addcourse", udemy);
-    }
-  }, [udemy]);
+  // useEffect(() => {
+  //   if (Udemyflag) {
+  //     axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("UDEMyyyy : ", udemy));
+  //   }
+  // }, [udemy]);
   return (
     <>
       <Header />
 
-      <Drawer
-        width={800}
-        closable={false}
-        onClose={onClose}
-        visible={state.visible}
-      >
+      <Drawer width={800} closable={false} onClose={onClose} visible={state.visible}>
         <h1 style={{ textAlign: "center" }}>{data.title}</h1>
         <br />
         <h2>Course Description</h2>
         <p style={{ marginLeft: "30px" }}>{data.description}</p>
         <h2>Course Field</h2>
         <p style={{ marginLeft: "30px" }}>{data.field}</p>
-        <Button
-          onClick={() => Actionenroll(data)}
-          style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}
-        >
+        <Button onClick={() => Actionenroll(data)} style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}>
           Enroll
         </Button>
       </Drawer>
@@ -140,18 +129,8 @@ function CoursesHome({ auth }) {
           }}
         >
           <br></br>
-          <Courses
-            setUdemy={setUdemy}
-            courses={courses}
-            setCurrentId={setCurrentId}
-            auth={auth}
-          />
-          <AdminCourse
-            setcourseEnrolled={setcourseEnrolled}
-            setId={setId}
-            courseData={adminCourse}
-            settrifield={setTriField}
-          />
+          <Courses setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
+          <AdminCourse setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br />
           <br />
         </Grid>

@@ -4,7 +4,7 @@ module.exports = (app) => {
   // GET all events
   app.get("/courses", async function (req, res) {
     try {
-      const UdemyUrl = `https://www.udemy.com/api-2.0/courses`;
+      const UdemyUrl = `https://www.udemy.com/api-2.0/courses?fields[course]=@default,primary_category`;
       axios.defaults.headers.common["Authorization"] =
         "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
       await axios.get(UdemyUrl).then((response) => {
@@ -20,7 +20,8 @@ module.exports = (app) => {
   app.get("/courses/:search", async function (req, res) {
     try {
       const a = req.params.search;
-      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${a}`;
+      console.log("hedhi el recherche" + a);
+      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${a}/?fields[course]=@default,primary_category`;
       axios.defaults.headers.common["Authorization"] =
         "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
       await axios.get(UdemyUrl).then((response) => {

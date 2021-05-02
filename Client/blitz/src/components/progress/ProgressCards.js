@@ -79,12 +79,12 @@ const ProgressCards = ({ auth }) => {
   const [courses, setCourses] = useState([]);
   const sliderSettings = {
     arrows: false,
-    slidesToShow: courses.length === 1 ? 1 : 3,
+    slidesToShow: courses.length === 1 ? 1 : courses.length === 2 ? 2 : 3,
     responsive: [
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
         },
       },
 
@@ -109,7 +109,7 @@ const ProgressCards = ({ auth }) => {
         })
         .then((result) => {
           result.data.forEach((course) => {
-            getCourseById(course.id);
+            //getCourseById(course.id);
             course.completion_ratio = progress;
           });
           console.log("COURSE IS :", result.data);
@@ -119,21 +119,21 @@ const ProgressCards = ({ auth }) => {
       console.error(err);
     }
   };
-  const getCourseById = async (id) => {
-    const params = "?fields[course]=@all&?fields[user]=@all";
-    try {
-      const courseProgress = await axios.get(`${endpoint}courses/756150/${params}`, {
-        auth: {
-          username: process.env.REACT_APP_UDEMY_CLIENT_ID,
-          password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
-        },
-      });
+  // const getCourseById = async (id) => {
+  //   const params = "?fields[course]=@all&?fields[user]=@all";
+  //   try {
+  //     const courseProgress = await axios.get(`${endpoint}courses/756150/${params}`, {
+  //       auth: {
+  //         username: process.env.REACT_APP_UDEMY_CLIENT_ID,
+  //         password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
+  //       },
+  //     });
 
-      setProgress(courseProgress.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     setProgress(courseProgress.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   const handleTitle = (title) => {
     setTitle(title);
   };
