@@ -62,7 +62,6 @@
     "use-in-view": "^1.0.15",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
-    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -89,5 +88,4 @@
     ]
   },
   "proxy": "https://jobs.github.com"
-
 }
