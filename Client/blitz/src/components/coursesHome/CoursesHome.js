@@ -9,6 +9,7 @@ import axios from "axios";
 import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
+import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } from "react-share"
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
@@ -45,30 +46,27 @@ function CoursesHome({ auth }) {
       window.location.reload();
     };
   }, []);
+  
   useEffect(() => {
-    if (TriField.name !== "default") {
-      if (TriField.name === "Front End") {
-        axios
-          .get(`http://localhost:5000/blitzcourse/field`)
-          .then(function (response) {
-            console.log("fel filter");
-            setFilterFlag(true)
-            setAdminCourse(response.data);
-            
-          });
-      } else if (TriField.name === "MostFrequent") {
-        console.log("most frequent");
-      }
-    } else {
-      console.log("else");
-    }
-  }, [TriField]);
-  useEffect(() => {
-    if(!FilterFlag){
+    if (TriField.name === "Front End") {
+          setAdminCourse(adminCourse.filter(c=>c.field === "Front End"));
+    } 
+    if (TriField.name === "Back End") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Back End"));
+    } 
+    if (TriField.name === "Soft Skills") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Soft Skills"));
+    } 
+    if (TriField.name === "Hard Skills") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Hard Skills"));
+    } 
+    if(TriField.name === "default"){
     axios.get("http://localhost:5000/allcourses").then(function (response) {
       setAdminCourse(response.data);
     });}
-  }, []);
+    else{console.log("value in tri : ",TriField.name);}
+    
+  }, [TriField]);
 
   useEffect(() => {
     if (id !== "id" && id !== undefined) {
@@ -119,6 +117,19 @@ function CoursesHome({ auth }) {
         <Button onClick={() => Actionenroll(data)} style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}>
           Enroll
         </Button>
+        <FacebookShareButton
+        style={{marginLeft: "70px"}}
+         url="blitz.com"
+         quote={data.title + data.description}
+         hashtag="#blitz #onlineCourses">
+         <FacebookIcon logoFillColor="white" />
+        </FacebookShareButton>
+        <LinkedinShareButton
+         url="blitz.com"
+         title="mehdi hrairi"
+         summary={data.title}>
+         <LinkedinIcon logoFillColor="white" />
+        </LinkedinShareButton>
       </Drawer>
       <Grow in>
         <Grid
@@ -130,7 +141,7 @@ function CoursesHome({ auth }) {
         >
           <br></br>
           <Courses setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
-          <AdminCourse setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
+          <AdminCourse settrifield={setTriField} setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br />
           <br />
         </Grid>

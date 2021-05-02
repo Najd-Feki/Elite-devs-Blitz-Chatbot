@@ -14,7 +14,7 @@ import 'style.css';
 import Home from 'pages/Home.js';
 import 'tailwindcss/dist/base.css';
 //import "styles/globalStyles.css";
-import Login from './components/auth/login';
+import Login from './components/auth/Login.js';
 
 import Progress from 'pages/Progress';
 import 'assets/vendor/nucleo/css/nucleo.css';

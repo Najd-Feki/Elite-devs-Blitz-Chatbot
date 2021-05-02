@@ -75,25 +75,25 @@ const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
                             <div class="card-body">
                                 <label class="custom-control custom-checkbox">
                                   <input onChange={() =>
-                                settrifield({ ...settrifield, name: "Front End" })
+                                settrifield({ name: "Front End" })
                                      } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Front End</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input onChange={() =>
-                                settrifield({ ...settrifield, name: "Back ENd" })
+                                settrifield({ name: "Back End" })
                                      } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Back end</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input onChange={() =>
-                                settrifield({ ...settrifield, name: "Soft Skills" })
+                                settrifield({ name: "Soft Skills" })
                                      } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Soft Skills</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input onChange={() =>
-                                settrifield({ ...settrifield, name: "Hard Skills" })
+                                settrifield({ name: "Hard Skills" })
                                      } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Hard Skills</div>
                                 </label>
