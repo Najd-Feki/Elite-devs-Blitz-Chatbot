@@ -165,6 +165,7 @@ module.exports = {
         visible_instructors: newCourse[j].visible_instructors,
         image_480x270: newCourse[j].image_480x270,
         completionRatio: newCourse[j].completionRatio ? newCourse[j].completionRatio : "",
+        primary_category: newCourse[j].primary_category ? newCourse[j].primary_category : "",
       });
       try {
         //insert course in courses db
