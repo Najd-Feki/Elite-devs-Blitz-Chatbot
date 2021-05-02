@@ -131,7 +131,7 @@ module.exports = (app) => {
     });
     app.get("/blitzcourse/field", async function (req, res, next) {
       try{
-      await Course.find.sort({field : "Front end"});
+      await Course.find({field : "Front End"});
     res.status(200).json(doc);}
     catch(error){next(error)}
     });

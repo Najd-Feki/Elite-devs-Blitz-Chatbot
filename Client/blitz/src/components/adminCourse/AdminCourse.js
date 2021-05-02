@@ -4,7 +4,7 @@ import '../../assets/css/bootstrap.css'
 import '../../assets/css/responsive.css'
 import '../../assets/css/ui.css'
 
-const AdminCourse = ({setId, courseData,setcourseEnrolled}) => {
+const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
   
     const action =(a)=>{ 
         setId(a);
@@ -74,23 +74,31 @@ const AdminCourse = ({setId, courseData,setcourseEnrolled}) => {
                         <div class="filter-content collapse show" id="collapse_2">
                             <div class="card-body">
                                 <label class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" />
+                                  <input onChange={() =>
+                                settrifield({ ...settrifield, name: "Front End" })
+                                     } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Front End</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" />
+                                  <input onChange={() =>
+                                settrifield({ ...settrifield, name: "Back ENd" })
+                                     } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Back end</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" />
+                                  <input onChange={() =>
+                                settrifield({ ...settrifield, name: "Soft Skills" })
+                                     } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Soft Skills</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" />
+                                  <input onChange={() =>
+                                settrifield({ ...settrifield, name: "Hard Skills" })
+                                     } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Hard Skills</div>
                                 </label>
                                 
-                    </div> 
+                            </div> 
                         </div>
                     </article> 
                     <article class="filter-group">

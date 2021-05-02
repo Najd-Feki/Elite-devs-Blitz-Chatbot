@@ -49,7 +49,7 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
           <Course course={a} setCurrentId={setCurrentId} />
-          <Button onClick={() => handle(a)}>enroll</Button>
+          <Button onClick={() => handle(a)} style={{width: "322px",marginTop: "-20px"}}>enroll</Button>
         </Grid>
       </>
     );

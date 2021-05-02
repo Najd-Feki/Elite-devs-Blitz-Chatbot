@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
-  const [selectedOption, setselectedOption] = useState({
+  const [TriField, setTriField] = useState({
     name: "default",
   });
   const dispatch = useDispatch();
@@ -25,6 +25,7 @@ function CoursesHome({ auth }) {
   const [flag, setFlag] = useState(false);
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
+  const [FilterFlag, setFilterFlag] = useState(false);
   const showDrawer = () => {
     setState({
       visible: true,
@@ -45,25 +46,28 @@ function CoursesHome({ auth }) {
     };
   }, []);
   useEffect(() => {
-    if (selectedOption.name !== "default") {
-      if (selectedOption.name === "field") {
+    if (TriField.name !== "default") {
+      if (TriField.name === "Front End") {
         axios
           .get(`http://localhost:5000/blitzcourse/field`)
           .then(function (response) {
             console.log("fel filter");
+            setFilterFlag(true)
             setAdminCourse(response.data);
+            
           });
-      } else if (selectedOption.name === "MostFrequent") {
+      } else if (TriField.name === "MostFrequent") {
         console.log("most frequent");
       }
     } else {
       console.log("else");
     }
-  }, [selectedOption]);
+  }, [TriField]);
   useEffect(() => {
+    if(!FilterFlag){
     axios.get("http://localhost:5000/allcourses").then(function (response) {
       setAdminCourse(response.data);
-    });
+    });}
   }, []);
 
   useEffect(() => {
@@ -85,8 +89,6 @@ function CoursesHome({ auth }) {
 
   useEffect(() => {
     if (flag) {
-      console.log("id course: " + courseEnrolled._id);
-      console.log("id user : " + auth.user._id);
       axios.put(
         `http://localhost:5000/enroll/${auth.user._id}/${courseEnrolled._id}`);
         axios.post("http://localhost:5000/addUdemy", courseEnrolled);
@@ -144,26 +146,11 @@ function CoursesHome({ auth }) {
             setCurrentId={setCurrentId}
             auth={auth}
           />
-          <select
-            defaultValue={"default"}
-            value={selectedOption.name}
-            onChange={(e) =>
-              setselectedOption({ ...selectedOption, name: e.target.value })
-            }
-            displayEmpty
-            name="filter"
-          >
-            <option value="default" disable>
-              <em>Order by</em>
-            </option>
-            <option value="field">field</option>
-            <option value="MostLiked">Most Liked</option>
-            <option value="MostFrequent">Most Frequent</option>
-          </select>
           <AdminCourse
             setcourseEnrolled={setcourseEnrolled}
             setId={setId}
             courseData={adminCourse}
+            settrifield={setTriField}
           />
           <br />
           <br />
