@@ -40,6 +40,7 @@ import Reclamation from "pages/Reclamation";
 import CoursesHome from "components/coursesHome/CoursesHome";
 import { CourseForm } from "components/courseForm/CourseForm";
 import CourseDetails from "components/adminCourse/CourseDetails";
+import JobsApp from 'components/jobs/App';
 
 function App() {
   useEffect(() => {
@@ -85,7 +86,9 @@ function App() {
               <Route path="/about" component={About}></Route>
               <Route path="/login" component={Login}></Route>
               <Route path="/signup" component={Signup}></Route>
+              <Route path='/jobs' component={JobsApp}></Route>
               <Route path="/" component={Home}></Route>
+
 
               <Route exact path="/" component={Home}></Route>
               <Route component={Routes} />
