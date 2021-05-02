@@ -84,7 +84,7 @@ const Login = ({ login, isAuthenticated, auth }) => {
     return <Redirect to='/' />;
   }
   if (isAuthenticated && auth.user.isAdmin) {
-    return <Redirect to='/' />;
+    return <Redirect to='/users' />;
   }
 
   return (
