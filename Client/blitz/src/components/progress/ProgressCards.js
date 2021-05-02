@@ -100,40 +100,39 @@ const ProgressCards = ({ auth }) => {
   const endpoint = "http://localhost:5000/";
   const getCourses = async () => {
     try {
-      const courses = await axios
-        .get(endpoint + "course/temp", {
-          params: {
-            id: auth.user._id,
-            temp: 2,
-          },
-        })
-        .then((result) => {
-          result.data.forEach((course) => {
-            getCourseById(course.id);
-            course.completion_ratio = progress;
-          });
-          console.log("COURSE IS :", result.data);
-          setCourses(result.data);
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  const getCourseById = async (id) => {
-    const params = "?fields[course]=@all&?fields[user]=@all";
-    try {
-      const courseProgress = await axios.get(`${endpoint}courses/756150/${params}`, {
-        auth: {
-          username: process.env.REACT_APP_UDEMY_CLIENT_ID,
-          password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
+      const courses = await axios.get(endpoint + "course/temp", {
+        params: {
+          id: auth.user._id,
+          temp: 2,
         },
       });
-
-      setProgress(courseProgress.data);
+      // .then((result) => {
+      //   result.data.forEach((course) => {
+      //     getCourseById(course.id);
+      //     course.completion_ratio = progress;
+      //   });
+      //   console.log("COURSE IS :", result.data);
+      //   setCourses(result.data);
+      // });
     } catch (err) {
       console.error(err);
     }
   };
+  // const getCourseById = async (id) => {
+  //   const params = "?fields[course]=@all&?fields[user]=@all";
+  //   try {
+  //     const courseProgress = await axios.get(`${endpoint}courses/756150/${params}`, {
+  //       auth: {
+  //         username: process.env.REACT_APP_UDEMY_CLIENT_ID,
+  //         password: process.env.REACT_APP_UDEMY_CLIENT_SECRET,
+  //       },
+  //     });
+
+  //     setProgress(courseProgress.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   const handleTitle = (title) => {
     setTitle(title);
   };

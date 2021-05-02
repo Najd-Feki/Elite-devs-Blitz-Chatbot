@@ -43,7 +43,6 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   };
   if (search) a = courses;
   else a = crs;
-  console.log("courses A : ", a);
   const displayCourses = a.slice(pagesVisited, pagesVisited + coursesPerPage).map((a) => {
     return (
       <>
