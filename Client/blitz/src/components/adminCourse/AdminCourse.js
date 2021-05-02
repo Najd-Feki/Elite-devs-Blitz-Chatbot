@@ -80,7 +80,8 @@ const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
                                   <div class="custom-control-label">Front End</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input onChange={() =>
+                                  <input 
+                                   onChange={() =>
                                 settrifield({ name: "Back End" })
                                      } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Back end</div>

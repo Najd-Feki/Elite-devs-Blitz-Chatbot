@@ -30,7 +30,6 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
         let id = auth.user._id;
         await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: "temp" } }).then((res) => {
           setCrs(res.data);
-          console.log("DATA IS ", res.data);
         });
       }
     }
@@ -39,8 +38,7 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
     }, 0);
   }, [auth]);
   const handle = (udemy) => {
-    alert("Course added with succes !");
-    axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("UDEMyyyy : ", udemy));
+    axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("Udemy : ", udemy));
   };
   if (search) a = courses;
   else a = crs;

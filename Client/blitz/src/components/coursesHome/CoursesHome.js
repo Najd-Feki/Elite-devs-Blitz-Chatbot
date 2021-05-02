@@ -87,11 +87,11 @@ function CoursesHome({ auth }) {
     if (flag) {
       console.log("id course: " + courseEnrolled._id);
       console.log("id user : " + auth.user._id);
-      axios.put(`http://localhost:5000/enroll/${auth.user._id}/${courseEnrolled._id}`);
+      axios.put(`http://localhost:5000/enrollCourse/${auth.user._id}/${courseEnrolled._id}`);
       axios.post("http://localhost:5000/addUdemy", courseEnrolled);
     }
     console.log(courseEnrolled);
-  }, [flag]);
+  }, [flag,courseEnrolled]);
 
   useEffect(() => {
     //
