@@ -40,7 +40,6 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   }, [auth]);
   const handle = (b) => {
     setUdemy(b);
-    console.log(b);
   };
   if (search) a = courses;
   else a = crs;
