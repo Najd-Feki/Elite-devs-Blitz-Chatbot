@@ -30,7 +30,6 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
         let id = auth.user._id;
         await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: "temp" } }).then((res) => {
           setCrs(res.data);
-          console.log("DATA IS ", res.data);
         });
       }
     }
@@ -38,18 +37,17 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
-  const handle = (b) => {
-    setUdemy(b);
+  const handle = (udemy) => {
+    axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("Udemy : ", udemy));
   };
   if (search) a = courses;
   else a = crs;
-  console.log("courses A : ", a);
   const displayCourses = a.slice(pagesVisited, pagesVisited + coursesPerPage).map((a) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
           <Course course={a} setCurrentId={setCurrentId} />
-          <Button onClick={() => handle(a)}>enroll</Button>
+          <Button onClick={() => handle(a)} style={{width: "322px",marginTop: "-20px"}}>enroll</Button>
         </Grid>
       </>
     );

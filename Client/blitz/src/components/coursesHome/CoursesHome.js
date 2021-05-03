@@ -9,10 +9,11 @@ import axios from "axios";
 import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
+import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } from "react-share"
 //import "antd/dist/antd.css";
 function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
-  const [selectedOption, setselectedOption] = useState({
+  const [TriField, setTriField] = useState({
     name: "default",
   });
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function CoursesHome({ auth }) {
   const [flag, setFlag] = useState(false);
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
+  const [FilterFlag, setFilterFlag] = useState(false);
   const showDrawer = () => {
     setState({
       visible: true,
@@ -44,36 +46,34 @@ function CoursesHome({ auth }) {
       window.location.reload();
     };
   }, []);
+  
   useEffect(() => {
-    if (selectedOption.name !== "default") {
-      if (selectedOption.name === "field") {
-        axios
-          .get(`http://localhost:5000/blitzcourse/field`)
-          .then(function (response) {
-            console.log("fel filter");
-            setAdminCourse(response.data);
-          });
-      } else if (selectedOption.name === "MostFrequent") {
-        console.log("most frequent");
-      }
-    } else {
-      console.log("else");
-    }
-  }, [selectedOption]);
-  useEffect(() => {
+    if (TriField.name === "Front End") {
+          setAdminCourse(adminCourse.filter(c=>c.field === "Front End"));
+    } 
+    if (TriField.name === "Back End") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Back End"));
+    } 
+    if (TriField.name === "Soft Skills") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Soft Skills"));
+    } 
+    if (TriField.name === "Hard Skills") {
+      setAdminCourse(adminCourse.filter(c=>c.field === "Hard Skills"));
+    } 
+    if(TriField.name === "default"){
     axios.get("http://localhost:5000/allcourses").then(function (response) {
       setAdminCourse(response.data);
-    });
-  }, []);
+    });}
+    else{console.log("value in tri : ",TriField.name);}
+    
+  }, [TriField]);
 
   useEffect(() => {
     if (id !== "id" && id !== undefined) {
       console.log("id in 1 : " + id);
-      axios
-        .get(`http://localhost:5000/blitzcourse/${id}`)
-        .then(function (response) {
-          setData(response.data);
-        });
+      axios.get(`http://localhost:5000/blitzcourse/${id}`).then(function (response) {
+        setData(response.data);
+      });
       showDrawer();
     }
   }, [id]);
@@ -87,47 +87,49 @@ function CoursesHome({ auth }) {
     if (flag) {
       console.log("id course: " + courseEnrolled._id);
       console.log("id user : " + auth.user._id);
-      axios.put(
-        `http://localhost:5000/enroll/${auth.user._id}/${courseEnrolled._id}`);
-        axios.post("http://localhost:5000/addUdemy", courseEnrolled);
-      
+      axios.put(`http://localhost:5000/enrollCourse/${auth.user._id}/${courseEnrolled._id}`);
+      axios.post("http://localhost:5000/addUdemy", courseEnrolled);
     }
     console.log(courseEnrolled);
-  }, [flag]);
+  }, [flag,courseEnrolled]);
 
   useEffect(() => {
     //
     console.log(udemy);
     setUdemyflag(true);
   }, [udemy]);
-  useEffect(() => {
-    if (Udemyflag) {
-      axios.put(`http://localhost:5000/enroll/${auth.user._id}/${udemy}`);
-      axios.post("http://localhost:5000/addcourse", udemy);
-    }
-  }, [udemy]);
+  // useEffect(() => {
+  //   if (Udemyflag) {
+  //     axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("UDEMyyyy : ", udemy));
+  //   }
+  // }, [udemy]);
   return (
     <>
       <Header />
 
-      <Drawer
-        width={800}
-        closable={false}
-        onClose={onClose}
-        visible={state.visible}
-      >
+      <Drawer width={800} closable={false} onClose={onClose} visible={state.visible}>
         <h1 style={{ textAlign: "center" }}>{data.title}</h1>
         <br />
         <h2>Course Description</h2>
         <p style={{ marginLeft: "30px" }}>{data.description}</p>
         <h2>Course Field</h2>
         <p style={{ marginLeft: "30px" }}>{data.field}</p>
-        <Button
-          onClick={() => Actionenroll(data)}
-          style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}
-        >
+        <Button onClick={() => Actionenroll(data)} style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}>
           Enroll
         </Button>
+        <FacebookShareButton
+        style={{marginLeft: "70px"}}
+         url="blitz.com"
+         quote={data.title + data.description}
+         hashtag="#blitz #onlineCourses">
+         <FacebookIcon logoFillColor="white" />
+        </FacebookShareButton>
+        <LinkedinShareButton
+         url="blitz.com"
+         title="mehdi hrairi"
+         summary={data.title}>
+         <LinkedinIcon logoFillColor="white" />
+        </LinkedinShareButton>
       </Drawer>
       <Grow in>
         <Grid
@@ -138,33 +140,8 @@ function CoursesHome({ auth }) {
           }}
         >
           <br></br>
-          <Courses
-            setUdemy={setUdemy}
-            courses={courses}
-            setCurrentId={setCurrentId}
-            auth={auth}
-          />
-          <select
-            defaultValue={"default"}
-            value={selectedOption.name}
-            onChange={(e) =>
-              setselectedOption({ ...selectedOption, name: e.target.value })
-            }
-            displayEmpty
-            name="filter"
-          >
-            <option value="default" disable>
-              <em>Order by</em>
-            </option>
-            <option value="field">field</option>
-            <option value="MostLiked">Most Liked</option>
-            <option value="MostFrequent">Most Frequent</option>
-          </select>
-          <AdminCourse
-            setcourseEnrolled={setcourseEnrolled}
-            setId={setId}
-            courseData={adminCourse}
-          />
+          <Courses setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
+          <AdminCourse settrifield={setTriField} setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br />
           <br />
         </Grid>

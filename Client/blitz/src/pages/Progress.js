@@ -34,13 +34,10 @@ const Progress = ({ auth }) => {
     daysRecordedA.push(element.loginDate.slice(0, 10));
   });
   let daysRecorded = [...new Set(daysRecordedA)];
-
   const dayGrids = [];
   for (var i = 0; i < 365; i++) {
-    let dayGridDate = moment("2021-01-01").add(i, "days").format("YYYY-MM-D");
-
+    let dayGridDate = moment("2021-01-01").add(i, "days").format("YYYY-MM-DD");
     if (daysRecorded.includes(dayGridDate.toString())) {
-      //console.log("daysRecorded ", daysRecordedA);
       if (!open) setOpen(true);
       dayGrids.push(
         <Zoom duration={3500}>
@@ -55,19 +52,18 @@ const Progress = ({ auth }) => {
     auth.user.loginDates.forEach((element) => {
       console.log("dayGridDate IS :", dayGridDate);
       console.log("loginDate IS :", element.loginDate.slice(0, 10));
-      if (element.loginDate.slice(0, 10) === dayGridDate) {
-        setCourseIdByDate(element.courseId);
-        axios
-          .get(endpoint + "course/find", {
-            params: {
-              id: element.courseId,
-            },
-          })
-          .then((result) => {
-            setSelectedCourseName(result.data.title);
-            console.log("result Title", result.data.title);
-          });
-      }
+
+      setCourseIdByDate(element.courseId);
+      axios
+        .get(endpoint + "course/find", {
+          params: {
+            id: element.courseId,
+          },
+        })
+        .then((result) => {
+          setSelectedCourseName(result.data.title);
+          console.log("result Title", result.data.title);
+        });
     });
 
     setdate(dayGridDate);

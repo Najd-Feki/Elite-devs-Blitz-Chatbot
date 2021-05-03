@@ -47,18 +47,14 @@ const getTempCourseDb = async (req, res) => {
       .then(async (data) => {
         if (data) {
           let tmp;
-          console.log("REQ TypE : ", req.query.temp);
           if (req.query.temp == "temp") {
             tmp = data.tempCourses;
-            console.log("TEMP ! ");
           } else {
             tmp = data.courses;
-            console.log("Course !??? ");
           }
           for (i in tmp)
             Course.findById(tmp[i], (err, data2) => {
               coursesTable.push(data2);
-              console.log(data2);
             });
         }
       })
@@ -112,8 +108,6 @@ const getCourseUdemyBySearch = (req, res) => {
 };
 const setCourseAndDate = async (req, res) => {
   try {
-    console.log("bdé user id is :", req.body.userId);
-    console.log("bdé course id is :", req.body.courseId);
     User.updateOne(
       { _id: req.body.userId },
       {
@@ -124,12 +118,10 @@ const setCourseAndDate = async (req, res) => {
           },
         },
       }
-    )
-      .exec()
-      .then((result) => {
-        console.log("Result is :", result);
-      });
-  } catch (error) {}
+    ).exec();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {

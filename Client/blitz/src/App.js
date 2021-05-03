@@ -14,6 +14,7 @@ import 'style.css';
 import Home from 'pages/Home.js';
 import 'tailwindcss/dist/base.css';
 //import "styles/globalStyles.css";
+import Login from './components/auth/Login.js';
 
 import Progress from 'pages/Progress';
 import 'assets/vendor/nucleo/css/nucleo.css';
@@ -89,6 +90,8 @@ function App() {
               <Route path='/profile' component={Profile}></Route>
               <Route path='/contact' component={Contact}></Route>
               <Route path='/about' component={About}></Route>
+              <Route path='/login' component={Login}></Route>
+              <Route path='/signup' component={Signup}></Route>
               <Route path='/jobs' component={JobsApp}></Route>
 
               <Route exact path='/' component={Home}></Route>
