@@ -20,7 +20,7 @@ module.exports = (app) => {
   app.get("/courses/:search", async function (req, res) {
     try {
       const a = req.params.search;
-      console.log("hedhi el recherche" + a);
+      console.log("hedhi el recherche : " + a);
       const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${a}/?fields[course]=@default,primary_category`;
       axios.defaults.headers.common["Authorization"] =
         "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";

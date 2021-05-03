@@ -86,7 +86,9 @@ const Login = ({ login, isAuthenticated, auth }) => {
   if (isAuthenticated && auth.user.isAdmin) {
     return <Redirect to='/' />;
   }
-
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
   return (
     <Fade left>
       <Container>

@@ -4,6 +4,7 @@ module.exports = (app) => {
   const User = require("../models-auth/User");
   const nodemailer = require("nodemailer");
   const Courses = require("../models/course.js");
+  const axios = require("axios");
 
   let trasporter = nodemailer.createTransport({
     service: "gmail",
@@ -28,6 +29,32 @@ module.exports = (app) => {
     });
   });
 
+  app.get("/userCourses/:idUser", async function (req, res, next) {
+    let a =" " ;
+    let result = {};
+    const c = await User.findOne({_id:req.params.idUser}, { _id:0, courses:1 })
+    for(const values of c.courses){
+     const t= await Course.findById({_id:values},{_id:0,title:1})
+     a=a+t.title+" ";
+     console.log(t);
+    }
+    res.send(a)
+  });
+  app.get("/recommandation/:recSeach", async function (req, res) {
+    try {
+      const a = req.params.recSeach;
+      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${a}/?fields[course]=@default,primary_category`;
+      axios.defaults.headers.common["Authorization"] =
+        "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
+      await axios.get(UdemyUrl).then((response) => {
+        res.send(response.data.results);
+        console.log(response.data.results);
+      });
+      res.end();
+    } catch (error) {
+      console.log(error);
+    }
+  });
   // GET event by id
   app.get("/blitzcourse/:id", async function (req, res, next) {
     const id = req.params.id;
@@ -123,7 +150,7 @@ module.exports = (app) => {
       if (err) {
         console.log(err);
       }
-      console.log("email sent");
+      console.log("mail sent");
     });
   });
   // app.post("/addcourse", async function (req, res) {
