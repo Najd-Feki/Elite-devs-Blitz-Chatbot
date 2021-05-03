@@ -128,12 +128,13 @@ module.exports = {
       profilePreparation.courses.push(fields.course.stringValue);
 
       //////////////////////////////
-      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${fields.course.stringValue}`;
+      const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${fields.course.stringValue}&?fields[course]=@default,primary_subcategory`;
       axios.defaults.headers.common["Authorization"] =
         "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
       axios.get(UdemyUrl).then((response) => {
         let newCourse = response.data.results.slice(0, 3);
-        this.saveCourseToDb(newCourse);
+        console.log("NEW COURSES : ! ", newCourses);
+        //this.saveCourseToDb(newCourse);
       });
 
       ///////////////////////////////
@@ -165,7 +166,7 @@ module.exports = {
         visible_instructors: newCourse[j].visible_instructors,
         image_480x270: newCourse[j].image_480x270,
         completionRatio: newCourse[j].completionRatio ? newCourse[j].completionRatio : "",
-        primary_category: newCourse[j].primary_category ? newCourse[j].primary_category : "",
+        category: newCourse[j].primary_subcategory.title,
       });
       try {
         //insert course in courses db
@@ -205,7 +206,7 @@ module.exports = {
       let pro = await profile.save();
       const user = User.findByIdAndUpdate(profilePreparation.userId, { profile: (await pro)._id }, (err, result) => {
         if (err) console.log(err);
-        else console.log(result);
+        else console.log("User Saved");
       });
     } catch (err) {
       console.log(err);

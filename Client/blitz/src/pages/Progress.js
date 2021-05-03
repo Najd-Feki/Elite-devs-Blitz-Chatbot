@@ -34,13 +34,10 @@ const Progress = ({ auth }) => {
     daysRecordedA.push(element.loginDate.slice(0, 10));
   });
   let daysRecorded = [...new Set(daysRecordedA)];
-  console.log("days in db ", daysRecorded);
   const dayGrids = [];
   for (var i = 0; i < 365; i++) {
     let dayGridDate = moment("2021-01-01").add(i, "days").format("YYYY-MM-DD");
-    console.log(dayGridDate.toString());
     if (daysRecorded.includes(dayGridDate.toString())) {
-      console.log("daysRecorded ", daysRecordedA);
       if (!open) setOpen(true);
       dayGrids.push(
         <Zoom duration={3500}>
