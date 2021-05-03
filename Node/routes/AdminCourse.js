@@ -87,7 +87,6 @@ module.exports = (app) => {
     });
   });
   app.put("/enroll/:idUser/", async function (req, res) {
-    console.log("UDEMY ID: ", req.body.udemy._id);
     const course = new Courses({
       title: req.body.udemy.title,
       url: req.body.udemy.url,
@@ -104,6 +103,19 @@ module.exports = (app) => {
     try {
       let c = await course.save();
       const user = await User.findByIdAndUpdate(req.params.idUser, { $push: { courses: (await c)._id } });
+    } catch (err) {
+      console.log(err);
+    }
+    trasporter.sendMail(mailOptions, function (err, data) {
+      if (err) {
+        console.log(err);
+      }
+      console.log("email sent");
+    });
+  });
+  app.put("/enrollCourse/:idUser/:idCourse", async function (req, res) {
+    try {
+      const user = await User.findByIdAndUpdate(req.params.idUser, { $push: { courses: req.params.idCourse } });
     } catch (err) {
       console.log(err);
     }
