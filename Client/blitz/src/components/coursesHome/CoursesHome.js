@@ -28,6 +28,7 @@ function CoursesHome({ auth }) {
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
   const [recSeach,setrecSeach]= useState("");
+  const [recSeach1,setrecSeach1]= useState("");
   const [recData,setrecData]= useState([]);
   const [flagrec,setflagrec]= useState(false);
   const showDrawer = () => {
@@ -42,18 +43,32 @@ function start() {
   if (auth.user != null) {
     let a =" ";
     console.log(auth);
-    axios.get(`http://localhost:5000/userCourses/${auth.user._id}`).then(function (response) {
-      setrecSeach(response.data)
-      a=a+response.data;
-      setflagrec(true)
+     axios.get(`http://localhost:5000/userCourses/${auth.user._id}`).then(function (response) {
+      console.log("local",response.data.title);
+      a=response.data+a;
+      setrecSeach(a)
+    });
+    axios.get(`http://localhost:5000/userUdemy/${auth.user._id}`).then(function (response) {
+      
+      a=response.data+a;
+      console.log("udemy",response.data.title);
+      setrecSeach1(a)
     });
     
   }}
+useEffect(() => {
+  if(recSeach || recSeach1) {
+    setflagrec(true)
+  }
+}, [recSeach,recSeach1])
   useEffect(() => {
+    
    if(flagrec){
     console.log("data lbara : ",recSeach);
-    axios.get(`http://localhost:5000/recommandation/${recSeach}`).then(function (response) {
+    const data = recSeach+" "+recSeach1;
+    axios.get(`http://localhost:5000/recommandation/${data}`).then(function (response) {
       setrecData(response.data)
+      console.log("rec lenaaaa : ",response.data);
     });
    }
   }, [flagrec])
