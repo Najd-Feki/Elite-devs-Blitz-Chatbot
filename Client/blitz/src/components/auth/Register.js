@@ -84,14 +84,9 @@ const Register = ({ setAlert, register, isAuthenticated, auth }) => {
       register({ name, email, password });
     }
   };
-
-  if (isAuthenticated && !auth.user.isAdmin) {
+  if (isAuthenticated) {
     return <Redirect to='/' />;
   }
-  if (isAuthenticated && auth.user.isAdmin) {
-    return <Redirect to='/' />;
-  }
-
   return (
     <Container>
       <Content>

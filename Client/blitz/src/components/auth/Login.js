@@ -81,10 +81,10 @@ const Login = ({ login, isAuthenticated, auth }) => {
   };
 
   if (isAuthenticated && !auth.user.isAdmin) {
-    return <Redirect to='/' />;
+    return <Redirect to='/about' />;
   }
   if (isAuthenticated && auth.user.isAdmin) {
-    return <Redirect to='/' />;
+    return <Redirect to='/users' />;
   }
   if (isAuthenticated) {
     return <Redirect to='/' />;

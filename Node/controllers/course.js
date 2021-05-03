@@ -108,8 +108,6 @@ const getCourseUdemyBySearch = (req, res) => {
 };
 const setCourseAndDate = async (req, res) => {
   try {
-    console.log("bdé user id is :", req.body.userId);
-    console.log("bdé course id is :", req.body.courseId);
     User.updateOne(
       { _id: req.body.userId },
       {
@@ -120,11 +118,7 @@ const setCourseAndDate = async (req, res) => {
           },
         },
       }
-    )
-      .exec()
-      .then((result) => {
-        console.log("Result is :", result);
-      });
+    ).exec();
   } catch (error) {
     console.log(error);
   }
