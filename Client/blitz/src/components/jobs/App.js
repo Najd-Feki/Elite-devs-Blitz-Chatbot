@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <Header />
-      <Container className='mt-2'>
+      <Container className='mt-2 mx-2'>
         <Content>
           <h1 className='mb-2 '>
             GitHub Jobs

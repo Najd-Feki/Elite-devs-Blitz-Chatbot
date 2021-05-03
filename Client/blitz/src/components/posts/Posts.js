@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
@@ -11,8 +12,8 @@ import { Card, Badge, Button, Collapse } from 'react-bootstrap';
 import Header from 'components/headers/light';
 import tw, { css } from 'twin.macro';
 
-const Container = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
-const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
+const Container = tw.div`relative`;
+const Content = tw.div`max-w-screen-xl  py-16 lg:py-20`;
 
 /******** */
 const Posts = ({ getPosts, post: { posts } }) => {
@@ -26,11 +27,8 @@ const Posts = ({ getPosts, post: { posts } }) => {
       <Container>
         <Content>
           <Card className='mt-auto'>
-            <a href='/'>
-              <i class='fa fa-chevron-left mt-3 mx-2'> </i>
-            </a>
             <Card.Body>
-              <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content-between '>
                 <div>
                   <Card.Title>
                     <i className='fas fa-user' /> Welcome to the
@@ -39,6 +37,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
                     </span>
                   </Card.Title>
                   <Card.Subtitle className='text-muted mb-2'>...</Card.Subtitle>
+
                   <PostForm />
                   <div>
                     {posts.map((post) => (

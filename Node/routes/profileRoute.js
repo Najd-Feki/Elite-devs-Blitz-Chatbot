@@ -1,8 +1,8 @@
 module.exports = (app) => {
-  var express = require("express");
-  const Profile = require("../models/profile");
+  var express = require('express');
+  const Profile = require('../models/profile');
   // GET all profile
-  app.get("/profile", async function (req, res, next) {
+  app.get('/profile', async function (req, res, next) {
     await Profile.find(function (err, data) {
       if (err) {
         console.log(err);
@@ -12,7 +12,7 @@ module.exports = (app) => {
   });
 
   // GET profile by id
-  app.get("/profile/:id", async function (req, res, next) {
+  app.get('/profile/:id', async function (req, res, next) {
     var id = req.params.id;
     await Profile.findById(id, function (err, data) {
       if (err) {
@@ -23,7 +23,7 @@ module.exports = (app) => {
   });
 
   // add profile
-  app.post("/profile/add", async function (req, res) {
+  app.post('/profile/add', async function (req, res) {
     var profile = new Profile();
     profile.age = req.body.age;
     profile.phone = req.body.phone;
@@ -43,32 +43,36 @@ module.exports = (app) => {
     try {
       var profilelog = await profile.save();
       console.log(profilelog);
-      res.send("profile added");
+      res.send('profile added');
     } catch (err) {
       console.log(err);
     }
   });
 
   // delete profile
-  app.delete("/profile/delete/:id", async function (req, res) {
+  app.delete('/profile/delete/:id', async function (req, res) {
     var id = req.params.id;
     await Profile.findByIdAndRemove(id, function (err, doc) {
       if (err) {
         console.log(err);
       }
-      res.send("profile removed");
+      res.send('profile removed');
     });
   });
 
   // modify profile
-  app.put("/profile/modify/:id", async function (req, res) {
+  app.put('/profile/modify/:id', async function (req, res) {
     var id = req.params.id;
-    await Profile.findByIdAndUpdate(id, { $set: req.body }, function (err, doc) {
-      if (err) {
-        console.log(err);
+    await Profile.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      function (err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        res.send('profile updated');
+        console.log(doc);
       }
-      res.send("profile updated");
-      console.log(doc);
-    });
+    );
   });
 };

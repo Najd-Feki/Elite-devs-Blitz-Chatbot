@@ -10,8 +10,9 @@ import AdminCourse from "components/adminCourse/AdminCourse";
 import { Drawer, Button } from "antd";
 import { connect } from "react-redux";
 import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } from "react-share"
+import CourseRec from "components/recommandation/CourseRec";
 //import "antd/dist/antd.css";
-function CoursesHome({ auth }) {
+function CoursesHome({ auth,user }) {
   const [setCurrentId] = useState(null);
   const [TriField, setTriField] = useState({
     name: "default",
@@ -27,42 +28,68 @@ function CoursesHome({ auth }) {
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
   const [FilterFlag, setFilterFlag] = useState(false);
+  const [recSeach,setrecSeach]= useState("");
+  const [recData,setrecData]= useState([]);
+  const [flagrec,setflagrec]= useState(false);
   const showDrawer = () => {
     setState({
       visible: true,
     });
   };
-
+useEffect(() => {
+  start();
+}, [auth])
+function start() {
+  if (auth.user != null) {
+    let a =" ";
+    console.log(auth);
+    axios.get(`http://localhost:5000/userCourses/${auth.user._id}`).then(function (response) {
+      setrecSeach(response.data)
+      a=a+response.data;
+      setflagrec(true)
+    });
+    console.log("hedi a = ",a);
+  }}
+  
+  useEffect(() => {
+   if(flagrec){
+    console.log("data lbara : ",recSeach);
+    axios.get(`http://localhost:5000/recommandation/${recSeach}`).then(function (response) {
+      setrecData(response.data)
+    });
+   }
+  }, [flagrec])
   const onClose = () => {
     setState({
       visible: false,
     });
   };
-
   useEffect(() => {
     dispatch(getCourses());
     require("antd/dist/antd.css");
+    
     return () => {
       window.location.reload();
     };
   }, []);
-  
+
   useEffect(() => {
     if (TriField.name === "Front End") {
           setAdminCourse(adminCourse.filter(c=>c.field === "Front End"));
     } 
     if (TriField.name === "Back End") {
-      setAdminCourse(adminCourse.filter(c=>c.field === "Back End"));
+      setAdminCourse(adminCourse.filter(c => c.field === "Back End"));
     } 
     if (TriField.name === "Soft Skills") {
-      setAdminCourse(adminCourse.filter(c=>c.field === "Soft Skills"));
+      setAdminCourse(adminCourse.filter(c => c.field === "Soft Skills"));
     } 
     if (TriField.name === "Hard Skills") {
-      setAdminCourse(adminCourse.filter(c=>c.field === "Hard Skills"));
+      setAdminCourse(adminCourse.filter(c => c.field === "Hard Skills"));
     } 
     if(TriField.name === "default"){
     axios.get("http://localhost:5000/allcourses").then(function (response) {
       setAdminCourse(response.data);
+      
     });}
     else{console.log("value in tri : ",TriField.name);}
     
@@ -90,7 +117,6 @@ function CoursesHome({ auth }) {
       axios.put(`http://localhost:5000/enrollCourse/${auth.user._id}/${courseEnrolled._id}`);
       axios.post("http://localhost:5000/addUdemy", courseEnrolled);
     }
-    console.log(courseEnrolled);
   }, [flag,courseEnrolled]);
 
   useEffect(() => {
@@ -98,6 +124,8 @@ function CoursesHome({ auth }) {
     console.log(udemy);
     setUdemyflag(true);
   }, [udemy]);
+
+  
   // useEffect(() => {
   //   if (Udemyflag) {
   //     axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("UDEMyyyy : ", udemy));
@@ -117,6 +145,7 @@ function CoursesHome({ auth }) {
         <Button onClick={() => Actionenroll(data)} style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}>
           Enroll
         </Button>
+        
         <FacebookShareButton
         style={{marginLeft: "70px"}}
          url="blitz.com"
@@ -140,6 +169,7 @@ function CoursesHome({ auth }) {
           }}
         >
           <br></br>
+          <CourseRec recData={recData} />
           <Courses setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse settrifield={setTriField} setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br />
@@ -150,8 +180,10 @@ function CoursesHome({ auth }) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+
+  const mapStateToProps = (state) => ({
+    auth: state.auth,
+  });
+
 
 export default connect(mapStateToProps)(CoursesHome);
