@@ -28,7 +28,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
         <Content>
           <Card className='mt-auto'>
             <Card.Body>
-              <div className='d-flex justify-content-between'>
+              <div className='d-flex justify-content-between '>
                 <div>
                   <Card.Title>
                     <i className='fas fa-user' /> Welcome to the
