@@ -29,7 +29,7 @@ function CoursesHome({ auth,user }) {
   const [udemy, setUdemy] = useState();
   const [FilterFlag, setFilterFlag] = useState(false);
   const [recSeach,setrecSeach]= useState("");
-  const [recData,setrecData]= useState();
+  const [recData,setrecData]= useState([]);
   const [flagrec,setflagrec]= useState(false);
   const showDrawer = () => {
     setState({
@@ -56,7 +56,6 @@ function start() {
     console.log("data lbara : ",recSeach);
     axios.get(`http://localhost:5000/recommandation/${recSeach}`).then(function (response) {
       setrecData(response.data)
-      console.log(response.data);
     });
    }
   }, [flagrec])
@@ -170,7 +169,7 @@ function start() {
           }}
         >
           <br></br>
-          <CourseRec />
+          <CourseRec recData={recData} />
           <Courses setUdemy={setUdemy} courses={courses} setCurrentId={setCurrentId} auth={auth} />
           <AdminCourse settrifield={setTriField} setcourseEnrolled={setcourseEnrolled} setId={setId} courseData={adminCourse} />
           <br />
