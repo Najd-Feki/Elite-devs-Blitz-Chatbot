@@ -41,6 +41,7 @@ import CoursesHome from 'components/coursesHome/CoursesHome';
 import { CourseForm } from 'components/courseForm/CourseForm';
 import CourseDetails from 'components/adminCourse/CourseDetails';
 import JobsApp from 'components/jobs/App';
+import DataTable from 'components/adminCourse/DataTable';
 
 function App({auth}) {
   useEffect(() => {
@@ -85,7 +86,8 @@ function App({auth}) {
               <Route path='/eventdetail/:id' component={EventDetail}></Route>
               <Route path='/progress' component={Progress}></Route>
               <Route path='/course' component={CoursesHome} user={auth}></Route>
-              <Route path='/admin' component={CourseForm}></Route>
+              <Route path='/addCourse' component={CourseForm}></Route>
+              <Route path='/CourseList' component={DataTable}></Route>
               <Route path='/details' component={CourseDetails}></Route>
               <Route path='/profile' component={Profile}></Route>
               <Route path='/contact' component={Contact}></Route>

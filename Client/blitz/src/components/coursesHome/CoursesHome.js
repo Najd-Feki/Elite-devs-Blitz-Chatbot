@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } from "react-share"
 import CourseRec from "components/recommandation/CourseRec";
 //import "antd/dist/antd.css";
-function CoursesHome({ auth,user }) {
+function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
   const [TriField, setTriField] = useState({
     name: "default",
@@ -27,7 +27,6 @@ function CoursesHome({ auth,user }) {
   const [flag, setFlag] = useState(false);
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
-  const [FilterFlag, setFilterFlag] = useState(false);
   const [recSeach,setrecSeach]= useState("");
   const [recData,setrecData]= useState([]);
   const [flagrec,setflagrec]= useState(false);
@@ -48,9 +47,8 @@ function start() {
       a=a+response.data;
       setflagrec(true)
     });
-    console.log("hedi a = ",a);
+    
   }}
-  
   useEffect(() => {
    if(flagrec){
     console.log("data lbara : ",recSeach);
