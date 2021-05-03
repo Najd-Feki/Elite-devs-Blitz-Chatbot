@@ -10,6 +10,6 @@ var Course = new Schema({
   visible_instructors: [Schema.Types.Mixed],
   image_480x270: String,
   completionRatio: Number,
-  primary_category: String,
+  category: String,
 });
 module.exports = mongoose.model("Course", Course);
