@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -63,7 +63,7 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 export default ({
-  heading = "Checkout the Menu",
+  heading = "Recommended courses",
   tabs = {
     Starters: [
       {
@@ -157,9 +157,10 @@ export default ({
    * as the key and value of the key will be its content (as an array of objects).
    * To see what attributes are configurable of each object inside this array see the example above for "Starters".
    */
-  const tabsKeys = Object.keys(tabs);
-  const [activeTab, setActiveTab] = useState(tabsKeys[0]);
 
+  console.log("TABS : ", tabs);
+  const tabsKeys = Object.keys(tabs);
+  const [activeTab, setActiveTab] = useState(tabsKeys[1]);
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -195,14 +196,13 @@ export default ({
           >
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
-                  <CardImageContainer imageSrc={card.imageSrc}>
+                <Card className="group" href={"https://www.udemy.com" + card.url} initial="rest" whileHover="hover" animate="rest">
+                  <CardImageContainer imageSrc={card.image_480x270}>
                     <CardRatingContainer>
                       <CardRating>
                         <StarIcon />
-                        {card.rating}
+                        {Math.round(card.avg_rating)}
                       </CardRating>
-                      <CardReview>({card.reviews})</CardReview>
                     </CardRatingContainer>
                     <CardHoverOverlay
                       variants={{
@@ -222,7 +222,7 @@ export default ({
                   </CardImageContainer>
                   <CardText>
                     <CardTitle>{card.title}</CardTitle>
-                    <CardContent>{card.content}</CardContent>
+                    <CardContent>{card.headline}</CardContent>
                     <CardPrice>{card.price}</CardPrice>
                   </CardText>
                 </Card>

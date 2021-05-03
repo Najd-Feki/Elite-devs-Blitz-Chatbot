@@ -124,7 +124,8 @@ module.exports = (app) => {
       image_480x270: req.body.udemy.image_480x270,
       completionRatio: req.body.udemy.completionRatio,
       visible_instructors: req.body.udemy.visible_instructors,
-      primary_category: req.body.udemy.primary_category,
+      category: req.body.udemy.category,
+      rating: req.body.udemy.rating,
     });
 
     try {
@@ -190,7 +191,7 @@ module.exports = (app) => {
     course.price = req.body.price_detail.amount;
     course.isPaid = req.body.is_paid;
     course.headline = req.body.headline;
-    course.rating = req.body.rating;
+    course.rating = req.body.avg_rating;
     course.image_480x270 = req.body.image_480x270;
     course.completionRatio = req.body.completionRatio;
     course.visible_instructors = req.body.visible_instructors;

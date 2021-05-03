@@ -112,7 +112,6 @@ const ProgressCards = ({ auth }) => {
             //getCourseById(course.id);
             course.completion_ratio = progress;
           });
-          console.log("COURSE IS :", result.data);
           setCourses(result.data);
         });
     } catch (err) {
