@@ -1,5 +1,7 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router';
+
 const ACTIONS = {
   MAKE_REQUEST: 'make-request',
   GET_DATA: 'get-data',
@@ -29,6 +31,9 @@ function reducer(state, action) {
 
 export default function useFetchJobs(params, page) {
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
+  const { id } = useParams();
+  const [user, setUser] = useState({});
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     const cancelToken1 = axios.CancelToken.source();
@@ -63,6 +68,18 @@ export default function useFetchJobs(params, page) {
         dispatch({ type: ACTIONS.ERROR, payload: { error: e } });
       });
 
+    /*     axios.get('http://localhost:5000/user/' + id).then((Response) => {
+      this.setUser(Response.data);
+      console.log('users', Response.data);
+      axios
+        .get('http://localhost:5000/profile/' + Response.data.profile)
+
+        .then((res) => {
+          this.setProfile(res.data);
+
+          console.log('profile', res.data);
+        }); 
+    });*/
     return () => {
       cancelToken1.cancel();
       cancelToken2.cancel();

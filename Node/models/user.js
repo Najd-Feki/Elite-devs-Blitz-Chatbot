@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ThirdPartyProviderSchema = new Schema({
   provider_name: {
@@ -13,6 +13,11 @@ const ThirdPartyProviderSchema = new Schema({
     type: {},
     default: null,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 var User = new Schema({
@@ -24,21 +29,26 @@ var User = new Schema({
     unique: true,
   },
   photo: String,
-  role: String,
+
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
+      ref: 'Event',
     },
   ],
   profile: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Profile",
+    ref: 'Profile',
   },
   third_party_auth: [ThirdPartyProviderSchema],
   date: {
     type: Date,
     default: Date.now,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
-module.exports = mongoose.model("User", User);
+module.exports = mongoose.model('User', User);

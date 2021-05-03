@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Register from '../auth/Register';
-import Login from '../auth/login';
+import Login from '../auth/Login';
 import Alert from '../layout/Alert';
 import ProfilesGit from '../profiles/Profiles';
 import ProfileGit from '../profile/Profile';
