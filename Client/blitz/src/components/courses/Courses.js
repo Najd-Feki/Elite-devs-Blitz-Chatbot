@@ -47,7 +47,7 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
           <Course course={a} setCurrentId={setCurrentId} />
-          <Button onClick={() => handle(a)} style={{width: "322px",marginTop: "-20px"}}>enroll</Button>
+          <Button onClick={() => handle(a)} style={{width: "21.4rem",marginTop: "-20px"}}>enroll</Button>
         </Grid>
       </>
     );
@@ -65,7 +65,8 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   };
   return a.length === 0 ? (
     <>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text"  onClick={(e) => onChange(e)} />
+      
       <br />
       <div style={{ position: "absolute", left: "0px", right: "0px", marginLeft: "auto", marginRight: "auto", width: "100px" }}>
         <CircularProgress className={classes.circularLoading} />
@@ -77,7 +78,7 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
     </>
   ) : (
     <div style={{ paddingTop: "50px", paddingBottom: "10px" }}>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text"  onChange={(e) => onChange(e)} />
       <br></br>
       <br></br>
       <br></br>
