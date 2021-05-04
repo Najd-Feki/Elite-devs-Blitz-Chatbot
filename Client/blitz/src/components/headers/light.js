@@ -109,7 +109,14 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
         <Link to="/users">Users</Link>
       </NavLink>
       <NavLink>
+
         <Link to="/addCourse">Add Course</Link>
+
+        <Link to='/reclamationAdmin'>Claims </Link>
+      </NavLink>
+      <NavLink>
+        <Link to='/classification'>Dashbord </Link>
+
       </NavLink>
       <NavLink>
         <Link to="/CourseList">Course List</Link>
