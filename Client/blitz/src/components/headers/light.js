@@ -109,9 +109,14 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
         <Link to="/users">Users</Link>
       </NavLink>
       <NavLink>
+        <Link to="/addCourse">Add Course</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/CourseList">Course List</Link>
+      </NavLink>
+      <NavLink>
         <Link to="/reclamationAdmin">Reclamation </Link>
       </NavLink>
-
       <a onClick={logout} href="/">
         <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
       </a>

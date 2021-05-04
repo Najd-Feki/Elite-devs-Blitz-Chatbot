@@ -161,9 +161,9 @@ useEffect(() => {
         
         <FacebookShareButton
         style={{marginLeft: "70px"}}
-         url="blitz.com"
+         url="blitz.gg"
          quote={data.title + data.description}
-         hashtag="#blitz #onlineCourses">
+         hashtag="#blitz">
          <FacebookIcon logoFillColor="white" />
         </FacebookShareButton>
         <LinkedinShareButton
