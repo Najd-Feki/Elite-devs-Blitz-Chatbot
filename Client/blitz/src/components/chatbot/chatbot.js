@@ -62,11 +62,10 @@ const Chatbot = ({ auth }) => {
   function start() {
     if (auth.user != null) {
       //  let userId = auth?.user?._id;
-<<<<<<< Updated upstream
-=======
+
       console.log(auth);
       localStorage.setItem('idUser', auth.user._id);
->>>>>>> Stashed changes
+
       (function (d, m) {
         var kommunicateSettings = {
           // userId: auth.user._id,
