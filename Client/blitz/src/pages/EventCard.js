@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -21,32 +21,25 @@ const useStyles = makeStyles({
   });
   export default function EventCard({events}) {
     const classes = useStyles();
-
 return(
-<Card className={classes.root} style={{minHeight:'25em',maxHeight:'25em'}}>
-    <CardHeader
-        title={events.name}
-        subheader={events.date?.slice(0,10)}
+ <Card className={classes.root} style={{minHeight:'25em',maxHeight:'25em'}}>
+    <CardHeader style={{maxHeight:'8em',minHeight:'8em',color:"rgba(60,13,153)"}}
+        title={events.title}
       />
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={events.photo}
-        />
-
-        <CardContent style={{maxHeight:'5em',overflow: 'hidden'}}>
-          <Typography variant="body2" color="textSecondary" component="p"  >
-            {events.subject}
-          </Typography>
+      <CardActionArea style={{minHeight:'12em'}}>
+        <CardContent style={{maxHeight:'10em',overflow: 'hidden'}}>
+        <p>Location :  {events.timezone}</p>
+        <p>This event start at  {events.start?.slice(0,10)}</p>
+        <p>Categorys :  {events.labels}</p>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className="card-footer" style={{  display: 'flex',alignItems: 'center', justify: 'space-between', marginTop: "16px"}}>
         <Button size="small" color="primary">
-          join
+        Notify me
         </Button>
         
-        <Link to={"/eventdetail/"+ events._id}>Learn More</Link>
+        <Link to={"/eventdetail/"+ events.id}>Learn More</Link>
       </CardActions>
-    </Card>
+    </Card> 
     );
 }

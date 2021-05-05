@@ -20,7 +20,7 @@ const Routes = (props) => {
         <Route exact path='/profiles-git' component={ProfilesGit} />
         <Route exact path='/profile-git/:id' component={ProfileGit} />
         <Route exact path='/posts' component={Posts} />
-        <PrivateRoute exact path='/posts/:id' component={Post} />
+        <Route exact path='/posts/:id' component={Post} />
         <Route component={NotFound} />
       </Switch>
     </section>

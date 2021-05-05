@@ -15,6 +15,9 @@
     
 }
 
+.mapouter{position:relative;text-align:right;height:500px;width:600px;}
+.gmap_canvas{overflow:hidden;background:none!important;height:500px;width:600px;}
+
 .tm-mb-1 { margin-bottom: 20px; }
 .tm-bg-color-1 { background-color:white;border-radius: 25px;}
 .tm-bg-color-8 { background-color:white;border-radius: 25px;} /* Nav background */
