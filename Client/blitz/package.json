@@ -66,7 +66,8 @@
     "twin.macro": "^1.12.1",
     "use-in-view": "^1.0.15",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
