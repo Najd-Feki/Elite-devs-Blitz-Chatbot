@@ -35,9 +35,46 @@ export default function UsersAdmin() {
     setpaginationUsers(paginatedUser);
   };
 
+  const filterindata = (users, searchTerm)=> {
+    const resultat = users.filter(
+      (x) =>
+        x.name.toLowerCase().includes(searchTerm) 
+
+       
+    );
+    console.log("res",resultat)
+    setpaginationUsers(resultat);
+    
+  }
+
+  const handleTextSearch = (e) => {
+    const searchTerm = e.currentTarget.value;
+    axios.get('http://localhost:5000/users').then((res) => {
+      if (res.data) {
+        console.log("searchTerm ",searchTerm);
+        filterindata(res.data, searchTerm);
+      }
+    });
+  };
+
   return (
     <>
       <NavbarAdmin />
+      <div className="mar">
+
+      <section className='search' >
+            <form >
+              
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search users by Name"
+              name="searchTerm"
+              onChange={handleTextSearch}
+              style={{marginLeft:"40%",width:"20%",marginBottom:"30px", "border-radius":"20px",backgroundColor:"rgba(60,13,153)"}}
+            />
+            </form>
+        </section>
 
       <div className='container'>
         {!paginationUsers ? (
@@ -91,6 +128,7 @@ export default function UsersAdmin() {
           </ul>
         </nav>
       </div>
+  </div>
     </>
   );
 }

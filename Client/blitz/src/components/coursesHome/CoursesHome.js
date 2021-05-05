@@ -12,7 +12,18 @@ import { connect } from "react-redux";
 import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } from "react-share"
 import CourseRec from "components/recommandation/CourseRec";
 //import "antd/dist/antd.css";
-function CoursesHome({ auth,user }) {
+import {  Divider, Col, Row } from 'antd';
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
+const DescriptionItem = ({ title, content }) => (
+  <div className="site-description-item-profile-wrapper">
+    <p className="site-description-item-profile-p-label">{title}:</p>
+    {content}
+  </div>
+);
+function CoursesHome({ auth }) {
   const [setCurrentId] = useState(null);
   const [TriField, setTriField] = useState({
     name: "default",
@@ -27,8 +38,8 @@ function CoursesHome({ auth,user }) {
   const [flag, setFlag] = useState(false);
   const [Udemyflag, setUdemyflag] = useState(false);
   const [udemy, setUdemy] = useState();
-  const [FilterFlag, setFilterFlag] = useState(false);
   const [recSeach,setrecSeach]= useState("");
+  const [recSeach1,setrecSeach1]= useState("");
   const [recData,setrecData]= useState([]);
   const [flagrec,setflagrec]= useState(false);
   const showDrawer = () => {
@@ -43,19 +54,32 @@ function start() {
   if (auth.user != null) {
     let a =" ";
     console.log(auth);
-    axios.get(`http://localhost:5000/userCourses/${auth.user._id}`).then(function (response) {
-      setrecSeach(response.data)
-      a=a+response.data;
-      setflagrec(true)
+     axios.get(`http://localhost:5000/userCourses/${auth.user._id}`).then(function (response) {
+      console.log("local",response.data.title);
+      a=response.data+a;
+      setrecSeach(a)
     });
-    console.log("hedi a = ",a);
+    axios.get(`http://localhost:5000/userUdemy/${auth.user._id}`).then(function (response) {
+      
+      a=response.data+a;
+      console.log("udemy",response.data.title);
+      setrecSeach1(a)
+    });
+    
   }}
-  
+useEffect(() => {
+  if(recSeach || recSeach1) {
+    setflagrec(true)
+  }
+}, [recSeach,recSeach1])
   useEffect(() => {
+    
    if(flagrec){
     console.log("data lbara : ",recSeach);
-    axios.get(`http://localhost:5000/recommandation/${recSeach}`).then(function (response) {
+    const data = recSeach+" "+recSeach1;
+    axios.get(`http://localhost:5000/recommandation/${data}`).then(function (response) {
       setrecData(response.data)
+      console.log("rec lenaaaa : ",response.data);
     });
    }
   }, [flagrec])
@@ -108,6 +132,7 @@ function start() {
     setcourseEnrolled(data);
     console.log(data);
     setFlag(true);
+    toast.success('You are now enrolled in course : '+data.title);
   };
 
   useEffect(() => {
@@ -136,21 +161,78 @@ function start() {
       <Header />
 
       <Drawer width={800} closable={false} onClose={onClose} visible={state.visible}>
-        <h1 style={{ textAlign: "center" }}>{data.title}</h1>
-        <br />
-        <h2>Course Description</h2>
-        <p style={{ marginLeft: "30px" }}>{data.description}</p>
-        <h2>Course Field</h2>
-        <p style={{ marginLeft: "30px" }}>{data.field}</p>
+        
+        <p  style={{ marginBottom: 24 ,color:"#3076ab"}}>
+            Course Details
+          </p>
+          <p className="site-description-item-profile-p">course</p>
+          <Row>
+            <Col span={12}>
+              <DescriptionItem title="Title" content={data.title} />
+            </Col>
+            <Col span={12}>
+              <DescriptionItem title="Field Of Study" content={data.field} />
+            </Col>
+          </Row>
+          <br/>
+          <Row>
+            <Col span={24}>
+              <DescriptionItem
+                title="Course Discription"
+                content={data.description}
+              />
+            </Col>
+          </Row>
+          <Divider />
+          <p style={{color:"#3076ab"}}>Tutuor</p>
+          <Row>
+            <Col span={12}>
+              <DescriptionItem title="Name" content={data.tutorName} />
+            </Col>
+            <Col span={12}>
+              <DescriptionItem title="BIO" content={data.tutorDetails} />
+            </Col>
+          </Row>
+          <br/>
+          <Row>
+            <Col span={24}>
+              <DescriptionItem
+                title="Skills"
+                content="C / C + +, data structures, software engineering, operating systems, computer networks, databases, compiler theory, computer architecture, Microcomputer Principle and Interface Technology, Computer English, Java, ASP, etc."
+              />
+            </Col>
+          </Row>
+          <Divider />
+          <p style={{color:"#3076ab"}}>Contacts</p>
+          <Row>
+            <Col span={12}>
+              <DescriptionItem title="Email" content="mehdi.hrairi@esprit.tn" />
+            </Col>
+            <Col span={12}>
+              <DescriptionItem title="Phone Number" content="+216 23 485 725" />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <DescriptionItem
+                title="Github"
+                content={
+                  <a href="https://github.com/MEHDIHRAIRI?tab=repositories">
+                    Github link
+                  </a>
+                }
+              />
+            </Col>
+          </Row>
         <Button onClick={() => Actionenroll(data)} style={{ width: "200px", textAlign: "center", marginLeft: "250px" }}>
           Enroll
         </Button>
-        
+        <p style={{marginLeft: "20px"}}>Share</p>
         <FacebookShareButton
-        style={{marginLeft: "70px"}}
-         url="blitz.com"
+        style={{marginLeft: "10px"}}
+         url="blitz.gg"
          quote={data.title + data.description}
-         hashtag="#blitz #onlineCourses">
+         hashtag="#blitz">
          <FacebookIcon logoFillColor="white" />
         </FacebookShareButton>
         <LinkedinShareButton

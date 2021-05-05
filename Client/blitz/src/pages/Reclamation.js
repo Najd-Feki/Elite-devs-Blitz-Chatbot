@@ -6,11 +6,12 @@ import Footer from "components/footers/SimpleFooter";
 
 export default () => {
   
-     const [reclamation,setReclamation]=useState({userId:'',type:'',description:'',date:Date.now()})
+     const [reclamation,setReclamation]=useState({userId:localStorage.getItem('idUser'),type:'',description:'',date:Date.now()})
      const [submitted, setSubmitted] = useState(false);
    
      const handleSubmit = (e) => {
       e.preventDefault();
+      console.log(reclamation);
      axios.post('http://localhost:5000/reclamation/add',reclamation)
      .then(setReclamation({userId:'',type:'',description:'',date:Date.now()}))
      .then(alert('Clain successfully sent'))
@@ -20,9 +21,10 @@ export default () => {
       event.persist();
       setReclamation((reclamation) => ({
         ...reclamation,
-        userId: event.target.value,
+        userId: localStorage.getItem('idUser'),
+       
       }));
-    };
+      };
 
     const handleTypeInputChange = (event) => {
       event.persist();
@@ -54,7 +56,7 @@ export default () => {
     <div className="reclamation-fields">
     <p className="reclamation-p">id</p>
       <span>
-       <input placeholder="Id" type="text" value={reclamation.userId} onChange={handleUserIdInputChange} className='reclamation-input'/>
+       <input placeholder="Id" type="text" value={localStorage.getItem('idUser')} onChange={handleUserIdInputChange} className='reclamation-input'/>
     </span>
     <br />
     <p className="reclamation-p">Subject</p>

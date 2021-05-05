@@ -31,18 +31,27 @@ module.exports = (app) => {
 
   app.get("/userCourses/:idUser", async function (req, res, next) {
     let a =" " ;
-    let result = {};
-    const c = await User.findOne({_id:req.params.idUser}, { _id:0, courses:1 })
-    for(const values of c.courses){
+    const c = await User.findOne({_id:req.params.idUser}, { _id:0, localcourses:1 })
+    for(const values of c.localcourses){
      const t= await Course.findById({_id:values},{_id:0,title:1})
      a=a+t.title+" ";
      console.log(t);
     }
     res.send(a)
   });
-  app.get("/recommandation/:recSeach", async function (req, res) {
+  app.get("/userUdemy/:idUser", async function (req, res, next) {
+    let a =" " ;
+    const c = await User.findOne({_id:req.params.idUser}, { _id:0, courses:1 })
+    for(const values of c.courses){
+     const t= await Courses.findById({_id:values},{_id:0,title:1})
+     a=a+t.title+" ";
+     console.log(t);
+    }
+    res.send(a)
+  });
+  app.get("/recommandation/:data", async function (req, res) {
     try {
-      const a = req.params.recSeach;
+      const a = req.params.data;
       const UdemyUrl = `https://www.udemy.com/api-2.0/courses/?search=${a}/?fields[course]=@default,primary_category`;
       axios.defaults.headers.common["Authorization"] =
         "Basic c2Y5TXgyZWdHeDBwbHVUblBWd3paTGNlMW5XTUVCOTF0MHdDYlNJZTpoazJaaWdxbDVEZENkdkNoNjJrbFI2UGp1SkE3aThUTDF0TldCQkVQcFFIWlVCcVREajZ5dEtFTjNpSEJRYzZ4bnNxMkFPQjZZUjhHRlh0NUs0NmtlZjRIR1dCSWtsckxYbTRuZmlaRmNpQlAyM1RSNUxPUHR5Q0tVUjNNVHcyVw==";
@@ -143,7 +152,7 @@ module.exports = (app) => {
   });
   app.put("/enrollCourse/:idUser/:idCourse", async function (req, res) {
     try {
-      const user = await User.findByIdAndUpdate(req.params.idUser, { $push: { courses: req.params.idCourse } });
+      const user = await User.findByIdAndUpdate(req.params.idUser, { $push: { localcourses: req.params.idCourse } });
     } catch (err) {
       console.log(err);
     }
@@ -188,7 +197,6 @@ module.exports = (app) => {
     var course = new Courses();
     course.title = req.body.title;
     course.url = req.body.url;
-    course.price = req.body.price_detail.amount;
     course.isPaid = req.body.is_paid;
     course.headline = req.body.headline;
     course.rating = req.body.avg_rating;
