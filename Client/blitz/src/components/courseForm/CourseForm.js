@@ -13,13 +13,14 @@ import Typography from '@material-ui/core/Typography';
 import TutorForm from './TutorForm';
 import CourseDetails from './CourseDetails';
 import AddCourse from './AddCourse';
-
+import Header from "components/headers/light";
+import Footer from "components/footers/SimpleFooter";
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
-          Your Website
+          Blitz.com
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -90,7 +91,7 @@ export const CourseForm = () => {
           case 1:
             return <TutorForm courseData={courseData} setCourseData={setCourseData} activeStep={activeStep} handleNext={handleNext} steps = {steps} classes={classes} />;
           case 2:
-            return <AddCourse courseData={courseData} />;
+            return <AddCourse courseData={courseData} classes={classes} />;
           default:
             throw new Error('Unknown step');
         }}
@@ -103,14 +104,9 @@ export const CourseForm = () => {
       };
     return (
         <React.Fragment>
+          
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            blitz
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
@@ -150,6 +146,7 @@ export const CourseForm = () => {
         </Paper>
         <Copyright />
       </main>
+      <Footer />
     </React.Fragment>
     )
 }
