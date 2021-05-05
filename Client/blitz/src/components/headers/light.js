@@ -120,7 +120,7 @@ const Navbar = ({
       <NavLink>
         <Link to='/addCourse'>Add Course</Link>
 
-        <Link to='/reclamationAdmin'>Claims </Link>
+      
       </NavLink>
       <NavLink>
         <Link to='/classification'>Dashbord </Link>
@@ -130,6 +130,7 @@ const Navbar = ({
       </NavLink>
       <NavLink>
         <Link to='/reclamationAdmin'>Reclamation </Link>
+      <Link to='/reclamationAdmin'>Claims </Link>
       </NavLink>
       <a onClick={logout} href='/'>
         <i className='fas fa-sign-out-alt' />{' '}

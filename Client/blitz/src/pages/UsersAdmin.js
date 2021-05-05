@@ -60,14 +60,15 @@ export default function UsersAdmin() {
   return (
     <>
       <NavbarAdmin />
+      <div className="mar">
 
       <section className='search' >
             <form >
-              <p className="d-flex justify-content-center">search with Name</p>
+              
             <input
               className="form-control"
               type="search"
-              placeholder="Search users"
+              placeholder="Search users by Name"
               name="searchTerm"
               onChange={handleTextSearch}
               style={{marginLeft:"40%",width:"20%",marginBottom:"30px", "border-radius":"20px",backgroundColor:"rgba(60,13,153)"}}
@@ -127,6 +128,7 @@ export default function UsersAdmin() {
           </ul>
         </nav>
       </div>
+  </div>
     </>
   );
 }
