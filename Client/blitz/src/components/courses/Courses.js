@@ -8,10 +8,10 @@ import { getCoursesById } from "store/CoursesSlice";
 import axios from "axios";
 import Pagination from "react-paginate";
 import "./style.css";
-import {  Button } from "antd";
+import { Button } from "antd";
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
-const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
+const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const classes = useStyles();
@@ -26,10 +26,9 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
 
   useEffect(() => {
     async function ll() {
-      console.log(auth.user?._id);
       if (auth.user) {
         let id = auth.user._id;
-        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: true } }).then((res) => {
+        await axios.get("http://localhost:5000/course/temp", { params: { id: id, temp: "temp" } }).then((res) => {
           setCrs(res.data);
         });
       }
@@ -38,18 +37,17 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
       ll();
     }, 0);
   }, [auth]);
- const handle = (b) => {
-  setUdemyid(b);
- }
+  const handle = (udemy) => {
+    axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("Udemy : ", udemy));
+  };
   if (search) a = courses;
   else a = crs;
-  console.log("courses A : ", a);
   const displayCourses = a.slice(pagesVisited, pagesVisited + coursesPerPage).map((a) => {
     return (
       <>
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
-          <Course  course={a} setCurrentId={setCurrentId} />
-          <Button onClick={()=>handle(a.id)}>enroll</Button>
+          <Course course={a} setCurrentId={setCurrentId} />
+          <Button onClick={() => handle(a)} style={{width: "21.4rem",marginTop: "-20px"}}>enroll</Button>
         </Grid>
       </>
     );
@@ -67,7 +65,9 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
   };
   return a.length === 0 ? (
     <>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text"  onClick={(e) => onChange(e)} />
+      
+      <br />
       <div style={{ position: "absolute", left: "0px", right: "0px", marginLeft: "auto", marginRight: "auto", width: "100px" }}>
         <CircularProgress className={classes.circularLoading} />
       </div>
@@ -78,7 +78,7 @@ const Courses = ({ courses, setUdemyid ,setCurrentId, auth }) => {
     </>
   ) : (
     <div style={{ paddingTop: "50px", paddingBottom: "10px" }}>
-      <SearchBar type="text" value={search} onChange={(e) => onChange(e)} />
+      <SearchBar type="text"  onChange={(e) => onChange(e)} />
       <br></br>
       <br></br>
       <br></br>

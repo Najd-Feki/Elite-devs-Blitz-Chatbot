@@ -73,13 +73,16 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
         <Link to="/contact">Contact Us</Link>
       </NavLink>
       <NavLink>
+        <Link to="/jobs">Jobs</Link>
+      </NavLink>
+      <NavLink>
         <Link to="/posts">Posts</Link>
       </NavLink>
       <NavLink>
         <Link to={`/profile/${auth?.user?._id}`}> Profile</Link>
       </NavLink>
       <NavLink>
-        <a href="/course">Courses</a>
+        <Link to="/course">Courses</Link>
       </NavLink>
       <NavLink>
         <Link to="/progress">Progress</Link>
@@ -89,6 +92,37 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
       </NavLink>
       <NavLink>
         <Link to="/reclamation">Claims</Link>
+      </NavLink>
+
+      <a onClick={logout} href="/">
+        <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+      </a>
+    </NavLinks>,
+  ];
+
+  const adminLinks = [
+    <NavLinks>
+      <NavLink>
+        <Link to="/about">About Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/users">Users</Link>
+      </NavLink>
+      <NavLink>
+
+        <Link to="/addCourse">Add Course</Link>
+
+        <Link to='/reclamationAdmin'>Claims </Link>
+      </NavLink>
+      <NavLink>
+        <Link to='/classification'>Dashbord </Link>
+
+      </NavLink>
+      <NavLink>
+        <Link to="/CourseList">Course List</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/reclamationAdmin">Reclamation </Link>
       </NavLink>
       <a onClick={logout} href="/">
         <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
@@ -133,7 +167,7 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
       <Header className={"sticky"}>
         <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
           {logoLink}
-          {auth.isAuthenticated ? authLinks : guestLinks}
+          {!auth.isAuthenticated ? guestLinks : auth.user.isAdmin ? adminLinks : authLinks}
         </DesktopNavLinks>
 
         <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>

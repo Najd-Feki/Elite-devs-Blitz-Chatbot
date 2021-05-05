@@ -23,9 +23,11 @@ const UserSchema = new mongoose.Schema({
   },
   loginDates: [
     {
-      type: Date,
+      loginDate: Date,
+      courseId: String,
     },
   ],
+
   tempCourses: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -33,6 +35,12 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
+  localcourses: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
@@ -49,6 +57,11 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   role: String,
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("user", UserSchema);

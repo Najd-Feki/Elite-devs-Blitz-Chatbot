@@ -1,56 +1,161 @@
-import React,{useState,useEffect} from 'react'
-import {Grid} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import { DragHandle } from '@material-ui/icons';
+import React,{useState} from 'react'
+import '../../assets/css/all.min.css'
+import '../../assets/css/bootstrap.css'
+import '../../assets/css/responsive.css'
+import '../../assets/css/ui.css'
 
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
-  });
-const AdminCourse = ({setId, courseData}) => {
-    const classes = useStyles();
-  
+const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
+  const [front,setfront] = useState(true);
+  const [back,setback] = useState(true);
+  const [soft,setsoft] = useState(true);
+  const [hard,sethard] = useState(true);
+    const frontToggle = ()=>{
+      setfront(!front);
+      if(front){
+        settrifield({ name: "Front End" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const backToggle = ()=>{
+      setback(!back);
+      if(back){
+        settrifield({ name: "Back End" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const softToggle = ()=>{
+      setsoft(!soft);
+      if(soft){
+        settrifield({ name: "Soft Skills" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const hardToggle = ()=>{
+      sethard(!hard);
+      if(hard){
+        settrifield({ name: "Hard Skills" })
+      }
+      else {settrifield({ name: "default" })}
+    }
     const action =(a)=>{ 
         setId(a);
-        console.log("ide fel 2 : "+ a);
+    }
+    const handleAction =(a) => {
+      setcourseEnrolled(a);
     }
     const displayCourses = courseData
     .map((course) => {
       return (
-        <Grid style={{ paddingLeft: "30px" }}>
-           <Card className={classes.root}>
-          <CardActionArea  onClick={()=>action(course._id)} >
-          <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            height="100"
-            image={course.selectedFile}
-            title={course.title}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {course.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {course.description}
-            </Typography>
-          </CardContent>
-          </CardActionArea>
-          </Card>
-        </Grid>
+      
+          <article class="card card-product-list" >
+            <div class="row no-gutters">
+                <aside class="col-md-3">
+                    <a href="#" class="img-wrap">
+                        <span class="badge badge-danger"> NEW </span>
+                        <img src={course.selectedFile} />
+                    </a>
+                </aside> 
+                <div class="col-md-6">
+                    <div class="info-main">
+                      <br/>
+                        <a class="h5 title" onClick={()=>action(course._id)}> {course.title}  </a>
+                       <br></br>
+                        <br/>
+                        <p> {course.description} </p>
+                    </div>
+                </div> 
+                <aside class="col-sm-3">
+                    <div class="info-aside">
+                        <div class="price-wrap">
+                        <br/>
+                            <span class="price h5"> $0 </span>  
+                            <del class="price-old"> $50</del>
+                        </div>
+                        <p class="text-success">Free </p>
+                        <br />
+                        <p>
+                            <a  class="btn btn-primary btn-block" onClick={()=>action(course._id)}> Details </a>
+                            <a  class="btn btn-light btn-block" onClick={()=>handleAction(course)}><i class="fa fa-book"></i> 
+                                <span class="text">Enroll</span>
+                            </a>
+                        </p>
+                    </div> 
+                </aside> 
+            </div> 
+        </article>
       );
     });
      return (
        
-            <Grid className={classes.container} style={{paddingBottom:"50px"}} container  spacing={3}  >
-           {displayCourses}
-             </Grid>
+       
+             
+        
+        <div class="row">
+          <aside class="col-md-3">
+                
+                <div class="card">
+                  
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Field </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2">
+                            <div class="card-body">
+                                <label class="custom-control custom-checkbox">
+                                  <input onChange={frontToggle } type="checkbox" class="custom-control-input" />
+                                  <div class="custom-control-label">Front End</div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                  <input 
+                                   onChange={backToggle} type="checkbox" class="custom-control-input" />
+                                  <div class="custom-control-label">Back end</div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                  <input onChange={softToggle} type="checkbox" class="custom-control-input" />
+                                  <div class="custom-control-label">Soft Skills</div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                  <input onChange={hardToggle} type="checkbox" class="custom-control-input" />
+                                  <div class="custom-control-label">Hard Skills</div>
+                                </label>
+                                
+                            </div> 
+                        </div>
+                    </article> 
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Price range </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_3">
+                            <div class="card-body">
+                                <input type="range" class="custom-range" min="0" max="100" name="" />
+                                <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>Min</label>
+                                  <input class="form-control" placeholder="$0" type="number" />
+                                </div>
+                                <div class="form-group text-right col-md-6">
+                                  <label>Max</label>
+                                  <input class="form-control" placeholder="$1,0000" type="number" />
+                                </div>
+                                </div> 
+                                <button class="btn btn-block btn-primary">Apply</button>
+                            </div>
+                        </div>
+                    </article> 
+                    
+                </div> 
+                    </aside> 
+                    <main class="col-md-9">
+      {displayCourses}</main>
+      </div>
+             
         
     );
 

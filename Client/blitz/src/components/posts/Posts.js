@@ -1,22 +1,19 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
 
-import Header from 'components/headers/light';
-import Fade from 'react-reveal/Fade';
-import tw from 'twin.macro';
-import Features from 'components/features/TwoColWithButton';
 import Footer from 'components/footers/SimpleFooter';
+import { Card, Badge, Button, Collapse } from 'react-bootstrap';
 
-const Subheading = tw.div`uppercase  font-bold text-primary-500`;
-const HighlightedText = tw.div`text-primary-500 `;
-const Legend = tw.span` block italic text-primary-100 text-center`;
-const LegendTitle = tw.span` block font-bold text-lg text-primary-500 text-center`;
-const DividerTextContainer = tw.div`my-12 border-b text-center relative`;
-const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
+import Header from 'components/headers/light';
+import tw, { css } from 'twin.macro';
+
+const Container = tw.div`relative`;
+const Content = tw.div`max-w-screen-xl  py-16 lg:py-20`;
 
 /******** */
 const Posts = ({ getPosts, post: { posts } }) => {
@@ -27,22 +24,32 @@ const Posts = ({ getPosts, post: { posts } }) => {
   return (
     <>
       <Header />
-      <Fragment>
-        <Fade>
-          <h1 className='large text-primary'>Posts</h1>
-          <p className='lead'>
-            <i className='fas fa-user' /> Welcome to the community
-          </p>
-          <DividerTextContainer>
-            <PostForm />
-            <div className='posts'>
-              {posts.map((post) => (
-                <PostItem key={post._id} post={post} />
-              ))}
-            </div>
-          </DividerTextContainer>
-        </Fade>
-      </Fragment>
+      <Container>
+        <Content>
+          <Card className='mt-auto'>
+            <Card.Body>
+              <div className='d-flex justify-content-between '>
+                <div>
+                  <Card.Title>
+                    <i className='fas fa-user' /> Welcome to the
+                    <span className='text-muted font-weight-light ml-1'>
+                      COMMUNITY
+                    </span>
+                  </Card.Title>
+                  <Card.Subtitle className='text-muted mb-2'>...</Card.Subtitle>
+
+                  <PostForm />
+                  <div>
+                    {posts.map((post) => (
+                      <PostItem key={post._id} post={post} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        </Content>
+      </Container>
       <Footer></Footer>
     </>
   );

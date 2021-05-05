@@ -7,7 +7,7 @@ const courseSchema = mongoose.Schema({
   },
     title : String,
     description : String,
-    field : [String],
+    field : String,
     link : String,
     tags : [String],
     selectedFile : String,
