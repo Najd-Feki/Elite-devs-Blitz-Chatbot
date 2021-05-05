@@ -14,7 +14,7 @@ const PrivateRoute = ({
     render={(props) =>
       loading ? (
         <Spinner />
-      ) : isAuthenticated || isAdmin ? (
+      ) : isAuthenticated && isAdmin ? (
         <Component {...props} />
       ) : (
         <Redirect to='/login' />

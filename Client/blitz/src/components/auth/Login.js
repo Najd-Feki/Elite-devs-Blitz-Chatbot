@@ -1,24 +1,26 @@
-import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
-import "./App.css";
+import React, { Fragment, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
+import './App.css';
 
 /********* */
 
-import { Container as ContainerBase } from "components/misc/Layouts";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import illustration from "images/login-illustration.svg";
-import logo from "images/logo.svg";
-import googleIconImageSrc from "images/google-icon.png";
-import twitterIconImageSrc from "images/twitter-icon.png";
-import { ReactComponent as LoginIcon } from "feather-icons/dist/icons/log-in.svg";
-import { Fade } from "react-reveal";
+import { Container as ContainerBase } from 'components/misc/Layouts';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import illustration from 'images/login-illustration.svg';
+import logo from 'images/logo.svg';
+import googleIconImageSrc from 'images/google-icon.png';
+import twitterIconImageSrc from 'images/twitter-icon.png';
+import { ReactComponent as LoginIcon } from 'feather-icons/dist/icons/log-in.svg';
+import { Fade } from 'react-reveal';
 
-const Container = tw(ContainerBase)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
+const Container = tw(
+  ContainerBase
+)`min-h-screen bg-primary-900 text-white font-medium flex justify-center -m-8`;
 const Content = tw.div`max-w-screen-xl m-0 sm:mx-20 sm:my-16 bg-white text-gray-900 shadow sm:rounded-lg flex justify-center flex-1`;
 const MainContainer = tw.div`lg:w-1/2 xl:w-5/12 p-6 sm:p-12`;
 const LogoLink = tw.a``;
@@ -64,13 +66,14 @@ const IllustrationImage = styled.div`
 /******** */
 const Login = ({ login, isAuthenticated, auth }) => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const { email, password } = formData;
 
-  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -78,13 +81,13 @@ const Login = ({ login, isAuthenticated, auth }) => {
   };
 
   if (isAuthenticated && !auth.user.isAdmin) {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
-  if (isAuthenticated && auth.user.isAdmin) {
+  /*  if (isAuthenticated && auth.user.isAdmin) {
     return <Redirect to="/users" />;
-  }
+  } */
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
   return (
     <Fade left>
@@ -93,26 +96,40 @@ const Login = ({ login, isAuthenticated, auth }) => {
           <FormContainer>
             <DividerTextContainer>
               <DividerText>
-                {" "}
-                <h1 className="large text-primary">Sign In</h1>
-                <p className="lead">
-                  <i className="fas fa-user" /> Sign Into Your Account
+                {' '}
+                <h1 className='large text-primary'>Sign In</h1>
+                <p className='lead'>
+                  <i className='fas fa-user' /> Sign Into Your Account
                 </p>
               </DividerText>
             </DividerTextContainer>
             <br />
-            <Form className="form" onSubmit={onSubmit}>
-              <div className="form-group">
-                <Input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
+            <Form className='form' onSubmit={onSubmit}>
+              <div className='form-group'>
+                <Input
+                  type='email'
+                  placeholder='Email Address'
+                  name='email'
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
               </div>
-              <div className="form-group">
-                <Input type="password" placeholder="Password" name="password" value={password} onChange={onChange} minLength="6" />
+              <div className='form-group'>
+                <Input
+                  type='password'
+                  placeholder='Password'
+                  name='password'
+                  value={password}
+                  onChange={onChange}
+                  minLength='6'
+                />
               </div>
-              <input type="submit" className="btn btn-primary" value="Login" />
+              <input type='submit' className='btn btn-primary' value='Login' />
             </Form>
-            <p tw="mt-8 text-sm text-gray-600 text-center">
-              Don't have an account?{" "}
-              <Link to="/register" tw="border-b border-gray-500 border-dotted">
+            <p tw='mt-8 text-sm text-gray-600 text-center'>
+              Don't have an account?{' '}
+              <Link to='/register' tw='border-b border-gray-500 border-dotted'>
                 Sign Up
               </Link>
             </p>
