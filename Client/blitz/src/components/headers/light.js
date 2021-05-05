@@ -120,7 +120,7 @@ const Navbar = ({
       <NavLink>
         <Link to='/addCourse'>Add Course</Link>
 
-      
+        
       </NavLink>
       <NavLink>
         <Link to='/classification'>Dashbord </Link>
@@ -129,7 +129,6 @@ const Navbar = ({
         <Link to='/CourseList'>Course List</Link>
       </NavLink>
       <NavLink>
-        <Link to='/reclamationAdmin'>Reclamation </Link>
       <Link to='/reclamationAdmin'>Claims </Link>
       </NavLink>
       <a onClick={logout} href='/'>
