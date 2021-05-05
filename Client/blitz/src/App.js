@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Routes from './components/routing/Routes';
 import { LOGOUT } from './actions/types';
-
+import { connect } from 'react-redux';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -42,8 +42,9 @@ import { CourseForm } from 'components/courseForm/CourseForm';
 import CourseDetails from 'components/adminCourse/CourseDetails';
 import JobsApp from 'components/jobs/App';
 import PrivateRoute from 'components/routing/PrivateRoute';
+import DataTable from 'components/adminCourse/DataTable';
 
-function App() {
+function App({ auth }) {
   useEffect(() => {
     // check for token in LS
     if (localStorage.token) {
@@ -88,8 +89,10 @@ function App() {
               <Route path='/event' component={event}></Route>
               <Route path='/eventdetail/:id' component={EventDetail}></Route>
               <Route path='/progress' component={Progress}></Route>
-              <Route path='/course' component={CoursesHome}></Route>
               <PrivateRoute path='/admin' component={CourseForm}></PrivateRoute>
+              <Route path='/course' component={CoursesHome} user={auth}></Route>
+              <Route path='/addCourse' component={CourseForm}></Route>
+              <Route path='/CourseList' component={DataTable}></Route>
               <Route path='/details' component={CourseDetails}></Route>
               <Route path='/profile' component={Profile}></Route>
               <Route path='/contact' component={Contact}></Route>
@@ -108,5 +111,7 @@ function App() {
     </>
   );
 }
-
-export default App;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(App);

@@ -1,11 +1,42 @@
-import React from 'react'
+import React,{useState} from 'react'
 import '../../assets/css/all.min.css'
 import '../../assets/css/bootstrap.css'
 import '../../assets/css/responsive.css'
 import '../../assets/css/ui.css'
 
 const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
-  
+  const [front,setfront] = useState(true);
+  const [back,setback] = useState(true);
+  const [soft,setsoft] = useState(true);
+  const [hard,sethard] = useState(true);
+    const frontToggle = ()=>{
+      setfront(!front);
+      if(front){
+        settrifield({ name: "Front End" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const backToggle = ()=>{
+      setback(!back);
+      if(back){
+        settrifield({ name: "Back End" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const softToggle = ()=>{
+      setsoft(!soft);
+      if(soft){
+        settrifield({ name: "Soft Skills" })
+      }
+      else {settrifield({ name: "default" })}
+    }
+    const hardToggle = ()=>{
+      sethard(!hard);
+      if(hard){
+        settrifield({ name: "Hard Skills" })
+      }
+      else {settrifield({ name: "default" })}
+    }
     const action =(a)=>{ 
         setId(a);
     }
@@ -74,28 +105,20 @@ const AdminCourse = ({setId, courseData,setcourseEnrolled, settrifield}) => {
                         <div class="filter-content collapse show" id="collapse_2">
                             <div class="card-body">
                                 <label class="custom-control custom-checkbox">
-                                  <input onChange={() =>
-                                settrifield({ name: "Front End" })
-                                     } type="checkbox" class="custom-control-input" />
+                                  <input onChange={frontToggle } type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Front End</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
                                   <input 
-                                   onChange={() =>
-                                settrifield({ name: "Back End" })
-                                     } type="checkbox" class="custom-control-input" />
+                                   onChange={backToggle} type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Back end</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input onChange={() =>
-                                settrifield({ name: "Soft Skills" })
-                                     } type="checkbox" class="custom-control-input" />
+                                  <input onChange={softToggle} type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Soft Skills</div>
                                 </label>
                                 <label class="custom-control custom-checkbox">
-                                  <input onChange={() =>
-                                settrifield({ name: "Hard Skills" })
-                                     } type="checkbox" class="custom-control-input" />
+                                  <input onChange={hardToggle} type="checkbox" class="custom-control-input" />
                                   <div class="custom-control-label">Hard Skills</div>
                                 </label>
                                 

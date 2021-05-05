@@ -40,6 +40,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Course",
     },
   ],
+  localcourses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
   profile: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile",

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import moment from "moment";
 import Header from "components/headers/light";
 import Zoom from "react-reveal/Flash";
@@ -12,10 +12,12 @@ import Features from "components/features/TwoColWithButton";
 import Typical from "react-typical";
 import ProgressCards from "components/progress/ProgressCards";
 import Footer from "components/footers/SimpleFooter";
+import RecCards from "components/cards/TabCardGrid";
 
 import { connect } from "react-redux";
 
 import axios from "axios";
+import { set } from "lodash";
 
 const endpoint = "http://localhost:5000/";
 const Progress = ({ auth }) => {
@@ -28,12 +30,25 @@ const Progress = ({ auth }) => {
   const [courseIdByDate, setCourseIdByDate] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedCourseName, setSelectedCourseName] = useState("");
+  const [recCourses, setRecCourses] = useState([]);
+  const [recObject, setRecObject] = useState({});
 
+  useEffect(() => {
+    getRecCourses();
+    wow();
+  }, [auth, recCourses.length]);
+
+  const wow = useCallback(() => {
+    buildRecObject();
+  }, [recCourses]);
   let daysRecordedA = [];
+
   auth.user?.loginDates.forEach((element) => {
     daysRecordedA.push(element.loginDate.slice(0, 10));
   });
+
   let daysRecorded = [...new Set(daysRecordedA)];
+
   const dayGrids = [];
   for (var i = 0; i < 365; i++) {
     let dayGridDate = moment("2021-01-01").add(i, "days").format("YYYY-MM-DD");
@@ -48,11 +63,39 @@ const Progress = ({ auth }) => {
       dayGrids.push(<div key={i} />);
     }
   }
+  const getRecCourses = () => {
+    if (auth.user != null) {
+      axios
+        .get(endpoint + "courserec", {
+          params: {
+            id: auth.user._id,
+          },
+        })
+        .then((result) => {
+          setRecCourses(result.data);
+        });
+    }
+  };
+  // console.log("REC COURSES ARE : ", recCourses);
+  // const pushRecCourses = () => {
+  const buildRecObject = () => {
+    let obj = {};
+    for (let i = 0; i < recCourses.length; i++) {
+      const element = recCourses[i][0];
+      let title = element.primary_subcategory.title;
+      obj[title] = [];
+      for (let j = 0; j < recCourses[i].length; j++) {
+        obj[title].push(recCourses[i][j]);
+        //console.log("ELEMENt is : ", recCourses[i][j]);
+      }
+    }
+
+    console.log("Object is : ", obj);
+    setRecObject(obj);
+  };
+
   const handleCourseDate = (dayGridDate) => {
     auth.user.loginDates.forEach((element) => {
-      console.log("dayGridDate IS :", dayGridDate);
-      console.log("loginDate IS :", element.loginDate.slice(0, 10));
-
       setCourseIdByDate(element.courseId);
       axios
         .get(endpoint + "course/find", {
@@ -136,6 +179,7 @@ const Progress = ({ auth }) => {
         )}
       </Fade>
       <ProgressCards auth={auth}></ProgressCards>
+      <RecCards tabs={recObject}></RecCards>
       <Footer></Footer>
     </>
   );

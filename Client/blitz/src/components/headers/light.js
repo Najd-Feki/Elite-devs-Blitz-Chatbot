@@ -118,9 +118,19 @@ const Navbar = ({
         <Link to='/users'>Users</Link>
       </NavLink>
       <NavLink>
+        <Link to='/addCourse'>Add Course</Link>
+
+        <Link to='/reclamationAdmin'>Claims </Link>
+      </NavLink>
+      <NavLink>
+        <Link to='/classification'>Dashbord </Link>
+      </NavLink>
+      <NavLink>
+        <Link to='/CourseList'>Course List</Link>
+      </NavLink>
+      <NavLink>
         <Link to='/reclamationAdmin'>Reclamation </Link>
       </NavLink>
-
       <a onClick={logout} href='/'>
         <i className='fas fa-sign-out-alt' />{' '}
         <span className='hide-sm'>Logout</span>
@@ -136,7 +146,6 @@ const Navbar = ({
       <NavLink>
         <Link to='/contact'>Contact Us</Link>
       </NavLink>
-
       <NavLink tw='lg:ml-12!'>
         <Link to='/login'>Login</Link>
       </NavLink>
