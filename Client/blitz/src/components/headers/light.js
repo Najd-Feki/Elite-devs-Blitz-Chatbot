@@ -81,7 +81,7 @@ const Navbar = ({
         <Link to='/contact'>Contact Us</Link>
       </NavLink>
       <NavLink>
-        <Link to='/jobs'>Jobs</Link>
+        <Link to={`/jobs/${auth?.user?._id}`}> Jobs</Link>
       </NavLink>
       <NavLink>
         <Link to='/posts'>Posts</Link>
@@ -136,9 +136,7 @@ const Navbar = ({
       <NavLink>
         <Link to='/contact'>Contact Us</Link>
       </NavLink>
-      <NavLink>
-        <Link to='/jobs'>Jobs</Link>
-      </NavLink>
+
       <NavLink tw='lg:ml-12!'>
         <Link to='/login'>Login</Link>
       </NavLink>

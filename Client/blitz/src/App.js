@@ -41,6 +41,7 @@ import CoursesHome from 'components/coursesHome/CoursesHome';
 import { CourseForm } from 'components/courseForm/CourseForm';
 import CourseDetails from 'components/adminCourse/CourseDetails';
 import JobsApp from 'components/jobs/App';
+import PrivateRoute from 'components/routing/PrivateRoute';
 
 function App() {
   useEffect(() => {
@@ -70,14 +71,17 @@ function App() {
                 render={(props) => <ProfileUpdate {...props} />}
               />
               <Route path='/reclamation' component={Reclamation}></Route>
-              <Route path='/classification' component={Classification}></Route>
-              <Route path='/connecting' component={ConnectingUsers}></Route>
-              <Route path='/users' component={UsersAdmin}></Route>
-              <Route
+              <PrivateRoute
+                path='/classification'
+                component={Classification}
+              ></PrivateRoute>
+
+              <PrivateRoute path='/users' component={UsersAdmin}></PrivateRoute>
+              <PrivateRoute
                 path='/reclamationAdmin'
                 component={ReclamationAdmin}
-              ></Route>
-              <Route path='/adminhome' component={HomeAdmin}></Route>
+              ></PrivateRoute>
+
               <Route path='/profile' component={Profile}></Route>
               <Route path='/contact' component={Contact}></Route>
               <Route path='/about' component={About}></Route>
@@ -85,14 +89,14 @@ function App() {
               <Route path='/eventdetail/:id' component={EventDetail}></Route>
               <Route path='/progress' component={Progress}></Route>
               <Route path='/course' component={CoursesHome}></Route>
-              <Route path='/admin' component={CourseForm}></Route>
+              <PrivateRoute path='/admin' component={CourseForm}></PrivateRoute>
               <Route path='/details' component={CourseDetails}></Route>
               <Route path='/profile' component={Profile}></Route>
               <Route path='/contact' component={Contact}></Route>
               <Route path='/about' component={About}></Route>
               <Route path='/login' component={Login}></Route>
               <Route path='/signup' component={Signup}></Route>
-              <Route path='/jobs' component={JobsApp}></Route>
+              <Route path='/jobs/:id' component={JobsApp}></Route>
 
               <Route exact path='/' component={Home}></Route>
               <Route component={Routes} />
