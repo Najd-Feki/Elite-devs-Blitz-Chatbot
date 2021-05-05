@@ -158,7 +158,6 @@ export default ({
    * To see what attributes are configurable of each object inside this array see the example above for "Starters".
    */
 
-  console.log("TABS : ", tabs);
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[1]);
   return (

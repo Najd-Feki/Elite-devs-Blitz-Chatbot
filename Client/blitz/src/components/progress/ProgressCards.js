@@ -254,8 +254,8 @@ const ProgressCards = ({ auth }) => {
                     </SecondaryInfoContainer>
                     <Description onMouseEnter={() => handleBody(course.headline)}>{course.headline}</Description>
                     <div hidden>{(prog = Math.floor(Math.random() * 100) + 1)}</div>
-                    <Line percent={0}></Line>
-                    <Title style={{ textAlign: "center" }}>{0 + "%"}</Title>
+                    <Line percent={prog}></Line>
+                    <Title style={{ textAlign: "center" }}>{prog + "%"}</Title>
                   </TextInfo>
 
                   <PrimaryButton
