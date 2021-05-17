@@ -13,7 +13,10 @@ import { FacebookShareButton, FacebookIcon, LinkedinShareButton,LinkedinIcon } f
 import CourseRec from "components/recommandation/CourseRec";
 //import "antd/dist/antd.css";
 import {  Divider, Col, Row } from 'antd';
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
 const DescriptionItem = ({ title, content }) => (
   <div className="site-description-item-profile-wrapper">
     <p className="site-description-item-profile-p-label">{title}:</p>
@@ -129,6 +132,7 @@ useEffect(() => {
     setcourseEnrolled(data);
     console.log(data);
     setFlag(true);
+    toast.success('You are now enrolled in course : '+data.title);
   };
 
   useEffect(() => {

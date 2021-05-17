@@ -9,8 +9,11 @@ import axios from "axios";
 import Pagination from "react-paginate";
 import "./style.css";
 import { Button } from "antd";
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 //import { createScrollMotionValues } from "framer-motion/types/value/scroll/utils";
 
+toast.configure()
 const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
@@ -39,6 +42,8 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
   }, [auth]);
   const handle = (udemy) => {
     axios.put(`http://localhost:5000/enroll/${auth.user._id}`, { udemy: udemy }).then((result) => console.log("Udemy : ", udemy));
+    toast.success('You are now enrolled in course : '+udemy.title);
+  
   };
   if (search) a = courses;
   else a = crs;
@@ -48,6 +53,7 @@ const Courses = ({ courses, setUdemy, setCurrentId, auth }) => {
         <Grid lg={4} spacing={5} wrap={"nowrap"} style={{ padding: "30px" }}>
           <Course course={a} setCurrentId={setCurrentId} />
           <Button onClick={() => handle(a)} style={{width: "21.4rem",marginTop: "-20px"}}>enroll</Button>
+         
         </Grid>
       </>
     );

@@ -21,7 +21,7 @@ const Course = ({ course }) => {
   };
   
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} style={{minHeight:"25rem",maxHeight:"25rem"}}>
       <CardActionArea onClick={() => openInNewTab(`${course?.url}`)}>
         <CardMedia component="img" alt="Contemplative Reptile" height="100" image={course?.image_480x270} title={course?.title} />
         <CardContent>

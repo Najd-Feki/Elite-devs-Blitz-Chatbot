@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import formatDate from '../../utils/formatDate';
 import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
+import tw, { css } from 'twin.macro';
+
+const Div = tw.div`rounded-full py-3 px-6`;
 
 const PostItem = ({
   addLike,
@@ -14,11 +17,11 @@ const PostItem = ({
   showActions,
 }) => (
   /*   <div className='post bg-white p-1 my-1'>
-   */ <div className='post bg-white p-1 my-1 block'>
+   */ <Div className='post bg-white p-1 my-1 block rounded md:rounded-lg py-3 px-6'>
     <div>
       <Link to={`/profile/${user}`}>
         <img className='round-img' src={avatar} alt='' />
-        <h4>{name}</h4>
+        <p className='font-sans lg:font-serif '>{name}</p>
       </Link>
     </div>
     <div>
@@ -60,7 +63,7 @@ const PostItem = ({
         </Fragment>
       )}
     </div>
-  </div>
+  </Div>
 );
 
 PostItem.defaultProps = {

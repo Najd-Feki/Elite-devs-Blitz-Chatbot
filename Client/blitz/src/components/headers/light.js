@@ -1,22 +1,22 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import tw from "twin.macro";
-import styled from "styled-components";
-import Pulse from "react-reveal/Pulse";
-import Fade from "react-reveal/Fade";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import "./ligh.css";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { logout } from "../../actions/auth";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import './ligh.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
-import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
+import useAnimatedNavToggler from '../../helpers/useAnimatedNavToggler.js';
 
-import logo from "../../images/blitz.PNG";
-import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
-import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
+import logo from '../../images/blitz.PNG';
+import { ReactComponent as MenuIcon } from 'feather-icons/dist/icons/menu.svg';
+import { ReactComponent as CloseIcon } from 'feather-icons/dist/icons/x.svg';
 
 const Header = tw.header`
 sticky top-0
@@ -63,39 +63,48 @@ export const DesktopNavLinks = tw.nav`
   hidden lg:flex flex-1 justify-between items-center sticky top-0
 `;
 
-const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg", auth, logout }) => {
+const Navbar = ({
+  roundedHeaderButton = false,
+  logoLink,
+  links,
+  className,
+  collapseBreakpointClass = 'lg',
+  auth,
+  logout,
+}) => {
   const authLinks = [
     <NavLinks>
       <NavLink>
-        <Link to="/about">About Us</Link>
+        <Link to='/about'>About Us</Link>
       </NavLink>
       <NavLink>
-        <Link to="/contact">Contact Us</Link>
+        <Link to='/contact'>Contact Us</Link>
       </NavLink>
       <NavLink>
-        <Link to="/jobs">Jobs</Link>
+        <Link to={`/jobs/${auth?.user?._id}`}> Jobs</Link>
       </NavLink>
       <NavLink>
-        <Link to="/posts">Posts</Link>
+        <Link to='/posts'>Posts</Link>
       </NavLink>
       <NavLink>
         <Link to={`/profile/${auth?.user?._id}`}> Profile</Link>
       </NavLink>
       <NavLink>
-        <Link to="/course">Courses</Link>
+        <Link to='/course'>Courses</Link>
       </NavLink>
       <NavLink>
-        <Link to="/progress">Progress</Link>
+        <Link to='/progress'>Progress</Link>
       </NavLink>
       <NavLink>
-        <Link to="/event">Events</Link>
+        <Link to='/event'>Events</Link>
       </NavLink>
       <NavLink>
-        <Link to="/reclamation">Claims</Link>
+        <Link to='/reclamation'>Claims</Link>
       </NavLink>
 
-      <a onClick={logout} href="/">
-        <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+      <a onClick={logout} href='/'>
+        <i className='fas fa-sign-out-alt' />{' '}
+        <span className='hide-sm'>Logout</span>
       </a>
     </NavLinks>,
   ];
@@ -103,29 +112,28 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
   const adminLinks = [
     <NavLinks>
       <NavLink>
-        <Link to="/about">About Us</Link>
+        <Link to='/about'>About Us</Link>
       </NavLink>
       <NavLink>
-        <Link to="/users">Users</Link>
+        <Link to='/users'>Users</Link>
       </NavLink>
       <NavLink>
+        <Link to='/addCourse'>Add Course</Link>
 
-        <Link to="/addCourse">Add Course</Link>
-
-        <Link to='/reclamationAdmin'>Claims </Link>
+        
       </NavLink>
       <NavLink>
         <Link to='/classification'>Dashbord </Link>
-
       </NavLink>
       <NavLink>
-        <Link to="/CourseList">Course List</Link>
+        <Link to='/CourseList'>Course List</Link>
       </NavLink>
       <NavLink>
-        <Link to="/reclamationAdmin">Reclamation </Link>
+      <Link to='/reclamationAdmin'>Claims </Link>
       </NavLink>
-      <a onClick={logout} href="/">
-        <i className="fas fa-sign-out-alt" /> <span className="hide-sm">Logout</span>
+      <a onClick={logout} href='/'>
+        <i className='fas fa-sign-out-alt' />{' '}
+        <span className='hide-sm'>Logout</span>
       </a>
     </NavLinks>,
   ];
@@ -133,29 +141,33 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
   const guestLinks = [
     <NavLinks>
       <NavLink>
-        <Link to="/about">About Us</Link>
+        <Link to='/about'>About Us</Link>
       </NavLink>
       <NavLink>
-        <Link to="/contact">Contact Us</Link>
+        <Link to='/contact'>Contact Us</Link>
       </NavLink>
-      <NavLink tw="lg:ml-12!">
-        <Link to="/login">Login</Link>
+      <NavLink tw='lg:ml-12!'>
+        <Link to='/login'>Login</Link>
       </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/register">
+      <PrimaryLink
+        css={roundedHeaderButton && tw`rounded-full`}
+        href='/register'
+      >
         Sign Up
       </PrimaryLink>
     </NavLinks>,
   ];
 
   const { showNavLinks, animation, toggleNavbar } = useAnimatedNavToggler();
-  const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
+  const collapseBreakpointCss =
+    collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink style={{ top: "100rem" }}>
+    <LogoLink style={{ top: '100rem' }}>
       <Pulse forever left>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt='logo' />
       </Pulse>
-      <Link to="/">Blitz</Link>
+      <Link to='/'>Blitz</Link>
     </LogoLink>
   );
 
@@ -164,19 +176,36 @@ const Navbar = ({ roundedHeaderButton = false, logoLink, links, className, colla
    */
   return (
     <Fade bottom duration={3000}>
-      <Header className={"sticky"}>
+      <Header className={'sticky'}>
         <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
           {logoLink}
-          {!auth.isAuthenticated ? guestLinks : auth.user.isAdmin ? adminLinks : authLinks}
+          {!auth.isAuthenticated
+            ? guestLinks
+            : auth.user.isAdmin
+            ? adminLinks
+            : authLinks}
         </DesktopNavLinks>
 
-        <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
+        <MobileNavLinksContainer
+          css={collapseBreakpointCss.mobileNavLinksContainer}
+        >
           {logoLink}
-          <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+          <MobileNavLinks
+            initial={{ x: '150%', display: 'none' }}
+            animate={animation}
+            css={collapseBreakpointCss.mobileNavLinks}
+          >
             {links}
           </MobileNavLinks>
-          <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>
-            {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
+          <NavToggle
+            onClick={toggleNavbar}
+            className={showNavLinks ? 'open' : 'closed'}
+          >
+            {showNavLinks ? (
+              <CloseIcon tw='w-6 h-6' />
+            ) : (
+              <MenuIcon tw='w-6 h-6' />
+            )}
           </NavToggle>
         </MobileNavLinksContainer>
       </Header>

@@ -27,7 +27,6 @@ const Progress = ({ auth }) => {
   const LegendTitle = tw.span` block font-bold text-lg text-primary-500 text-center`;
 
   const [date, setdate] = useState(moment().format("YYYY-MM-D"));
-  const [courseIdByDate, setCourseIdByDate] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedCourseName, setSelectedCourseName] = useState("");
   const [recCourses, setRecCourses] = useState([]);
@@ -89,29 +88,25 @@ const Progress = ({ auth }) => {
         //console.log("ELEMENt is : ", recCourses[i][j]);
       }
     }
-
-    console.log("Object is : ", obj);
     setRecObject(obj);
   };
 
   const handleCourseDate = (dayGridDate) => {
     auth.user.loginDates.forEach((element) => {
-      setCourseIdByDate(element.courseId);
-      axios
-        .get(endpoint + "course/find", {
-          params: {
-            id: element.courseId,
-          },
-        })
-        .then((result) => {
-          setSelectedCourseName(result.data.title);
-          console.log("result Title", result.data.title);
-        });
+      if (element.loginDate.slice(0, 10) === dayGridDate) {
+        axios
+          .get(endpoint + "course/find", {
+            params: {
+              id: element.courseId,
+            },
+          })
+          .then((result) => {
+            setSelectedCourseName(result.data.title);
+            console.log("result Title", result.data.title);
+          });
+      }
     });
-
     setdate(dayGridDate);
-    console.log("date is : ", date);
-    console.log("COURSE IS : ", courseIdByDate);
   };
   return (
     <>
