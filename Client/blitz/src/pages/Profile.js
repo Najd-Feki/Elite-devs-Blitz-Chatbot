@@ -9,7 +9,6 @@ import 'jquery/dist/jquery';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    console.log('id', this.props.match.params.id);
     this.state = {
       profiles: [],
       langtab: [],
@@ -110,12 +109,7 @@ class Profile extends React.Component {
                   </div>
                 </div>
                 <div className='col-md-2'>
-                  <Link
-                    to={'/profileupdate/' + this.state.users._id}
-                    className='profile-edit-btn'
-                  >
-                    Edit Profile
-                  </Link>
+                  <Link to={'/profileupdate/' + this.state.users._id}className='profile-edit-btn'>Edit profile</Link>
                 </div>
               </div>
               <div className='row'>
@@ -178,7 +172,7 @@ class Profile extends React.Component {
                     >
                       <div className='row'>
                         <div className='col-md-6'>
-                          <label>User Id</label>
+                          <label style={{fontSize: "20px"}}>User Id</label>
                         </div>
                         <div className='col-md-6'>
                           <p>{this.state.users._id}</p>
@@ -186,7 +180,7 @@ class Profile extends React.Component {
                       </div>
                       <div className='row'>
                         <div className='col-md-6'>
-                          <label>Name</label>
+                          <label style={{fontSize: "20px"}}>Name</label>
                         </div>
                         <div className='col-md-6'>
                           <p>{this.state.users.name}</p>
@@ -194,7 +188,7 @@ class Profile extends React.Component {
                       </div>
                       <div className='row'>
                         <div className='col-md-6'>
-                          <label>Email</label>
+                          <label style={{fontSize: "20px"}}>Email</label>
                         </div>
                         <div className='col-md-6'>
                           <p>{this.state.users.email}</p>
@@ -205,7 +199,7 @@ class Profile extends React.Component {
                         {this.state.profiles.phone != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Phone</label>
+                              <label style={{fontSize: "20px"}} >Phone</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.phone}</p>
@@ -220,7 +214,7 @@ class Profile extends React.Component {
                         {this.state.profiles.age != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Age</label>
+                              <label style={{fontSize: "20px"}}>Age</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.age}</p>
@@ -235,7 +229,7 @@ class Profile extends React.Component {
                         {this.state.profiles.address != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Adress</label>
+                              <label style={{fontSize: "20px"}}>Adress</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.address}</p>
@@ -256,7 +250,7 @@ class Profile extends React.Component {
                         {this.state.profiles.education != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Education</label>
+                              <label style={{fontSize: "20px"}}>Education</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.education}</p>
@@ -271,7 +265,7 @@ class Profile extends React.Component {
                         {this.state.experiencestab.length != 0 ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Experiences</label>
+                              <label style={{fontSize: "20px"}}>Experiences</label>
                             </div>
                             <div className='col-md-6'>
                               <p>
@@ -290,7 +284,7 @@ class Profile extends React.Component {
                         {this.state.profiles.academicProject != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Projects</label>
+                              <label style={{fontSize: "20px"}}>Projects</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.academicProject}</p>
@@ -305,7 +299,7 @@ class Profile extends React.Component {
                         {this.state.profiles.personal != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Personal</label>
+                              <label style={{fontSize: "20px"}}>Personal</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.personal}</p>
@@ -320,7 +314,7 @@ class Profile extends React.Component {
                         {this.state.profiles.summary != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Summary</label>
+                              <label style={{fontSize: "20px"}}>Summary</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.summary}</p>
@@ -335,7 +329,7 @@ class Profile extends React.Component {
                         {this.state.profiles.website != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Website</label>
+                              <label style={{fontSize: "20px"}}>Website</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.website}</p>
@@ -350,7 +344,7 @@ class Profile extends React.Component {
                         {this.state.profiles.contacts != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Contacts</label>
+                              <label style={{fontSize: "20px"}}>Contacts</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.contacts}</p>
@@ -365,7 +359,7 @@ class Profile extends React.Component {
                         {this.state.profiles.github != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Github</label>
+                              <label style={{fontSize: "20px"}}>Github</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.github}</p>
@@ -380,7 +374,7 @@ class Profile extends React.Component {
                         {this.state.profiles.linkedIn != undefined ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>LinkedIn</label>
+                              <label style={{fontSize: "20px"}}>LinkedIn</label>
                             </div>
                             <div className='col-md-6'>
                               <p>{this.state.profiles.linkedIn}</p>
@@ -395,7 +389,7 @@ class Profile extends React.Component {
                         {this.state.langtab.length != 0 ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Languages</label>
+                              <label style={{fontSize: "20px"}}>Languages</label>
                             </div>
                             <div className='col-md-6'>
                               <p>
@@ -414,7 +408,7 @@ class Profile extends React.Component {
                         {this.state.hobbiestab.length != 0 ? (
                           <div className='row'>
                             <div className='col-md-6'>
-                              <label>Hobbies</label>
+                              <label style={{fontSize: "20px"}}>Hobbies</label>
                             </div>
                             <div className='col-md-6'>
                               <p>

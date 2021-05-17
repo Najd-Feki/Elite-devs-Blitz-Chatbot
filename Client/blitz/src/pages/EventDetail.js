@@ -11,7 +11,7 @@ const [event,setEvent] = useState({});
 const {id}=useParams()
 useEffect(() => {
     axios.get('https://api.predicthq.com/v1/events/?id='+id, {
-      headers: { Authorization: `Bearer B5pmjnvZc_pAMp8-MFtAVKHcldB45VFhitROU_n5` }
+      headers: { Authorization: `Bearer NqEm6EdH3DI-c5zpslc_nfanq-d9v6r4f0iOwGeQ` }
     })      .then(function (res) {
         setEvent(res.data.results[0]);
       })

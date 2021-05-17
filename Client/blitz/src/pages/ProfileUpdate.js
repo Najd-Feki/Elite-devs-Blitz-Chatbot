@@ -6,8 +6,6 @@ import {Link} from "react-router-dom";
 import "bootstrap/dist/js/bootstrap";
 import "../assets/profilecss/profile.css";
 import "jquery/dist/jquery";
-import Profiles from "components/profiles/Profiles";
-import { current } from "immer";
 class ProfileUpdate extends React.Component {
   constructor(props) {
     super(props);
@@ -25,79 +23,79 @@ class ProfileUpdate extends React.Component {
   }
 
 avatar(e){
-    this.state.users.avatar = e.target.value;;
+    this.state.users.avatar = e.target.value;
     console.log("avatar",this.state.users.avatar); 
 }
 headline(e){
-    this.state.profiles.headline = e.target.value;;
+    this.state.profiles.headline = e.target.value;
     console.log("headline",this.state.profiles.headline); 
 }
 hardSkills(e){
-    this.state.profiles.hardSkills = e.target.value;;
+    this.state.profiles.hardSkills = e.target.value;
     console.log("hardSkills",this.state.profiles.hardSkills); 
 }
 softSkills(e){
-    this.state.profiles.softSkills = e.target.value;;
+    this.state.profiles.softSkills = e.target.value;
     console.log("softSkills",this.state.profiles.softSkills); 
 }
 name(e){
-    this.state.users.name = e.target.value;;
+    this.state.users.name = e.target.value;
     console.log("name",this.state.users.name); 
 }
 email(e){
-    this.state.users.email = e.target.value;;
+    this.state.users.email = e.target.value;
     console.log("email",this.state.users.email); 
 }
 age(e){
-    this.state.profiles.age = e.target.value;;
+    this.state.profiles.age = e.target.value;
     console.log("age",this.state.profiles.age); 
 }
 phone(e){
-    this.state.profiles.phone = e.target.value;;
+    this.state.profiles.phone = e.target.value;
     console.log("phone",this.state.profiles.phone); 
 }
 address(e){
-    this.state.profiles.address = e.target.value;;
+    this.state.profiles.address = e.target.value;
     console.log("address",this.state.profiles.address); 
 }
 education(e){
-    this.state.profiles.education = e.target.value;;
+    this.state.profiles.education = e.target.value;
     console.log("education",this.state.profiles.education); 
 }
 experiences(e){
-    this.state.profiles.experiences = e.target.value;;
+    this.state.profiles.experiences = e.target.value;
     console.log("experiences",this.state.profiles.experiences); 
 }
 academicProject(e){
-    this.state.profiles.academicProject = e.target.value;;
+    this.state.profiles.academicProject = e.target.value;
     console.log("academicProject",this.state.profiles.academicProject); 
 }
 summary(e){
-    this.state.profiles.summary = e.target.value;;
+    this.state.profiles.summary = e.target.value;
     console.log("summary",this.state.profiles.summary); 
 }
 personal(e){
-    this.state.profiles.personal = e.target.value;;
+    this.state.profiles.personal = e.target.value;
     console.log("personal",this.state.profiles.personal); 
 }
 website(e){
-    this.state.profiles.website = e.target.value;;
+    this.state.profiles.website = e.target.value;
     console.log("website",this.state.profiles.website); 
 }
 contacts(e){
-    this.state.profiles.contacts = e.target.value;;
+    this.state.profiles.contacts = e.target.value;
     console.log("contacts",this.state.profiles.contacts); 
 }
 github(e){
-    this.state.profiles.github = e.target.value;;
+    this.state.profiles.github = e.target.value;
     console.log("github",this.state.profiles.github); 
 }
 languages(e){
-    this.state.profiles.languages = e.target.value;;
+    this.state.profiles.languages = e.target.value;
     console.log("languages",this.state.profiles.languages); 
 }
 hobbies(e){
-    this.state.profiles.hobbies = e.target.value;;
+    this.state.profiles.hobbies = e.target.value;
     console.log("hobbies",this.state.profiles.hobbies); 
 }
 
@@ -169,13 +167,13 @@ save(){
                                     <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">More info</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div className="col-md-2">
-                        <Link to ={"/profileupdate/"+ this.state.users._id} onClick={this.save} className="profile-edit-btn" >Edit Profile</Link>
+                        <Link to ={"/profile/"+ this.state.users._id} onClick={this.save} className="profile-edit-btn" >Save</Link>
                     </div>
                 </div>
                 <div className="row">
@@ -195,7 +193,7 @@ save(){
                             <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Name</label>
+                                                <label style={{fontSize: "20px"}}>Name</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add name(required)" name="name" defaultValue={this.state.users.name} onChange={this.name.bind(this)}/>
@@ -204,7 +202,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Email</label>
+                                                <label style={{fontSize: "20px"}}>Email</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="email" placeholder="add email(required)" name="email" defaultValue={this.state.users.email} onChange={this.email.bind(this)}/>
@@ -213,7 +211,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Phone</label>
+                                                <label style={{fontSize: "20px"}}>Phone</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add phone" name="phone" defaultValue={this.state.profiles.phone} onChange={this.phone.bind(this)}/>
@@ -222,7 +220,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Age</label>
+                                                <label style={{fontSize: "20px"}}>Age</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add age" name="age" defaultValue={this.state.profiles.age} onChange={this.age.bind(this)}/>
@@ -231,7 +229,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Adress</label>
+                                                <label style={{fontSize: "20px"}}>Adress</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add adress" name="address" defaultValue={this.state.profiles.address} onChange={this.address.bind(this)}/>
@@ -243,7 +241,7 @@ save(){
                                         
                             <div className="row">
                                             <div className="col-md-6">
-                                                <label>Education</label>
+                                                <label style={{fontSize: "20px"}}>Education</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add education" name="education" defaultValue={this.state.profiles.education} onChange={this.education.bind(this)}/>
@@ -252,7 +250,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Experiences</label>
+                                                <label style={{fontSize: "20px"}}>Experiences</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add experiences"  name="hobbies" defaultValue={this.state.profiles.experiences} onChange={this.experiences.bind(this)}/>
@@ -261,7 +259,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Projects</label>
+                                                <label style={{fontSize: "20px"}}>Projects</label>
                                             </div>
                                             <div className="col-md-6">
                                             <input className="form-control" style={{color:"black"}} type="text" placeholder="add projects" name="academicProject" defaultValue={this.state.profiles.academicProject} onChange={this.academicProject.bind(this)}/>
@@ -270,7 +268,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Personal</label>
+                                                <label style={{fontSize: "20px"}}>Personal</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add personal"  name="personal" defaultValue={this.state.profiles.personal} onChange={this.personal.bind(this)}/>
@@ -279,7 +277,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Summary</label>
+                                                <label style={{fontSize: "20px"}}>Summary</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add summary"  name="summary" defaultValue={this.state.profiles.summary} onChange={this.summary.bind(this)}/>
@@ -288,7 +286,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Website</label>
+                                                <label style={{fontSize: "20px"}}>Website</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="url" placeholder="add website"  name="website" defaultValue={this.state.profiles.website} onChange={this.website.bind(this)}/>
@@ -298,7 +296,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Contacts</label>
+                                                <label style={{fontSize: "20px"}}>Contacts</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add contacts"  name="contacts" defaultValue={this.state.profiles.contacts} onChange={this.contacts.bind(this)}/>
@@ -308,7 +306,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Github</label>
+                                                <label style={{fontSize: "20px"}}>Github</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="url" placeholder="add github"  name="github" defaultValue={this.state.profiles.github} onChange={this.github.bind(this)}/>
@@ -317,7 +315,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Linkedin</label>
+                                                <label style={{fontSize: "20px"}}>Linkedin</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="url" placeholder="add linkedin"  name="linkedin" defaultValue={this.state.profiles.linkedin}/>
@@ -326,7 +324,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Languages</label>
+                                                <label style={{fontSize: "20px"}}>Languages</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add languages"  name="languages" defaultValue={this.state.profiles.languages} onChange={this.languages.bind(this)}/>
@@ -335,7 +333,7 @@ save(){
 
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label>Hobbies</label>
+                                                <label style={{fontSize: "20px"}}>Hobbies</label>
                                             </div>
                                             <div className="col-md-6">
                                                 <input className="form-control" style={{color:"black"}} type="text" placeholder="add hobbies"  name="hobbies" defaultValue={this.state.profiles.hobbies} onChange={this.hobbies.bind(this)}/>

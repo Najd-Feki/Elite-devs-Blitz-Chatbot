@@ -28,8 +28,8 @@ const useStyles = makeStyles({
 // },[])
 
   useEffect(() => {
-    axios.get('https://api.predicthq.com/v1/events/?limit=100&state=active&category=conferences', {
-      headers: { Authorization: `Bearer B5pmjnvZc_pAMp8-MFtAVKHcldB45VFhitROU_n5` }
+    axios.get('https://api.predicthq.com/v1/events/?limit=100&state=active&label=technology', {
+      headers: { Authorization: `Bearer NqEm6EdH3DI-c5zpslc_nfanq-d9v6r4f0iOwGeQ` }
     })
       .then(function (res) {
         setEvents(res.data.results);
@@ -54,8 +54,8 @@ const filterindata = (events, searchTerm)=> {
 }
 const handleTextSearch = (e) => {
   const searchTerm = e.currentTarget.value;
-  axios.get('https://api.predicthq.com/v1/events/?limit=100&state=active&category=conferences', {
-    headers: { Authorization: `Bearer B5pmjnvZc_pAMp8-MFtAVKHcldB45VFhitROU_n5` }
+  axios.get('https://api.predicthq.com/v1/events/?limit=100&state=active&label=technology', {
+    headers: { Authorization: `Bearer NqEm6EdH3DI-c5zpslc_nfanq-d9v6r4f0iOwGeQ` }
   }).then((res) => {
     if (res.data.results) {
       filterindata(res.data.results, searchTerm);
